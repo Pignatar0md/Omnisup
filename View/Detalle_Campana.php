@@ -81,10 +81,10 @@
         <table id="tableAgt" class="table table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Agentes</th><th>Estado</th><th>Tiempo</th><th>Acciones</th>
+                    <th>Agentes</th><th>Estado</th><th>Tiempo</th><th style="text-align: center">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableAgBody">
             </tbody>
         </table>
     </div>

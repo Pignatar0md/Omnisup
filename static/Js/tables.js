@@ -35,24 +35,22 @@ $(function () {
     }
   });
   setInterval("actualiza_contenido()", 1000);
+  //actualiza_contenido();
 });
 function actualiza_contenido() {
-      var nomcamp = $("#nombreCamp").html();
-        $.ajax({
-          url: 'Controller/Detalle_Campana_Contenido.php',
-          type: 'GET',
-          dataType: 'html',
-          data: 'nomcamp='+nomcamp,
-          success: function (msg) {
-            debugger;
-            //console.log(msg);
-            var mje = JSON.parse(msg);
-            tabagt.rows().remove().draw();
-            tabagt.rows.add(mje).draw();
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            debugger;
-            console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
-          }
-        });
+  var nomcamp = $("#nombreCamp").html();
+  $.ajax({
+    url: 'Controller/Detalle_Campana_Contenido.php',
+    type: 'GET',
+    dataType: 'html',
+    data: 'nomcamp='+nomcamp,
+    success: function (msg) {
+      var mje = JSON.parse(msg);
+      tabagt.rows().remove().draw();
+      tabagt.rows.add(mje).draw();
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
     }
+  });
+}

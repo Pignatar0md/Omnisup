@@ -20,23 +20,39 @@ $(function () {
   var userAgent = new JsSIP.UA(config);
   var sipSession = userAgent.start();
   
-  $(".chanspy").on('click', function () {
-      var id = this.id;
-      $.ajax({
-          url: 'View/ChanSpy.php',
-          type: 'GET',
-          dataType: 'html',
-          data: 'sip='+id,
-          success: function (msg) {
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            debugger;
-            console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
-        }
-      });
+  $("#tableAgBody").on('click', '.chanspy', function () {
+    var id = this.id;
+    $.ajax({
+        url: 'View/ChanSpy.php',
+        type: 'GET',
+        dataType: 'html',
+        data: 'sip='+id,
+        success: function (msg) {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          debugger;
+          console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+      }
+    });
   });
   
-  $(".chanspywhisper").on('click', function () {
+  $("#tableAgBody").on('click', '.agentlogoff', function () {
+    var id = this.id;
+    $.ajax({
+        url: 'View/AgentLogOff.php',
+        type: 'GET',
+        dataType: 'html',
+        data: 'sip='+id,
+        success: function (msg) {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          debugger;
+          console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+      }
+    });
+  });
+  
+  $("#tableAgBody").on('click', '.chanspywhisper', function () {
       var id = this.id;
       $.ajax({
           url: 'View/ChanSpyWhisper.php',

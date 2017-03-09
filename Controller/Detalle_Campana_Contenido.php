@@ -31,7 +31,11 @@ if ($_GET['nomcamp']) {
                 $jsonString .= '"estado": "' . $status . '",';
                 $jsonString .= '"tiempo": "'.date('H:i:s').'",';
             }
-            $jsonString .= '"acciones": "<button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspy\' placeholder=\'monitorear\'><span class=\'glyphicon glyphicon-eye-open\'></span></button>&nbsp;<button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspywhisper\' placeholder=\'hablar con agente\'><span class=\'glyphicon glyphicon-sunglasses\'></span></button>"},';
+            $jsonString .= '"acciones": "<button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspy\' placeholder=\'monitorear\'><span class=\'glyphicon glyphicon-eye-open\'></span></button>&nbsp;'
+                    . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspywhisper\' placeholder=\'hablar con agente\'><span class=\'glyphicon glyphicon-sunglasses\'></span></button>&nbsp;'
+                    . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs takecall\' placeholder=\'tomar llamada\'><span class=\'glyphicon glyphicon-phone\'></span></button>&nbsp;'
+                    . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs conference\' placeholder=\'conferencia\'><span class=\'glyphicon glyphicon-user\'></span></button>&nbsp;'
+                    . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs agentlogoff\' placeholder=\'desconectar agente\'><span class=\'glyphicon glyphicon-off\'></span></button>"},';
         }
     }
     $jsonString = substr($jsonString, 0, -1);
