@@ -22,7 +22,7 @@ class Agente_Model {
         $this->agi->disconnect();
         return $data;
     }
-    
+
     function getPauseAgents($agt) {
         try {
             $this->agi->connect(AMI_HOST, AMI_USERNAME, AMI_PASWORD);
@@ -55,4 +55,13 @@ class Agente_Model {
         $this->agi->disconnect();
     }
 
+    function Conference($agt, $exten) {
+        try {
+            $this->agi->connect(AMI_HOST, AMI_USERNAME, AMI_PASWORD);
+        } catch (Exception $ex) {
+            return "problemas de Conexion AMI: " . $ex;
+        }
+        $this->agi->Originate('SIP/' . $exten, "006$agt", 'fts-sup', 1, NULL, NULL, '25000', NULL, NULL, NULL, NULL, false, NULL);
+        $this->agi->disconnect();
+    }
 }

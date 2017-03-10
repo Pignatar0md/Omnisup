@@ -59,8 +59,13 @@ class Agente {
         echo $res;
     }
 
-    function espiaryHablarAgente() {
+    function espiaryHablarAgente($agt, $ext) {
         $res = $this->Agente_Model->ChanSpyWhisper($agt, $ext);
+        echo $res;
+    }
+
+    function Conferencia($agt, $ext) {
+        $res = $this->Agente_Model->Conference($agt, $ext);
         echo $res;
     }
 

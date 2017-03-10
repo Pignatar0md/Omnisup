@@ -10,95 +10,100 @@ $(function () {
   var local = document.getElementById('localAudio');
   var remoto = document.getElementById('remoteAudio');
   var config = {
-      uri: 'sip:1006' + '@' + KamailioIp,
-      ws_servers: 'wss://' + KamailioIp + ':443',
-      password: 'PdpDVDxaZ5',
-      hack_ip_in_contact: true,
-      session_timers: false
+    uri: 'sip:1006' + '@' + KamailioIp,
+    ws_servers: 'wss://' + KamailioIp + ':443',
+    password: 'PdpDVDxaZ5',
+    hack_ip_in_contact: true,
+    session_timers: false
   };
-  
+
   var userAgent = new JsSIP.UA(config);
   var sipSession = userAgent.start();
-  
+
   $("#tableAgBody").on('click', '.chanspy', function () {
     var id = this.id;
     $.ajax({
-        url: 'View/ChanSpy.php',
-        type: 'GET',
-        dataType: 'html',
-        data: 'sip='+id,
-        success: function (msg) {
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          debugger;
-          console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+      url: 'Controller/ChanSpy.php',
+      type: 'GET',
+      dataType: 'html',
+      data: 'sip='+id,
+      success: function (msg) {
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        debugger;
+        console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
       }
     });
   });
-  
-  $("#tableAgBody").on('click', '.agentlogoff', function () {
+
+  $("#tableAgBody").on('click', '.chanspywhisper', function () {
     var id = this.id;
     $.ajax({
-        url: 'View/AgentLogOff.php',
-        type: 'GET',
-        dataType: 'html',
-        data: 'sip='+id,
-        success: function (msg) {
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          debugger;
-          console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+      url: 'Controller/ChanSpyWhisper.php',
+      type: 'GET',
+      dataType: 'html',
+      data: 'sip='+id,
+      success: function (msg) {
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        debugger;
+      console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
       }
     });
   });
-  
-  $("#tableAgBody").on('click', '.chanspywhisper', function () {
-      var id = this.id;
-      $.ajax({
-          url: 'View/ChanSpyWhisper.php',
-          type: 'GET',
-          dataType: 'html',
-          data: 'sip='+id,
-          success: function (msg) {
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            debugger;
-            console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
-        }
-      });
+
+  $("#tableAgBody").on('click', '.conferencia', function () {
+    var id = this.id;
+    $.ajax({
+      url: 'Controller/Conference.php',
+      type: 'GET',
+      dataType: 'html',
+      data: 'sip='+id,
+      success: function (msg) {
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        debugger;
+        console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+      }
+    });
+  });
+
+  $("#tableAgBody").on('click', '.agentlogoff', function () {
+    var id = this.id;
+    
   });
 
   userAgent.on('registered', function(e) { // cuando se registra la entidad SIP
     setSipStatus("greendot.png", "  Registered", sipStatus);
     defaultCallState();
   });
-  
+
   userAgent.on('unregistered', function(e) {  // cuando se desregistra la entidad SIP
     setSipStatus("reddot.png", "  Unregistered", sipStatus);
     $("#Pause").prop('disabled',true);
     $("#Resume").prop('disabled',true);
   });
-  
+
   $("#endCall").click(function() {
     Sounds("", "stop");
     userAgent.terminateSessions();
     defaultCallState();
   });
-  
+
   $("#call").click(function(e) {
     $("#modalSelectCmp").modal("show");
     // esto es para enviar un Invite/llamada
     num = displayNumber.value;
     lastDialedNumber = num;
   });
-  
+
   userAgent.on('registrationFailed', function(e) {  // cuando falla la registracion
     setSipStatus("redcross.png", "  Registration failed", sipStatus);
   });
   //
   userAgent.on('newRTCSession', function(e) {       // cuando se crea una sesion RTC
-    var originHeader = "";	  
-    e.session.on("ended",function() {               // Cuando Finaliza la llamada      
+    var originHeader = "";
+    e.session.on("ended",function() {               // Cuando Finaliza la llamada
       var callerOrCalled = "";
       if(entrante) {
       	callerOrCalled = fromUser;
@@ -106,7 +111,7 @@ $(function () {
         callerOrCalled =  num;
       }
       defaultCallState();
-    });  
+    });
     e.session.on("failed",function(e) {  // cuando falla el establecimiento de la llamada
       $("#modalReceiveCalls").modal('hide');
       Sounds("","stop");
@@ -128,39 +133,39 @@ $(function () {
       var atiendoSi = document.getElementById('answer');
       var atiendoNo = document.getElementById('doNotAnswer');
       var session_incoming = e.session;
-       
+
       session_incoming.on('addstream',function(e) {       // al cerrar el canal de audio entre los peers
         lastPause = $("#UserStatus").html();
         remote_stream = e.stream;
         remoto = JsSIP.rtcninja.attachMediaStream(remoto, remote_stream);
       });
       var options = {'mediaConstraints': {'audio': true, 'video': false}};
-      
+
       atiendoSi.onclick = function() {
         $("#modalReceiveCalls").modal('hide');
         session_incoming.answer(options);
         setCallState("Connected to " + num, "orange");
         Sounds("","stop");
       };
-       
+
       atiendoNo.onclick = function() {
         $("#modalReceiveCalls").modal('hide');
         if($("#autopause").val() === "True") {
-        	
+
         }
         userAgent.terminateSessions();
         defaultCallState();
       };
     }
-    
+
     e.session.on("accepted", function() { 			// cuando se establece una llamada
       Sounds("", "stop");
       lastPause = $("#UserStatus").html();
     });
   });
   //
-  
-    
+
+
   function makeCall() {
     eventHandlers = {
       'confirmed':  function(e) {
@@ -209,7 +214,7 @@ $(function () {
     };
     sipSession = userAgent.call("sip:"+num+"@"+KamailioIp, opciones);
   }
-  
+
   function setCallState(estado, color) {
     if(callStatus.childElementCount > 0) {
       callSipStatus.parentNode.removeChild(callSipStatus);
@@ -220,7 +225,7 @@ $(function () {
     callSipStatus.appendChild(textCallSipStatus);
     callStatus.appendChild(callSipStatus);
   }
-  
+
   function defaultCallState() {
     if(callStatus.childElementCount > 0) {
       callSipStatus.parentNode.removeChild(callSipStatus);
@@ -234,16 +239,16 @@ $(function () {
     $("#bTransfer").prop('disabled', true);
     $("#onHold").prop('disabled', true);
   }
-  
+
   function setSipStatus(img, state, elem) {
-    
+
       if(elem.childElementCount > 0) {
         var hijo1 = document.getElementById("textSipStatus");
         var hijo2 = document.getElementById("imgStatus");
         elem.removeChild(hijo1);
         elem.removeChild(hijo2);
       }
-    
+
     iconStatus = document.createElement('img');
     textSipStatus = document.createTextNode(state);
     iconStatus.id = "imgStatus";
@@ -253,7 +258,7 @@ $(function () {
     elem.appendChild(iconStatus);
     elem.appendChild(textSipStatus);
   }
-  
+
   function Sounds(callType, action) {
     var ring = null;
     if(action === "play") {
