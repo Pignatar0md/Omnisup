@@ -21,19 +21,22 @@ if ($_GET['nomcamp']) {
             $status = str_replace('(', '', $status);
             $status = str_replace(')', '', $status);
             $jsonString .= '{"agente": "' . $QM->getName() . '",';
+            $pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
+            $horaini = explode(' ', $pausa[3]);
+            $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
             if ($status == 'paused') {
-                $pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
+                /*$pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
                 $horaini = explode(' ', $pausa[3]);
-                $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
+                $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));*/
                 $jsonString .= '"estado": "' . $status . ' - ' . $pausa[2] . '",';
-            $jsonString .= '"tiempo": "'.$tiempo.'",';
+            $jsonString .= '"tiempo": "' . $tiempo . '",';
           } /*elseif ($status == ) {
 
           } elseif ($status == ) {
 
           } */else {
                 $jsonString .= '"estado": "' . $status . '",';
-                $jsonString .= '"tiempo": "'.date('H:i:s').'",';
+                $jsonString .= '"tiempo": "'. $tiempo .'",';
             }
             $jsonString .= '"acciones": "<button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspy\' placeholder=\'monitorear\'><span class=\'glyphicon glyphicon-eye-open\'></span></button>&nbsp;'
                     . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspywhisper\' placeholder=\'hablar con agente\'><span class=\'glyphicon glyphicon-sunglasses\'></span></button>&nbsp;'

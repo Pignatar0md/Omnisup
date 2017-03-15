@@ -58,7 +58,7 @@ class Campana {
                         $value = explode(" ", $value);
                         $exten = substr($value[2], 5);
                         $objQM->setExten($exten);
-                        $objQM->setName($value[0]);
+                        $objQM->setName($value[0] . ' ' . $value[1]);
                         if($value[8] == "(in") {
                             $objQM->setStatus($value[8].' '.$value[9]);
                         } elseif ($value[8] == "(Not" && $value[9] == "in") {
