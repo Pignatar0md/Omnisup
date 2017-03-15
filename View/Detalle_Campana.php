@@ -1,7 +1,6 @@
 <br/>
 <br/>
 <div class="container-fluid">
-
     <div class="modal fade" id="modalWebCall" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content Modal-Content">
@@ -88,4 +87,5 @@
             </tbody>
         </table>
     </div>
+    <div><img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/></div>
 </div>

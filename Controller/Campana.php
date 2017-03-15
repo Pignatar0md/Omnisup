@@ -63,9 +63,9 @@ class Campana {
                             $objQM->setStatus($value[8].' '.$value[9]);
                         } elseif ($value[8] == "(Not" && $value[9] == "in") {
                             $objQM->setStatus($value[8].' '.$value[9].' '.$value[10]);
-                        }  elseif ($value[8] == "(In") {
+                        } elseif ($value[8] == "(In") {
                             $objQM->setStatus($value[8].' '.$value[9]);
-                        }else {
+                        } else {
                             $objQM->setStatus($value[8]);
                         }
                     }

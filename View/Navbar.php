@@ -5,10 +5,8 @@
                 <span class="sr-only">Toggle navigation</span>
             </button>
             <a class="navbar-brand" href="">
-
             </a>
         </div>
-
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -17,7 +15,6 @@
                     </a>
                 </li>
             </ul>
-
             <ul class="nav navbar-nav">
                 <li role="presentation" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -25,21 +22,21 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="">Usuarios</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/users/list/page1/">Usuarios</a>
                         </li>
                         <li>
-                            <a href="">Crear Usuario</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="">Agentes</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/user/nuevo/">Crear Usuario</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="">Grupos</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/agente/list/">Agentes</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/grupo/list/">Grupos</a>
                         </li>
                         <li>
-                            <a href="">Crear Grupo</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/grupo/nuevo/">Crear Grupo</a>
                         </li>
                     </ul>
                 </li>
@@ -49,13 +46,11 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="">Modulos</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/modulo/list/">Modulos</a>
                         </li>
                         <li>
-                            <a href="">Habilitar Modulo</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/modulo/nuevo/">Habilitar Modulo</a>
                         </li>
-
-
                     </ul>
                 </li>
                 <li role="presentation" class="dropdown">
@@ -64,33 +59,33 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="">Listado de campañas</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/campana/list/">Listado de campañas</a>
                         </li>
                         <li>
-                            <a href="">Crear nueva campaña</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/campana/nuevo/">Crear nueva campaña</a>
                         </li>
                         <li>
-                            <a href="">Regenerar asterisk</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="">Listado de Calificaciones</a>
-                        </li>
-                        <li>
-                            <a href="">Nueva Calificacion</a>
-                        </li>
-                        <li>
-                            <a href="">Grupo de calificaciones</a>
-                        </li>
-                        <li>
-                            <a href="">Nuevo grupo de calificaciones</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/regenerar_asterisk/">Regenerar asterisk</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="">Crear nuevo formulario</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/calificacion/list/">Listado de Calificaciones</a>
                         </li>
                         <li>
-                            <a href="">Listado de formularios</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/calificacion/nuevo/">Nueva Calificacion</a>
+                        </li>
+                        <li>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/calificacion_campana/lista/">Grupo de calificaciones</a>
+                        </li>
+                        <li>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/calificacion_campana/nuevo/">Nuevo grupo de calificaciones</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/formulario/nuevo/">Crear nuevo formulario</a>
+                        </li>
+                        <li>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/formulario/list/">Listado de formularios</a>
                         </li>
                     </ul>
                 </li>
@@ -100,10 +95,10 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="">Pausas</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/pausa/list/">Pausas</a>
                         </li>
                         <li>
-                            <a href="">Crear nueva pausa</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/pausa/nuevo/">Crear nueva pausa</a>
                         </li>
                     </ul>
                 </li>
@@ -113,15 +108,15 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="">Cargar nueva base de datos de contactos</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/base_datos_contacto/nueva/">Cargar nueva base de datos de contactos</a>
                         </li>
                         <li>
-                            <a href="">Base de datos de contactos cargadas</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/base_datos_contacto/">Base de datos de contactos cargadas</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="">Buscar Grabación</a>
+                    <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/grabacion/buscar/1/">Buscar Grabación</a>
                 </li>
                 <li role="presentation" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -129,7 +124,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="#"><span class=" glyphicon glyphicon-earphone" aria-hidden="true"></span> Llamadas</a>
+                            <a href="https://<?= $_SERVER['SERVER_ADDR']; ?>/reporte/llamadas/"><span class=" glyphicon glyphicon-earphone" aria-hidden="true"></span> Llamadas</a>
                         </li>
                         <li>
                             <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> SMS</a>

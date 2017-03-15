@@ -52,7 +52,7 @@ $(function () {
     });
   });
 
-  $("#tableAgBody").on('click', '.conferencia', function () {
+  $("#tableAgBody").on('click', '.conference', function () {
     var id = this.id;
     $.ajax({
       url: 'Controller/Conference.php',
@@ -69,8 +69,13 @@ $(function () {
   });
 
   $("#tableAgBody").on('click', '.agentlogoff', function () {
+    debugger;
     var id = this.id;
-    
+    num = '003'+id;
+    var ag = this.html();
+    ag = 'nombreAgente: '+ ag;
+    makeCall(ag);
+    num = null;
   });
 
   userAgent.on('registered', function(e) { // cuando se registra la entidad SIP
@@ -88,13 +93,6 @@ $(function () {
     Sounds("", "stop");
     userAgent.terminateSessions();
     defaultCallState();
-  });
-
-  $("#call").click(function(e) {
-    $("#modalSelectCmp").modal("show");
-    // esto es para enviar un Invite/llamada
-    num = displayNumber.value;
-    lastDialedNumber = num;
   });
 
   userAgent.on('registrationFailed', function(e) {  // cuando falla la registracion
@@ -166,7 +164,7 @@ $(function () {
   //
 
 
-  function makeCall() {
+  function makeCall(extraHds=null) {
     eventHandlers = {
       'confirmed':  function(e) {
                     local.src = window.URL.createObjectURL(sipSession.connection.getLocalStreams()[0]);
@@ -212,6 +210,9 @@ $(function () {
               'video': false
       }
     };
+    if(extraHds !== null) {
+      opciones.extraHeaders = [extraHds];
+    }
     sipSession = userAgent.call("sip:"+num+"@"+KamailioIp, opciones);
   }
 
@@ -281,4 +282,14 @@ $(function () {
       ring.pause();
     }
   }
+
+  $("td").each(function () {
+    if($(this).html() == "Invalid" || $(this).html() == "Unavailable") {
+
+    }
+  });
+
+  $("#webphone").click(function () {
+    $("#modalWebCall").modal('show');
+  });
 });
