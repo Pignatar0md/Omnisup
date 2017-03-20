@@ -3,6 +3,9 @@
 define('AMI_USERNAME','');
 define('AMI_PASWORD','');
 define('AMI_HOST','');
+define('PG_USER','');
+define('PG_HOST','');
+define('PG_PASSWORD','');
 
 define("entities", $_SERVER['DOCUMENT_ROOT'].'/Omnisup/entities');
 define("helpers", $_SERVER['DOCUMENT_ROOT'].'/Omnisup/helpers');
