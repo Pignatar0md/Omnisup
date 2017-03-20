@@ -25,22 +25,28 @@ if ($_GET['nomcamp']) {
             $horaini = explode(' ', $pausa[3]);
             $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
             if ($status == 'paused') {
-              /*$pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
+                if($QM->getLogoff()) {
+                  //procedimiento para obtener las colas donde exista el agente
+                  $arrData = $Controller_Campana->traerCampanasPorAgente($QM->getName());
+                  $arrQueueNames = array();
+                  foreach ($arrData as $key => $value) {
+                    foreach ($value as $cla => $val) {
+                      $arrQueueNames[] = $val;
+                    }
+                  }
+                  $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
+                }
+
+                /*$pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
                 $horaini = explode(' ', $pausa[3]);
                 $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));*/
                 $jsonString .= '"estado": "' . $status . ' - ' . $pausa[2] . '",';
             $jsonString .= '"tiempo": "' . $tiempo . '",';
-          } elseif ($status == "Unavailable" || $status == "Invalid") {
-                //procedimiento para obtener las colas donde exista el agente
-                $arrData = $Controller_Campana->traerCampanasPorAgente($QM->getName());
-                $arrQueueNames = array();
-                foreach ($arrData as $key => $value) {
-                    foreach ($value as $cla => $val) {
-                        $arrQueueNames[] = $val;
-                    }
-                }
-                $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
-          } else {
+          } /*elseif ($status == ) {
+
+          } elseif ($status == ) {
+
+          } */else {
                 $jsonString .= '"estado": "' . $status . '",';
                 $jsonString .= '"tiempo": "'. $tiempo .'",';
             }
