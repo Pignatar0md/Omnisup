@@ -18,6 +18,7 @@ class Agente_Model {
         } catch (Exception $ex) {
             return "problemas de Conexion AMI: " . $ex;
         }
+        $this->agi->Events('off');
         $data = $this->agi->Command($this->command);
         $this->agi->disconnect();
         return $data;
@@ -29,6 +30,7 @@ class Agente_Model {
         } catch (Exception $ex) {
             return "problemas de Conexion AMI: " . $ex;
         }
+        $this->agi->Events('off');
         $this->command = "database show PAUSECUSTOM/AGENT/" . $agt;
         $data = $this->agi->Command($this->command);
         $this->agi->disconnect();
@@ -72,6 +74,7 @@ class Agente_Model {
             return "problemas de Conexion AMI: " . $ex;
         }
         foreach ($queueName as $value) {
+            $this->agi->Events('off');
             $this->command = "queue remove member sip/" . $agt . " from ". $value;
             $this->agi->Command($this->command);
         }
