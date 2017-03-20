@@ -65,6 +65,13 @@ class Campana {
                             $objQM->setStatus($value[8].' '.$value[9].' '.$value[10]);
                         } elseif ($value[8] == "(In") {
                             $objQM->setStatus($value[8].' '.$value[9]);
+                        } elseif ($value[8] == "(Paused") {
+                            if ($value[9] == "(Unavailable" || $value[9] == "(Invalid") {
+                              $objQM->setStatus($value[8]);
+                              $objQM->setLogoff(true);
+                            } else {
+                              $objQM->setStatus($value[8]);
+                            }
                         } else {
                             $objQM->setStatus($value[8]);
                         }
@@ -74,6 +81,11 @@ class Campana {
             }
         }
         return $stringData;
+    }
+
+    function traerCampanasPorAgente($agente) {
+        $res = $this->Campana_Model->getCampaignsByAgent($agente);
+        return $res;
     }
 
 }

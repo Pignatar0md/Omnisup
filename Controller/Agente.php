@@ -69,4 +69,9 @@ class Agente {
         echo $res;
     }
 
+    function Desregistrar($agt, $arrNomsColas) {
+        $res = $this->Agente_Model->AgentLogoff($agt, $arrNomsColas);
+        echo $res;
+    }
+
 }

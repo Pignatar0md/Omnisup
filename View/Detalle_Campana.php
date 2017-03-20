@@ -75,12 +75,12 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-lg-offset-3">
+    <div class="col-md-8 col-lg-offset-2">
         <h3>Agentes en <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3>
         <table id="tableAgt" class="table table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Agentes</th><th>Estado</th><th>Tiempo</th><th style="text-align: center">Acciones</th>
+                    <th>Agentes</th><th>Estado</th><th>Tiempo</th><th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="tableAgBody">

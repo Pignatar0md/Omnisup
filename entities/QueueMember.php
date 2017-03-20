@@ -5,15 +5,17 @@ class QueueMember {
     private $exten;
     private $name;
     private $callsTaken;
+    private $logoff;
     private $status;
 
     function __construct() {
         $this->exten = 0;
         $this->name = "";
         $this->callsTaken = 0;
+        $this->logoff = false;
         $this->status = "";
     }
-    
+
     function getExten() {
         return $this->exten;
     }
@@ -24,6 +26,10 @@ class QueueMember {
 
     function getCallsTaken() {
         return $this->callsTaken;
+    }
+
+    function getLogoff() {
+        return $this->logoff;
     }
 
     function getStatus() {
@@ -40,6 +46,10 @@ class QueueMember {
 
     function setCallsTaken($callsTaken) {
         $this->callsTaken = $callsTaken;
+    }
+
+    function setLogoff($logoff) {
+        $this->logoff = $logoff;
     }
 
     function setStatus($status) {

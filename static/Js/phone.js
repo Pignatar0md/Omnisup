@@ -20,6 +20,23 @@ $(function () {
   var userAgent = new JsSIP.UA(config);
   var sipSession = userAgent.start();
 
+  $("#tableAgBody").on('click', '.info', function () {
+    var id = this.id;
+    $.ajax({
+      url: 'Controller/GetInfo.php',
+      type: 'GET',
+      dataType: 'html',
+      data: 'sip='+id,
+      success: function (msg) {
+        window.location.href = "index.php?page=agentInfo";
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        debugger;
+        console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+      }
+    });
+  });
+
   $("#tableAgBody").on('click', '.chanspy', function () {
     var id = this.id;
     $.ajax({
@@ -282,12 +299,6 @@ $(function () {
       ring.pause();
     }
   }
-
-  $("td").each(function () {
-    if($(this).html() == "Invalid" || $(this).html() == "Unavailable") {
-
-    }
-  });
 
   $("#webphone").click(function () {
     $("#modalWebCall").modal('show');
