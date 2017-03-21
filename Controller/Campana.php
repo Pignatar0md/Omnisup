@@ -70,7 +70,7 @@ class Campana {
                               $objQM->setStatus($value[8]);
                               $objQM->setLogoff(true);
                             } else {
-                              $objQM->setStatus($value[8].' '.$value[9]);
+                              $objQM->setStatus($value[8]);
                             }
                         } else {
                             $objQM->setStatus($value[8]);

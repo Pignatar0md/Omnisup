@@ -1,0 +1,1 @@
+1- editar el archivo /etc/php.ini y settear la variable error_reporting en 0.
