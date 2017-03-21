@@ -21,7 +21,7 @@ if ($_GET['nomcamp']) {
             $jsonString .= '{"agente": "' . $QM->getName() . '",';
             $pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
             $horaini = explode(' ', $pausa[3]);
-            $tiempo = date('H:i:s',0);//RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
+            $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
             if ($status == 'Pausa') {
                 if($QM->getLogoff()) {
                   //procedimiento para obtener las colas donde exista el agente
@@ -34,12 +34,8 @@ if ($_GET['nomcamp']) {
                   }
                   $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
                 }
-
-                /*$pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
-                $horaini = explode(' ', $pausa[3]);
-                $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));*/
                 $jsonString .= '"estado": "' . $status . ' - ' . $pausa[2] . '",';
-            $jsonString .= '"tiempo": "' . $tiempo . '",';
+                $jsonString .= '"tiempo": "' . $tiempo . '",';
           } elseif ($status == "Unavailable") {
             //procedimiento para obtener las colas donde exista el agente Unavailable o Invalid
             $arrData = $Controller_Campana->traerCampanasPorAgente($QM->getName());
@@ -62,7 +58,7 @@ if ($_GET['nomcamp']) {
             $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
           } else {
                 $jsonString .= '"estado": "' . $status . '",';
-                $jsonString .= '"tiempo": "'. $tiempo .'",';
+                $jsonString .= '"tiempo": "'. $tiempo  .'",';
           }
           $jsonString .= '"acciones": "<button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspy\' placeholder=\'monitorear\'><span class=\'glyphicon glyphicon-eye-open\'></span></button>&nbsp;'
                   . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspywhisper\' placeholder=\'hablar con agente\'><span class=\'glyphicon glyphicon-sunglasses\'></span></button>&nbsp;'

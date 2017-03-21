@@ -67,7 +67,7 @@ class Campana {
                             $objQM->setStatus('Llamada');
                         } elseif ($value[8] == "(paused)") {
                             if ($value[9] == "(Unavailable)" || $value[9] == "(Invalid)") {
-                              $objQM->setStatus($value[8]);
+                              $objQM->setStatus('Pausa');
                               $objQM->setLogoff(true);
                             } else {
                               $objQM->setStatus('Pausa');
