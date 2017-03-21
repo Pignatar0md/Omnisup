@@ -64,16 +64,16 @@ class Campana {
                         } elseif ($value[8] == "(Not" && $value[9] == "in") {
                             $objQM->setStatus('Libre');
                         } elseif ($value[8] == "(In" && $value[9] == "use)") {
-                            $objQM->setStatus('en llamada');
+                            $objQM->setStatus('Llamada');
                         } elseif ($value[8] == "(paused)") {
                             if ($value[9] == "(Unavailable)" || $value[9] == "(Invalid)") {
                               $objQM->setStatus($value[8]);
                               $objQM->setLogoff(true);
                             } else {
-                              $objQM->setStatus($value[8]);
+                              $objQM->setStatus('Pausa');
                             }
                         } else {
-                            $objQM->setStatus('pausa');
+                            $objQM->setStatus($value[8]);
                         }
                     }
                     $stringData[] = $objQM;
