@@ -18,13 +18,11 @@ if ($_GET['nomcamp']) {
         if (!is_null($valor) && $valor->getExten() != NULL) {
             $QM = $valor;
             $status = $QM->getStatus();
-            $status = str_replace('(', '', $status);
-            $status = str_replace(')', '', $status);
             $jsonString .= '{"agente": "' . $QM->getName() . '",';
             $pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
             $horaini = explode(' ', $pausa[3]);
-            $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
-            if ($status == 'paused') {
+            $tiempo = date('H:i:s',0);//RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
+            if ($status == 'Pausa') {
                 if($QM->getLogoff()) {
                   //procedimiento para obtener las colas donde exista el agente
                   $arrData = $Controller_Campana->traerCampanasPorAgente($QM->getName());
