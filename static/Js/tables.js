@@ -34,8 +34,9 @@ $(function () {
       }
     }
   });
-  setInterval("actualiza_contenido()", 1000);
-  //actualiza_contenido();
+  if(window.href='index.php?page=Detalle_Campana') {
+    setInterval("actualiza_contenido()", 1000);
+  }
 });
 function actualiza_contenido() {
   var nomcamp = $("#nombreCamp").html();

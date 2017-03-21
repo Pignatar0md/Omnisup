@@ -62,9 +62,9 @@ class Campana {
                         if($value[8] == "(in") {
                             $objQM->setStatus($value[8].' '.$value[9]);
                         } elseif ($value[8] == "(Not" && $value[9] == "in") {
-                            $objQM->setStatus($value[8].' '.$value[9].' '.$value[10]);
-                        } elseif ($value[8] == "(In") {
-                            $objQM->setStatus($value[8].' '.$value[9]);
+                            $objQM->setStatus('Libre');
+                        } elseif ($value[8] == "(In" && $value[9] == "use)") {
+                            $objQM->setStatus('en llamada');
                         } elseif ($value[8] == "(paused)") {
                             if ($value[9] == "(Unavailable)" || $value[9] == "(Invalid)") {
                               $objQM->setStatus($value[8]);
@@ -73,7 +73,7 @@ class Campana {
                               $objQM->setStatus($value[8]);
                             }
                         } else {
-                            $objQM->setStatus($value[8]);
+                            $objQM->setStatus('pausa');
                         }
                     }
                     $stringData[] = $objQM;
