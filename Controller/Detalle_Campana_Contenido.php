@@ -18,6 +18,8 @@ if ($_GET['nomcamp']) {
         if (!is_null($valor) && $valor->getExten() != NULL) {
             $QM = $valor;
             $status = $QM->getStatus();
+            $status = str_replace('(','',$status);
+            $status = str_replace(')','',$status);
             $jsonString .= '{"agente": "' . $QM->getName() . '",';
             $pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
             $horaini = explode(' ', $pausa[3]);

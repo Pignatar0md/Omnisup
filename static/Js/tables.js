@@ -36,6 +36,7 @@ $(function () {
   });
   if(window.href='index.php?page=Detalle_Campana') {
     setInterval("actualiza_contenido()", 1000);
+    //actualiza_contenido();
   }
 });
 function actualiza_contenido() {
@@ -46,9 +47,13 @@ function actualiza_contenido() {
     dataType: 'html',
     data: 'nomcamp='+nomcamp,
     success: function (msg) {
-      var mje = JSON.parse(msg);
-      tabagt.rows().remove().draw();
-      tabagt.rows.add(mje).draw();
+      if(msg!=="]") {
+        var mje = JSON.parse(msg);
+        tabagt.rows().remove().draw();
+        tabagt.rows.add(mje).draw();
+      } else {
+        tabagt.rows().remove().draw();
+      }
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
