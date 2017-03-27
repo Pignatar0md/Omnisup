@@ -34,11 +34,13 @@ $(function () {
       }
     }
   });
-  if(window.href='index.php?page=Detalle_Campana') {
+  var url = window.location.href;
+  if(url.indexOf('Detalle_Campana') !== -1) {
     setInterval("actualiza_contenido()", 1000);
     //actualiza_contenido();
   }
 });
+
 function actualiza_contenido() {
   var nomcamp = $("#nombreCamp").html();
   $.ajax({

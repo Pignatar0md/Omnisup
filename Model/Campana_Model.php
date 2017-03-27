@@ -20,7 +20,6 @@ class Campana_Model {
         } catch (Exception $ex) {
             return "problemas de Conexion AMI: ".$ex;
         }
-        $this->agi->Events('off');
         $data = $this->agi->Command($this->command);
         $this->agi->disconnect();
         return $data;
@@ -32,7 +31,6 @@ class Campana_Model {
         } catch (Exception $ex) {
             return "problemas de Conexion AMI: ".$ex;
         }
-        $this->agi->Events('off');
         $data = $this->agi->Command($this->command." $CampName");
         $this->agi->disconnect();
         return $data;

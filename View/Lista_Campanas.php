@@ -1,8 +1,8 @@
 <br>
 <br>
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
-include controllers . '/Campana.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
+include_once controllers . '/Campana.php';
 
 $Controller_Campana = new Campana();
 $resul = $Controller_Campana->traerCampanas();
@@ -16,7 +16,7 @@ $resul = $Controller_Campana->traerCampanas();
             <?php
             foreach ($resul as $clave => $valor) {
                 foreach ($valor as $cla => $val) {
-                    ?>   
+                    ?>
                     <tr>
                         <td style='color:green'><a href="index.php?page=Detalle_Campana&nomcamp=<?= $val ?>"><?= $val ?></a></td>
                     </tr>
