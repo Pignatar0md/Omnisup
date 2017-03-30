@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("America/Argentina/Cordoba");
 
 define('AMI_USERNAME','');
 define('AMI_PASWORD','');

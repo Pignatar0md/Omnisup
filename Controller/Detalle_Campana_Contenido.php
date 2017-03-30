@@ -24,11 +24,11 @@ if ($_GET['nomcamp']) {
             $pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
             $horaini = explode(' ', $pausa[3]);
             $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
-            if($status != "Libre") {
+            /*if($status != "Libre") {
               $_SESSION['tiempo'] = date('H:i:s');
               $_SESSION['estado'] = $status;
               $_SESSION['agente'] = $QM->getName();
-            }
+            }*/
             if ($status == 'Pausa') {
                 if($QM->getLogoff()) {
                   //procedimiento para obtener las colas donde exista el agente
@@ -65,8 +65,8 @@ if ($_GET['nomcamp']) {
             $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
           }  elseif ($status == "Libre") {
             $jsonString .= '"estado": "Libre",';
-             $tiempoAhora = $_SESSION['tiempo'];
-             $jsonString .= '"tiempo": "' . RestarHoras($tiempoAhora, date('H:i:s')) . '",';
+             //$tiempoAhora = $_SESSION['tiempo'];
+             $jsonString .= '"tiempo": "---",';
           } else {
                 $jsonString .= '"estado": "' . $status . '",';
                 $jsonString .= '"tiempo": "' . $tiempo . '",';
