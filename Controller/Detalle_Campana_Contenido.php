@@ -67,9 +67,12 @@ if ($_GET['nomcamp']) {
             $jsonString .= '"estado": "Libre",';
              //$tiempoAhora = $_SESSION['tiempo'];
              $jsonString .= '"tiempo": "---",';
+          } elseif ($status == "Llamada") {
+            $jsonString .= '"estado": "' . $status . '",';
+            $jsonString .= '"tiempo": "---",';
           } else {
-                $jsonString .= '"estado": "' . $status . '",';
-                $jsonString .= '"tiempo": "' . $tiempo . '",';
+            $jsonString .= '"estado": "' . $status . '",';
+            $jsonString .= '"tiempo": "' . $tiempo . '",';
           }
           $jsonString .= '"acciones": "<button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspy\' placeholder=\'monitorear\'><span class=\'glyphicon glyphicon-eye-open\'></span></button>&nbsp;'
                   . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspywhisper\' placeholder=\'hablar con agente\'><span class=\'glyphicon glyphicon-sunglasses\'></span></button>&nbsp;'
