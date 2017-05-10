@@ -3,11 +3,12 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 include controllers . '/Campana.php';
 include controllers . '/Agente.php';
+include entities . 'QueueMember.php';
 include helpers . '/time_helper.php';
 
 $QM = new QueueMember();
 $Controller_Campana = new Campana();
-$Controller_Agente = new Agente();
+//$Controller_Agente = new Agente();
 $jsonString = '';
 
 if ($_GET['nomcamp']) {
