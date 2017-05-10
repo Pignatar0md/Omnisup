@@ -48,39 +48,8 @@ class Campana {
     function traerCampanaDet($nomCamp) {
         $stringData = array();
         $campana = $this->Campana_Model->getCampaign($nomCamp);
-        foreach ($campana as $clave => $valor) {
-            if ($clave == "data") {
-                $datos = explode(PHP_EOL, $valor);
-                foreach ($datos as $key => $value) {
-                    if ($key > 2 && $value != "") {
-                        $objQM = new QueueMember();
-                        $value = trim($value);
-                        $value = explode(" ", $value);
-                        $exten = substr($value[2], 5);
-                        $objQM->setExten($exten);
-                        $objQM->setName($value[0] . ' ' . $value[1]);
-                        if($value[8] == "(in") {
-                            $objQM->setStatus($value[8].' '.$value[9]);
-                        } elseif ($value[8] == "(Not" && $value[9] == "in") {
-                            $objQM->setStatus('Libre');
-                        } elseif ($value[8] == "(In" && $value[9] == "use)") {
-                            $objQM->setStatus('Llamada');
-                        } elseif ($value[8] == "(paused)") {
-                            if ($value[9] == "(Unavailable)" || $value[9] == "(Invalid)") {
-                              $objQM->setStatus('Pausa');
-                              $objQM->setLogoff(true);
-                            } else {
-                              $objQM->setStatus('Pausa');
-                            }
-                        } else {
-                            $objQM->setStatus($value[8]);
-                        }
-                    }
-                    $stringData[] = $objQM;
-                }
-            }
-        }
-        return $stringData;
+
+        return $campana;
     }
 
     function traerCampanasPorAgente($agente) {

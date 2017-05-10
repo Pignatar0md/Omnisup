@@ -14,73 +14,7 @@ if ($_GET['nomcamp']) {
 
     $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
     $jsonString .= '[';
-    foreach ($resul as $clave => $valor) {
-        if (!is_null($valor) && $valor->getExten() != NULL) {
-            $QM = $valor;
-            $status = $QM->getStatus();
-            $status = str_replace('(','',$status);
-            $status = str_replace(')','',$status);
-            $jsonString .= '{"agente": "' . $QM->getName() . '",';
-            $pausa = $Controller_Agente->traerTipoPausa($QM->getExten());
-            $horaini = explode(' ', $pausa[3]);
-            $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
-            /*if($status != "Libre") {
-              $_SESSION['tiempo'] = date('H:i:s');
-              $_SESSION['estado'] = $status;
-              $_SESSION['agente'] = $QM->getName();
-            }*/
-            if ($status == 'Pausa') {
-                if($QM->getLogoff()) {
-                  //procedimiento para obtener las colas donde exista el agente
-                  $arrData = $Controller_Campana->traerCampanasPorAgente($QM->getName());
-                  $arrQueueNames = array();
-                  foreach ($arrData as $key => $value) {
-                    foreach ($value as $cla => $val) {
-                      $arrQueueNames[] = $val;
-                    }
-                  }
-                  $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
-                }
-                $jsonString .= '"estado": "' . $status . ' - ' . $pausa[2] . '",';
-                $jsonString .= '"tiempo": "' . $tiempo . '",';
-          } elseif ($status == "Unavailable") {
-            //procedimiento para obtener las colas donde exista el agente Unavailable o Invalid
-            $arrData = $Controller_Campana->traerCampanasPorAgente($QM->getName());
-            $arrQueueNames = array();
-            foreach ($arrData as $key => $value) {
-              foreach ($value as $cla => $val) {
-                $arrQueueNames[] = $val;
-              }
-            }
-            $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
-          } elseif ($status == "Invalid") {
-            //procedimiento para obtener las colas donde exista el agente Unavailable o Invalid
-            $arrData = $Controller_Campana->traerCampanasPorAgente($QM->getName());
-            $arrQueueNames = array();
-            foreach ($arrData as $key => $value) {
-              foreach ($value as $cla => $val) {
-                $arrQueueNames[] = $val;
-              }
-            }
-            $Controller_Agente->Desregistrar($QM->getExten(),$arrQueueNames);
-          }  elseif ($status == "Libre") {
-            $jsonString .= '"estado": "Libre",';
-             //$tiempoAhora = $_SESSION['tiempo'];
-             $jsonString .= '"tiempo": "---",';
-          } elseif ($status == "Llamada") {
-            $jsonString .= '"estado": "' . $status . '",';
-            $jsonString .= '"tiempo": "---",';
-          } else {
-            $jsonString .= '"estado": "' . $status . '",';
-            $jsonString .= '"tiempo": "' . $tiempo . '",';
-          }
-          $jsonString .= '"acciones": "<button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspy\' placeholder=\'monitorear\'><span class=\'glyphicon glyphicon-eye-open\'></span></button>&nbsp;'
-                  . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs chanspywhisper\' placeholder=\'hablar con agente\'><span class=\'glyphicon glyphicon-sunglasses\'></span></button>&nbsp;'
-                  . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs conference\' placeholder=\'conferencia\'><span class=\'glyphicon glyphicon-user\'></span></button>&nbsp;'
-                  . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs info\' placeholder=\'conferencia\'><span class=\'glyphicon glyphicon-info-sign\'></span></button>&nbsp;'
-                  . '                  <button type=\'button\' id=\'' . $QM->getExten() . '\' class=\'btn btn-primary btn-xs agentlogoff\' placeholder=\'desconectar agente\'><span class=\'glyphicon glyphicon-off\'></span></button>"},';
-        }
-    }
+    var_dump($resul);
     $jsonString = substr($jsonString, 0, -1);
-    echo $jsonString . ']';
+    //echo $jsonString . ']';
 }
