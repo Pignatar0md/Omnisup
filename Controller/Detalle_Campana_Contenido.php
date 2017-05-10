@@ -14,7 +14,7 @@ $jsonString = '';
 if ($_GET['nomcamp']) {
 
     $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
-    echo $resul;
+    print_r($resul);
     $jsonString .= '[';
     /*$resul = explode("(", $resul);
 
