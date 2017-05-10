@@ -3,7 +3,7 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 include controllers . '/Campana.php';
 include controllers . '/Agente.php';
-include entities . 'QueueMember.php';
+include entities . '/QueueMember.php';
 include helpers . '/time_helper.php';
 
 $QM = new QueueMember();
