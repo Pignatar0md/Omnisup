@@ -23,7 +23,7 @@ if ($_GET['nomcamp']) {
     $sipExt = $sip[1];
 
     $status = explode("m", $resul[2]);
-    echo "nom: ".$nombre." /sip: ".$sipExt." /status: ".$status;
+    echo "nom: ".$nombre." /sip: ".$sipExt." /status: ".$status[1];
     $jsonString = substr($jsonString, 0, -1);
     //echo $jsonString . ']';
 }
