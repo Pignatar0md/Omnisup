@@ -14,11 +14,13 @@ $jsonString = '';
 if ($_GET['nomcamp']) {
 
     $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
-    print_r($resul);
-    $jsonString .= '[';
-    /*$resul = explode("(", $resul);
 
-    $nombre = $resul[0];
+    $jsonString .= '[';
+    $resul = explode("\n", $resul);
+    foreach ($resul as $key => $value) {
+      echo $value;
+    }
+    /*$nombre = $resul[0];
 
     $sip = explode("/",$resul[1]);
     $sipExt = $sip[1];
