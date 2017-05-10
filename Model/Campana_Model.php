@@ -29,7 +29,6 @@ class Campana_Model {
 
         $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep from |awk '{print $1}' FS='has taken'|awk '{print $1, $2}' FS='\(ringinuse disabled\)' |awk '{print $1, $2}' FS='\(dynamic\)'";
         $data = shell_exec($cmd);
-        echo $cmd;
         return $data;
     }
 
