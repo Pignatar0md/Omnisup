@@ -124,7 +124,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="<?php echo $_SERVER['IP_ADDR'] ?>/reporte/llamadas/"><span class=" glyphicon glyphicon-earphone" aria-hidden="true"></span> Llamadas</a>
+                            <a href="<?php echo $_SERVER['SERVER_ADDR'] ?>/reporte/llamadas/"><span class=" glyphicon glyphicon-earphone" aria-hidden="true"></span> Llamadas</a>
                         </li>
                         <li>
                             <a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> SMS</a>
