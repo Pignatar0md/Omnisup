@@ -1,10 +1,15 @@
 <?php
 
+include_once entities . '/Phpagi_asmanager.php';
+
 class Agente_Model {
 
+    private $command;
+    private $agi;
 
     function __construct() {
-
+        $this->command = "sip show peers";
+        $this->agi = new Phpagi_asmanager();
     }
 
     function getAgents() {
@@ -19,11 +24,14 @@ class Agente_Model {
 
     function getPauseAgents($agt) {
         try {
-
+            $this->agi->connect(AMI_HOST, AMI_USERNAME, AMI_PASWORD);
         } catch (Exception $ex) {
-            return "problemas de Conexion : " . $ex;
+            return "problemas de Conexion AMI: " . $ex;
         }
-
+        $this->agi->Events('off');
+        $this->command = "database show PAUSECUSTOM/AGENT/" . $agt;
+        $data = $this->agi->Command($this->command);
+        $this->agi->disconnect();
         return $data;
     }
 

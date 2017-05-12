@@ -2,7 +2,7 @@ $(function () {
   var sipStatus = document.getElementById('SipStatus');
   var modifyUserStat = document.getElementById("UserStatus");
   var callStatus = document.getElementById('CallStatus');
-  var KamailioIp = "172.16.20.14";
+  var KamailioIp = "172.16.20.88";
   var userAgent;
   var sipSession;
   var num;
@@ -10,9 +10,9 @@ $(function () {
   var local = document.getElementById('localAudio');
   var remoto = document.getElementById('remoteAudio');
   var config = {
-    uri: 'sip:1006' + '@' + KamailioIp,
+    uri: 'sip:1003' + '@' + KamailioIp,
     ws_servers: 'wss://' + KamailioIp + ':443',
-    password: 'PdpDVDxaZ5',
+    password: 'dzheD4PfXn',
     hack_ip_in_contact: true,
     session_timers: false
   };
@@ -159,15 +159,12 @@ $(function () {
       atiendoSi.onclick = function() {
         $("#modalReceiveCalls").modal('hide');
         session_incoming.answer(options);
-        setCallState("Connected to " + num, "orange");
+        setCallState("Connected", "orange");
         Sounds("","stop");
       };
 
       atiendoNo.onclick = function() {
         $("#modalReceiveCalls").modal('hide');
-        if($("#autopause").val() === "True") {
-
-        }
         userAgent.terminateSessions();
         defaultCallState();
       };

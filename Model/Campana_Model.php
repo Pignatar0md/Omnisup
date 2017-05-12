@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
+//ini_set('display_errors', 'On');
+//error_reporting(E_ALL | E_STRICT);
 
 include_once entities . '/Phpagi_asmanager.php';
 
@@ -26,7 +26,6 @@ class Campana_Model {
     }
 
     function getCampaign($CampName) {
-
         $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep from |awk '{print $1}' FS='has taken'|awk '{print $1, $2}' FS='\(ringinuse disabled\)' |awk '{print $1, $2}' FS='\(dynamic\)'";
         $data = shell_exec($cmd);
         return $data;
