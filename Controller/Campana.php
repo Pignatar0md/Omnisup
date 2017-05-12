@@ -2,6 +2,7 @@
 
 include models . '/Campana_Model.php';
 include entities. '/QueueMember.php';
+
 class Campana {
 
     private $Campana_Model;
