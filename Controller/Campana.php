@@ -48,7 +48,6 @@ class Campana {
 
     function traerCampanaDet($nomCamp) {
         $campana = $this->Campana_Model->getCampaign($nomCamp);
-        return $campana;
       	$rawArrayData = array();
       	$campana = explode(PHP_EOL, $campana);
       	foreach($campana as $clave => $valor) {

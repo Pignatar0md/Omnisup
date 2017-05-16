@@ -12,7 +12,6 @@ $jsonString = '';
 
 if ($_GET['nomcamp']) {
     $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
-    print_r($resul);
     $jsonString .= '[';
     foreach($resul as $Obj) {
 	      $Qm = $Obj;
