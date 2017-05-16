@@ -22,13 +22,16 @@ if ($_GET['nomcamp']) {
             $jsonString .= '{"agente": "' . trim($Qm->getName()) . '",';
 	          $status = $Qm->getStatus();
 	          $status = trim($status);
-	          if($status == "Not in use") {
+	          if($status == "Not in use") {                                // estado online
                 $jsonString .= '"estado": "Libre",';
 	              $jsonString .= '"tiempo": "---",';
-	          } else if($status == "paused") {
+	          } else if($status == "paused") {                             // pausa - acw/gestion/blabla
                 $jsonString .= '"estado": "Pausa - ' . $pausa[2] . '",';
                 $jsonString .= '"tiempo": "' . trim($tiempo) . '",';
-	          } else if($status == "in use") {
+	          } else if($status == "In use") {                             // llamada manual
+                $jsonString .= '"estado": "Llamada Manual",';
+	              $jsonString .= '"tiempo": "---",';
+	          } else if($status == "in call") {                            // llamada de dialer
                 $jsonString .= '"estado": "Llamada",';
 	              $jsonString .= '"tiempo": "---",';
 	          } else {
