@@ -3,7 +3,7 @@
 function obtenerPath() {
 
     $op = isset($_GET['op']) ? $_GET['op'] : "new";
-    $pag = isset($_GET['page']) ? $_GET['page'] : "Main";
+    $pag = isset($_GET['page']) ? $_GET['page'] : "Lista_Campanas";
 
     $path = "";
 

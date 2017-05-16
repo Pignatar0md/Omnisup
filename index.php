@@ -17,7 +17,7 @@
         <script type="text/javascript" src="static/Js/phone.js"></script>
         <script type="text/javascript" src="static/Js/tables.js"></script>
         <div class="container-fluid">
-            <?php include 'View/Navbar.php' ?>
+            <?php //include 'View/Navbar.php' ?>
             <br/>
             <div class="row-fluid">
                 <?php
