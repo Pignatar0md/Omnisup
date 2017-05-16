@@ -12,6 +12,7 @@ $jsonString = '';
 
 if ($_GET['nomcamp']) {
     $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
+    print_r($resul);
     $jsonString .= '[';
     foreach($resul as $Obj) {
 	      $Qm = $Obj;
@@ -28,11 +29,11 @@ if ($_GET['nomcamp']) {
 	          } else if($status == "paused") {
                 $jsonString .= '"estado": "Pausa - ' . $pausa[2] . '",';
                 $jsonString .= '"tiempo": "' . trim($tiempo) . '",';
-	          } else if($status == "In use") {
+	          } else if($status == "in use") {
                 $jsonString .= '"estado": "Llamada",';
 	              $jsonString .= '"tiempo": "---",';
 	          } else {
-	              $jsonString .= '"estado": "Desconectado",';
+	              $jsonString .= '"estado": "'.$status.'",';
                 $jsonString .= '"tiempo": "---",';
 	          }
 	          $jsonString .= '"acciones": "<button type=\'button\' id=\'' . $Qm->getExten() . '\' class=\'btn btn-primary btn-xs chanspy\' placeholder=\'monitorear\'><span class=\'glyphicon glyphicon-eye-open\'></span></button>&nbsp;'
