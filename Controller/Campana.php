@@ -78,4 +78,34 @@ class Campana {
         return $res;
     }
 
+    function traerInfoReporteRealTimeCamp($NomCamp) {
+        $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
+        $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
+        $llamadasProcesadas = $this->Campana_Model->getProcessedCalls($NomCamp);
+        $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
+        $llamadasOcupadas = $this->Campana_Model->getBusyCalls($NomCamp);
+        $cdadCalificaciones = $this->Campana_Model->getScoreCuantity($NomCamp);
+        $arrInfo = array();
+
+        foreach ($llamadasDiscadas as $key => $value) {
+            $arrInfo['dialed'] = $value;
+        }
+        foreach ($llamadasConectadas as $key => $value) {
+            $arrInfo['connected'] = $value;
+        }
+        foreach ($llamadasProcesadas as $key => $value) {
+            $arrInfo['processed'] = $value;
+        }
+        foreach ($llamadasPerdidas as $key => $value) {
+            $arrInfo['abandoned'] = $value;
+        }
+        foreach ($llamadasOcupadas as $key => $value) {
+            $arrInfo['busy'] = $value;
+        }
+
+        $arrInfo['score'] = $cdadCalificaciones;
+
+        return $arrInfo;
+    }
+
 }
