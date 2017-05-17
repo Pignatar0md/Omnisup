@@ -48,28 +48,28 @@ class Campana {
 
     function traerCampanaDet($nomCamp) {
         $campana = $this->Campana_Model->getCampaign($nomCamp);
-	$rawArrayData = array();
-	$campana = explode(PHP_EOL, $campana);
-	foreach($campana as $clave => $valor) {
-	    $Qm = new QueueMember();
-	    $valor = explode("(", $valor);
-	    $name = str_replace(")","",$valor[0]);
-	    if($name) {
-	        $Qm->setName($name);
-	    }
-	    $val = explode(" ", $valor[1]);
-	    $exten = str_replace("SIP/","",$val[0]);
-	    if($exten) {
-	        $Qm->setExten($exten);
-	    }
-	    $val = str_replace("(","",$valor[2]);
-	    $val = str_replace(")","",$valor[2]);
-	    $status = $val;
-	    if($status) {
-	        $Qm->setStatus($status);
-	    }
-	    $rawArrayData[] = $Qm;
-	}
+      	$rawArrayData = array();
+      	$campana = explode(PHP_EOL, $campana);
+      	foreach($campana as $clave => $valor) {
+      	    $Qm = new QueueMember();
+      	    $valor = explode("(", $valor);
+      	    $name = str_replace(")","",$valor[0]);
+      	    if($name) {
+      	        $Qm->setName($name);
+      	    }
+      	    $val = explode(" ", $valor[1]);
+      	    $exten = str_replace("SIP/","",$val[0]);
+      	    if($exten) {
+      	        $Qm->setExten($exten);
+      	    }
+      	    $val = str_replace("(","",$valor[2]);
+      	    $val = str_replace(")","",$valor[2]);
+      	    $status = $val;
+      	    if($status) {
+      	        $Qm->setStatus($status);
+      	    }
+      	    $rawArrayData[] = $Qm;
+      	}
         return $rawArrayData;
     }
 
@@ -78,7 +78,7 @@ class Campana {
         return $res;
     }
 
-    function traerInfoReporteRealTimeCamp($NomCamp) {
+    function traerInfoReporteRealTimeCamp($NomCamp, $IdCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
         $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
         $llamadasProcesadas = $this->Campana_Model->getProcessedCalls($NomCamp);
@@ -100,7 +100,7 @@ class Campana {
             $arrInfo['abandoned'] = $value;
         }
         foreach ($llamadasOcupadas as $key => $value) {
-            $arrInfo['Busy'] = $value;
+            $arrInfo['busy'] = $value;
         }
 
         $arrInfo['score'] = $cdadCalificaciones;

@@ -11,7 +11,7 @@ $Controller_Agente = new Agente();
 $jsonString = '';
 
 if ($_GET['nomcamp']) {
-    if($_GET['agstatus']) {
+    if($_GET['op'] == 'agstatus') {
       $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
       $jsonString .= '[';
       foreach($resul as $Obj) {
@@ -45,11 +45,39 @@ if ($_GET['nomcamp']) {
       }
       $jsonString = substr($jsonString, 0, -1);
       echo $jsonString . ']';
-    } else if ($_GET['campstatus']) {
+    } else if ($_GET['op'] == 'campstatus') {
         $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
-        $jsonString .= '[';
-        foreach($resul as $Obj) {
-
+        $jsonString .= '[{';
+        foreach($resul as $clave => $valor) {
+            if($clave == "dialed") {
+                $jsonString .= '"discadas": "' . $val . '",';
+            }
+            if($clave == "connected") {
+                $jsonString .= '"conectadas": "' . $val . '",';
+            }
+            if($clave == "processed") {
+                $jsonString .= '"procesadas": "' . $val . '",';
+            }
+            if($clave == "abandoned") {
+                $jsonString .= '"abandonadas": "' . $val . '",';
+            }
+            if($clave == "busy") {
+                $jsonString .= '"ocupadas": "' . $val . '",';
+            }
+            if(is_array($valor)) {
+                $jsonString .= '"calificaciones": [';
+                foreach ($valor as $key => $value) {
+                    if ($key == "score") {
+                        foreach ($value as $k => $v) {
+                            $jsonString .= '{"' . $k . '" :' . $v . '},';
+                        }
+                    }
+                }
+                $jsonString = substr($jsonString, 0, -1);
+                $jsonString .= "]";
+            }
         }
+        $jsonString .= "}]";
+        echo $jsonString;
     }
 }
