@@ -78,13 +78,13 @@ class Campana {
         return $res;
     }
 
-    function traerInfoReporteRealTimeCamp($NomCamp, $IdCamp) {
+    function traerInfoReporteRealTimeCamp($NomCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
         $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
         $llamadasProcesadas = $this->Campana_Model->getProcessedCalls($NomCamp);
         $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
         $llamadasOcupadas = $this->Campana_Model->getBusyCalls($NomCamp);
-        $cdadCalificaciones = $this->Campana_Model->getScoreCuantity($IdCamp);
+        $cdadCalificaciones = $this->Campana_Model->getScoreCuantity($NomCamp);
         $arrInfo = array();
 
         foreach ($llamadasDiscadas as $key => $value) {

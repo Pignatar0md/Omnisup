@@ -131,10 +131,10 @@ class Campana_Model {
       return $result;
     }
 
-    function getScoreCuantity($CampId) {
-      $sql = "SELECT count(*),c.nombre FROM ominicontacto_app_calificacioncliente cc JOIN ominicontacto_app_calificacion c " .
-      "ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :day AND EXTRACT(MONTH from fecha) = :month " .
-      "AND EXTRACT(YEAR from fecha) = :year AND campana_id = :campid GROUP BY c.nombre";
+    function getScoreCuantity($CampName) {
+      $sql = "select count(*),c.nombre FROM ominicontacto_app_campanadialer cd JOIN ominicontacto_app_calificacioncliente cc " .
+      "ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :day " .
+      "AND EXTRACT(MONTH from fecha) = :month AND EXTRACT(YEAR from fecha) = :year AND cd.nombre = :nombre GROUP BY c.nombre";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -144,7 +144,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campid', $CampId);
+        $query->bindParam(':nombre', $CampName);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {

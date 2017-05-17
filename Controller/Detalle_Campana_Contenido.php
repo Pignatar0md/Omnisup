@@ -46,7 +46,7 @@ if ($_GET['nomcamp']) {
       $jsonString = substr($jsonString, 0, -1);
       echo $jsonString . ']';
     } else if ($_GET['op'] == 'campstatus') {
-        $resul = $Controller_Campana->traerCampanaDet($_GET['nomcamp']);
+        $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($_GET['nomcamp']);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {
