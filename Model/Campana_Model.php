@@ -12,7 +12,7 @@ class Campana_Model {
     function __construct() {
         $this->command = "queue show";
         $this->agi = new Phpagi_asmanager();
-        $this->argPdo = 'mysql:host=' . PG_HOST . ';dbname=encuesta;charset=utf8';
+        $this->argPdo = 'pgsql:host=' . PG_HOST . ';dbname=kamailio;port=5432';
     }
 
     function getCampaigns() {
