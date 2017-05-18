@@ -76,7 +76,8 @@
     </div>
 
     <div class="col-md-8 col-lg-offset-2">
-        <h3>Agentes en <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3>
+        <h3 class="col-md-5">Agentes en <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3>
+        <img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/>
         <table id="tableAgt" class="table table-striped table-condensed">
             <thead>
                 <tr>
@@ -87,5 +88,4 @@
             </tbody>
         </table>
     </div>
-    <div><img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/></div>
 </div>
