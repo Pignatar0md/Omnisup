@@ -12,7 +12,7 @@ class Campana_Model {
     function __construct() {
         $this->command = "queue show";
         $this->agi = new Phpagi_asmanager();
-        $this->argPdo = 'mysql:host=' . DBHOST . ';dbname=encuesta;charset=utf8';
+        $this->argPdo = 'mysql:host=' . PG_HOST . ';dbname=encuesta;charset=utf8';
     }
 
     function getCampaigns() {
@@ -39,7 +39,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo, DBUSER, DBPASS);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -61,7 +61,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo, DBUSER, DBPASS);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -82,7 +82,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo, DBUSER, DBPASS);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -103,7 +103,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo, DBUSER, DBPASS);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -124,7 +124,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo, DBUSER, DBPASS);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -146,7 +146,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo, DBUSER, DBPASS);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
