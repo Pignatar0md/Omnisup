@@ -78,6 +78,11 @@ class Campana {
         return $res;
     }
 
+    function traerLlamadasConectadas($NomCamp) {
+        $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
+        return $llamadasConectadas;
+    }
+
     function traerInfoReporteRealTimeCamp($NomCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
         $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
