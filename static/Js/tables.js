@@ -76,8 +76,8 @@ function actualiza_contenido_camp() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        tabagt.rows().remove().draw();
-        tabagt.rows.add(mje).draw();
+        tabcamp.rows().remove().draw();
+        tabcamp.rows.add(mje).draw();
       } else {
         tabagt.rows().remove().draw();
       }
@@ -98,8 +98,8 @@ function actualiza_contenido_colas() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        tabagt.rows().remove().draw();
-        tabagt.rows.add(mje).draw();
+        tabqueue.rows().remove().draw();
+        tabqueue.rows.add(mje).draw();
       } else {
         tabagt.rows().remove().draw();
       }
@@ -120,8 +120,8 @@ function actualiza_contenido_wombat() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        tabagt.rows().remove().draw();
-        tabagt.rows.add(mje).draw();
+        tabwd.rows().remove().draw();
+        tabwd.rows.add(mje).draw();
       } else {
         tabagt.rows().remove().draw();
       }
