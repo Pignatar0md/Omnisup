@@ -37,7 +37,7 @@ $(function () {
   var url = window.location.href;
   if(url.indexOf('Detalle_Campana') !== -1) {
     setInterval("actualiza_contenido_agt()", 1000);
-    setInterval("actualiza_contenido_camp()", 1000);
+    //setInterval("actualiza_contenido_camp()", 1000);
     //setInterval("actualiza_contenido_queue()", 1000);
     //setInterval("actualiza_contenido_wombat()", 1000);
     //actualiza_contenido();
