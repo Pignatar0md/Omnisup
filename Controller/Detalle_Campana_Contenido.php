@@ -1,7 +1,7 @@
 <?php
-
-include controllers . '/Campana.php';
-include controllers . '/Agente.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
+include '/var/www/html/Omnisup/Controller/Campana.php';
+include '/var/www/html/Omnisup/Controller/Agente.php';
 
 include helpers . '/time_helper.php';
 

@@ -13,7 +13,7 @@ class Campana_Model {
     function __construct() {
         $this->command = "queue show";
         $this->agi = new Phpagi_asmanager();
-        $this->argPdo = 'pgsql:host=' . PG_HOST . ';dbname=kamailio;port=5432';
+        $this->argPdo = 'pgsql:host=' . PG_HOST . ';dbname=kamailio;port=5432;user='.PG_USERNAME.';password='.PG_PASSWORD;
     }
 
     function getCampaigns() {
@@ -56,18 +56,18 @@ class Campana_Model {
     }
 
     function getConnectedCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and " .
-      "EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ENTERQUEUE' and queuename like :campname";
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = 17 and " .
+      "EXTRACT(MONTH FROM time) = 05 and EXTRACT(YEAR FROM time) = 2017 and event like 'ENTERQUEUE' and queuename like 'multinum-3'";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
-        $query->bindParam(':dia', $day);
+        /*$query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campname', $CampName);
+        $query->bindParam(':campname', $CampName);*/
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -177,8 +177,3 @@ class Campana_Model {
         return $result;
     }
 }
-$r = new Campana_Model();
-
-$resu = $r->getConnectedCalls();
-
-var_dump($resu);
