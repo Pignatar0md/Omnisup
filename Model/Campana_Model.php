@@ -56,8 +56,8 @@ class Campana_Model {
     }
 
     function getConnectedCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = 17 and " .
-      "EXTRACT(MONTH FROM time) = 05 and EXTRACT(YEAR FROM time) = 2017 and event like 'ENTERQUEUE' and queuename like 'multinum-3'";
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and " .
+      "EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ENTERQUEUE' and queuename like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
