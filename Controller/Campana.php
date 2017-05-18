@@ -1,6 +1,6 @@
 <?php
 
-include '/var/www/html/Omnisup/Model/Campana_Model.php';
+include models . '/Campana_Model.php';
 include entities. '/QueueMember.php';
 
 class Campana {
