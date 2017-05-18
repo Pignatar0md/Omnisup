@@ -1,6 +1,5 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 include controllers . '/Campana.php';
 include controllers . '/Agente.php';
 
@@ -48,6 +47,7 @@ if ($_GET['nomcamp']) {
     } else if ($_GET['op'] == 'campstatus') {
         //$resul = $Controller_Campana->traerInfoReporteRealTimeCamp($_GET['nomcamp']);
         $resul = $Controller_Campana->traerLlamadasConectadas($_GET['nomcamp']);
+        var_dump($resul);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {

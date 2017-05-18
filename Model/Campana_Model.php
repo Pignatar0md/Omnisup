@@ -55,9 +55,9 @@ class Campana_Model {
       return $result;
     }
 
-    function getConnectedCalls() {
-      $sql = "select count(*) from ominicontacto_app_queuelog where " .
-      "EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ENTERQUEUE'";
+    function getConnectedCalls($CampName) {
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and " .
+      "EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ENTERQUEUE' and queuename like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -67,6 +67,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->bindParam(':campname', $CampName);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -76,9 +77,9 @@ class Campana_Model {
       return $result;
     }
 
-    function getProcessedCalls() {
-      $sql = "select count(*) from ominicontacto_app_queuelog where " .
-      "EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'CONNECT'";
+    function getProcessedCalls($CampName) {
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and " .
+      "EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'CONNECT' and queuename like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -88,6 +89,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->bindParam(':campname', $CampName);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -99,7 +101,8 @@ class Campana_Model {
 
     function getLostCalls($CampName) {
       $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia " .
-      "and EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ABANDON' and event like 'EXITWITHTIMEOUT'";
+      "and EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ABANDON' and " .
+      "event like 'EXITWITHTIMEOUT' and queuename like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -109,6 +112,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->bindParam(':campname', $CampName);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -120,7 +124,7 @@ class Campana_Model {
 
     function getBusyCalls($CampName) {
       $sql = "select count(*) from cdr where EXTRACT(DAY FROM calldate) = :dia and EXTRACT(MONTH FROM calldate) = :mes and " .
-      "EXTRACT(YEAR FROM calldate) = :ano and disposition like 'NO ANSWER' and disposition like 'BUSY'";
+      "EXTRACT(YEAR FROM calldate) = :ano and disposition like 'NO ANSWER' and disposition like 'BUSY' and clid like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -130,6 +134,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->bindParam(':campname', $CampName. "%");
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
