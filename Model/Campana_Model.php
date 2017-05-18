@@ -7,10 +7,12 @@ class Campana_Model {
 
     private $command;
     private $agi;
+    private $argPdo;
 
     function __construct() {
         $this->command = "queue show";
         $this->agi = new Phpagi_asmanager();
+        $this->argPdo = 'mysql:host=' . DBHOST . ';dbname=encuesta;charset=utf8';
     }
 
     function getCampaigns() {
@@ -43,6 +45,7 @@ class Campana_Model {
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
         $query->bindParam(':clid', $CampName . "%");
+        $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
@@ -63,6 +66,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
@@ -83,6 +87,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
@@ -103,6 +108,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
@@ -123,6 +129,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
+        $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
@@ -145,6 +152,7 @@ class Campana_Model {
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
         $query->bindParam(':nombre', $CampName);
+        $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
@@ -163,3 +171,8 @@ class Campana_Model {
         return $res;
     }
 }
+$r = new Campana_Model();
+
+$resu = $r->getConnectedCalls();
+
+var_dump($resu);
