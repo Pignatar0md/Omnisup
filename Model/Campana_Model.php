@@ -49,7 +49,7 @@ class Campana_Model {
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
-          $res = "Database Error: " . $e;
+          $result= "Database Error: " . $e;
       }
       return $result;
     }
@@ -70,7 +70,7 @@ class Campana_Model {
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
-          $res = "Database Error: " . $e;
+          $result= "Database Error: " . $e;
       }
       return $result;
     }
@@ -91,7 +91,7 @@ class Campana_Model {
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
-          $res = "Database Error: " . $e;
+          $result= "Database Error: " . $e;
       }
       return $result;
     }
@@ -112,7 +112,7 @@ class Campana_Model {
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
-          $res = "Database Error: " . $e;
+          $result= "Database Error: " . $e;
       }
       return $result;
     }
@@ -133,7 +133,7 @@ class Campana_Model {
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
-          $res = "Database Error: " . $e;
+          $result= "Database Error: " . $e;
       }
       return $result;
     }
@@ -156,7 +156,7 @@ class Campana_Model {
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
       } catch (PDOException $e) {
-          $res = "Database Error: " . $e;
+          $result= "Database Error: " . $e;
       }
       return $result;
     }
@@ -166,9 +166,9 @@ class Campana_Model {
         try {
 
         } catch (PDOException $e) {
-            $res = "Database Error: " . $e;
+            $result= "Database Error: " . $e;
         }
-        return $res;
+        return $result;
     }
 }
 $r = new Campana_Model();
