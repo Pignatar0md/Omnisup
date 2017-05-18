@@ -64,10 +64,10 @@ class Campana_Model {
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
-        /*$query->bindParam(':dia', $day);
+        $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campname', $CampName);*/
+        $query->bindParam(':campname', $CampName);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
