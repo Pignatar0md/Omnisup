@@ -1,5 +1,4 @@
 <br/>
-<br/>
 <div class="container-fluid">
     <div class="modal fade" id="modalWebCall" role="dialog">
         <div class="modal-dialog modal-sm">
@@ -35,8 +34,6 @@
                             </div>
                         </div>
                         <!-- -->
-
-
                         <div class="row">
                             <br>
                             <div class="backgroundWebPhone col-md-10 col-md-offset-1">
@@ -74,7 +71,6 @@
             </audio>
         </div>
     </div>
-
     <div class="col-md-8 col-lg-offset-2">
         <h3 class="col-md-5">Agentes en <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3>
         <img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/>
