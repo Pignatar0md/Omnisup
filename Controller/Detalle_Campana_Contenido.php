@@ -73,7 +73,7 @@ if ($_GET['nomcamp']) {
             if($clave == "score") {
                     $jsonString .= '"calificaciones": [';
                     foreach ($valor as $key => $value) {
-                        if ($key == "score") {
+
                             foreach ($value as $k => $v) {
                                 foreach ($v as $cl => $vl) {
                                   if($cl == "count") {
@@ -83,12 +83,12 @@ if ($_GET['nomcamp']) {
                                   }
                                 }
                             }
-                        }
+                        
                     }
                     $jsonString = substr($jsonString, 0, -1);
                     $jsonString .= "]";
             }
-        }
+
         $jsonString .= "}]";
         echo $jsonString;
     }
