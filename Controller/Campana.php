@@ -117,19 +117,29 @@ class Campana {
         $arrInfo = array();
 
         foreach ($llamadasDiscadas as $key => $value) {
-            $arrInfo['dialed'] = $value;
+            foreach($value as $k => $v) {
+                $arrInfo['dialed'] = $v;
+            }
         }
         foreach ($llamadasConectadas as $key => $value) {
-            $arrInfo['connected'] = $value;
+            foreach($value as $k => $v) {
+                $arrInfo['connected'] = $v;
+            }
         }
         foreach ($llamadasProcesadas as $key => $value) {
-            $arrInfo['processed'] = $value;
+            foreach($value as $k => $v) {
+                $arrInfo['processed'] = $v;
+            }
         }
         foreach ($llamadasPerdidas as $key => $value) {
-            $arrInfo['abandoned'] = $value;
+            foreach($value as $k => $v) {
+                $arrInfo['abandoned'] = $v;
+            }
         }
         foreach ($llamadasOcupadas as $key => $value) {
-            $arrInfo['busy'] = $value;
+            foreach($value as $k => $v) {
+                $arrInfo['busy'] = $v;
+            }
         }
 
         $arrInfo['score'] = $cdadCalificaciones;
