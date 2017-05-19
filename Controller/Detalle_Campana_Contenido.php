@@ -68,7 +68,7 @@ if ($_GET['nomcamp']) {
                 foreach ($valor as $key => $value) {
                     foreach ($value as $cl => $vl) {
                         if($cl != "count") {
-                            $subJsonString2 .=  $cl;
+                            $subJsonString2 .=  $vl;
                         } else {
                             $subJsonString1 .= $vl;
                         }
