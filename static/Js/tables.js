@@ -1,20 +1,6 @@
 var tabagt;
 $(function () {
-  $('#tableCamp').DataTable({
-    searching: false,
-    bLengthChange: false,
-    "language": {
-      "info": "pagina _PAGE_ de _PAGES_",
-      "paginate": {
-        "first":      "Primero",
-        "last":       "Ultimo",
-        "next":       "Siguiente",
-        "previous":   "Anterior"
-      }
-    }
-  });
-
-  tabagt = $('#tableAgt').DataTable({
+  /*  tabagt = $('#tableAgt').DataTable({
     columns: [
         {data: 'agente'},
         {data: 'estado'},
@@ -33,7 +19,7 @@ $(function () {
         "previous":   "Anterior"
       }
     }
-  });
+  });*/
   var url = window.location.href;
   if(url.indexOf('Detalle_Campana') !== -1) {
     debugger;
@@ -77,10 +63,11 @@ function actualiza_contenido_camp() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        tabagt.rows().remove().draw();
-        tabagt.rows.add(mje).draw();
-      } else {
-        tabagt.rows().remove().draw();
+        $("#dialed").val(mje[0].discadas);
+        $("#connected").val(mje[0].conectadas);
+        $("#processed").val(mje[0].procesadas);
+        $("#lost").val(mje[0].abandonadas);
+        $("#busy").val(mje[0].ocupadas);
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {

@@ -73,40 +73,6 @@ class Campana {
         return $rawArrayData;
     }
 
-    /*function traerCampanasPorAgente($agente) {
-        $res = $this->Campana_Model->getCampaignsByAgent($agente);
-        return $res;
-    }
-
-    function traerLlamadasDiscadas($NomCamp) {
-        $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
-        return $llamadasDiscadas;
-    }
-    function traerLlamadasConectadas($NomCamp) {
-        $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
-        return $llamadasConectadas;
-    }
-
-    function traerLlamadasProcesadas($NomCamp) {
-        $llamadasConectadas = $this->Campana_Model->getProcessedCalls($NomCamp);
-        return $llamadasConectadas;
-    }
-
-    function traerLlamadasPerdidas($NomCamp) {
-        $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
-        return $llamadasPerdidas;
-    }
-
-    function traerLlamadasOcupadas($NomCamp) {
-        $llamadasOcupadas = $this->Campana_Model->getBusyCalls($NomCamp);
-        return $llamadasOcupadas;
-    }
-
-    function traerCantidadDeCalificadas($NomCamp) {
-        $llamadasCalificadas = $this->Campana_Model->getScoreCuantity($NomCamp);
-        return $llamadasCalificadas;
-    }*/
-
     function traerInfoReporteRealTimeCamp($NomCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
         $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
