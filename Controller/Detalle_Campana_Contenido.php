@@ -73,22 +73,16 @@ if ($_GET['nomcamp']) {
             if($clave == "score") {
                     $jsonString .= '"calificaciones": [';
                     foreach ($valor as $key => $value) {
-                      echo "ckave ".$key . " - ".$value;
-/*                        if(is_array($value)) {
-                          foreach ($v as $cl => $vl) {
-                            if($cl == "count") {
+                        /**/
+                          foreach ($value as $cl => $vl) {
+                            echo 'clave '. $cl. " - ".$vl;
+                            /*if($cl == "count") {
                               $jsonString .= $vl . '},';
                             } else {
                               $jsonString .= '{"' . $cl . '" :';
-                            }
+                            }*/
                           }
-                        } else {
-                          if($key == "count") {
-                            $jsonString .= $value . '},';
-                          } else {
-                            $jsonString .= '{"' . $key . '" :';
-                          }
-                        }*/
+                        /**/
                     }
                     $jsonString = substr($jsonString, 0, -1);
                     $jsonString .= "]";
