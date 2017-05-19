@@ -88,8 +88,8 @@ if ($_GET['nomcamp']) {
                           } else {
                             $jsonString .= '{"' . $key . '" :';
                           }
-                        }
-                    }*/
+                        }*/
+                    }
                     $jsonString = substr($jsonString, 0, -1);
                     $jsonString .= "]";
             }
