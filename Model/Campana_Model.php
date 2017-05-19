@@ -124,7 +124,7 @@ class Campana_Model {
 
     function getBusyCalls($CampName) {
       $sql = "select count(*) from cdr where EXTRACT(DAY FROM calldate) = :dia and EXTRACT(MONTH FROM calldate) = :mes and " .
-      "EXTRACT(YEAR FROM calldate) = :ano and disposition like 'NO ANSWER' and disposition like 'BUSY' and clid like :campname";
+      "EXTRACT(YEAR FROM calldate) = :ano and (disposition='NO ANSWER') or (disposition='BUSY') and clid like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
