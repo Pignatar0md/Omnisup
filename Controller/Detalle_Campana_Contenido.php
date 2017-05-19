@@ -52,7 +52,7 @@ if ($_GET['nomcamp']) {
         $perdidas = $Controller_Campana->traerLlamadasPerdidas($_GET['nomcamp']);
         $ocupadas = $Controller_Campana->traerLlamadasOcupadas($_GET['nomcamp']);
         $calificadas = $Controller_Campana->traerCantidadDeCalificadas($_GET['nomcamp']);*/
-        //var_dump($resul);
+        var_dump($resul);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {
@@ -73,23 +73,27 @@ if ($_GET['nomcamp']) {
             if($clave == "score") {
                     $jsonString .= '"calificaciones": [';
                     foreach ($valor as $key => $value) {
-
-                            foreach ($value as $k => $v) {
-                                foreach ($v as $cl => $vl) {
-                                  if($cl == "count") {
-                                    $jsonString .= $vl . '},';
-                                  } else {
-                                    $jsonString .= '{"' . $cl . '" :';
-                                  }
-                                }
+                        if(is_array($value)) {
+                          foreach ($v as $cl => $vl) {
+                            if($cl == "count") {
+                              $jsonString .= $vl . '},';
+                            } else {
+                              $jsonString .= '{"' . $cl . '" :';
                             }
-
+                          }
+                        } else {
+                          if($key == "count") {
+                            $jsonString .= $value . '},';
+                          } else {
+                            $jsonString .= '{"' . $key . '" :';
+                          }
+                        }
                     }
                     $jsonString = substr($jsonString, 0, -1);
                     $jsonString .= "]";
             }
         }
         $jsonString .= "}]";
-        echo $jsonString;
+        //echo $jsonString;
     }
 }
