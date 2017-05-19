@@ -1,6 +1,6 @@
 <?php
-//ini_set('display_errors', 'On');
-//error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
 include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 include_once entities . '/Phpagi_asmanager.php';
 
@@ -128,13 +128,14 @@ class Campana_Model {
       $day = date("d");
       $month = date("m");
       $year = date("Y");
+      $CampName = $CampName."%";
       try {
         $cnn = new PDO($this->argPdo);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campname', $CampName. "%");
+        $query->bindParam(':campname', $CampName);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -177,6 +178,6 @@ class Campana_Model {
         return $result;
     }
 }
-$cmp = new Campana_Model();
+/*$cmp = new Campana_Model();
 $res = $cmp->getLostCalls("multinum-03");
-var_dump($res);
+var_dump($res);*/
