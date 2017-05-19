@@ -46,16 +46,9 @@ if ($_GET['nomcamp']) {
       echo $jsonString . ']';
     } else if ($_GET['op'] == 'campstatus') {
         $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($_GET['nomcamp']);
-        /*$discadas = $Controller_Campana->traerLlamadasDiscadas($_GET['nomcamp']);
-        $conectadas = $Controller_Campana->traerLlamadasConectadas($_GET['nomcamp']);
-        $procesadas = $Controller_Campana->traerLlamadasProcesadas($_GET['nomcamp']);
-        $perdidas = $Controller_Campana->traerLlamadasPerdidas($_GET['nomcamp']);
-        $ocupadas = $Controller_Campana->traerLlamadasOcupadas($_GET['nomcamp']);
-        $calificadas = $Controller_Campana->traerCantidadDeCalificadas($_GET['nomcamp']);*/
-        //var_dump($resul);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
-            /*if($clave == "dialed") {
+            if($clave == "dialed") {
                 $jsonString .= '"discadas": "' . $valor . '",';
             }
             if($clave == "connected") {
@@ -69,23 +62,23 @@ if ($_GET['nomcamp']) {
             }
             if($clave == "busy") {
                 $jsonString .= '"ocupadas": "' . $valor . '",';
-            }*/
+            }
             if($clave == "score") {
-                    $jsonString .= '"calificaciones": [';
-                    foreach ($valor as $key => $value) {
-                          foreach ($value as $cl => $vl) {
-                            if($cl == "count") {
-                              $jsonString .= $vl . '},';
-                            } else {
-                              $jsonString .= '{"' . $cl . '" :';
-                            }
-                          }
+                $jsonString .= '"calificaciones": [';
+                foreach ($valor as $key => $value) {
+                    foreach ($value as $cl => $vl) {
+                        if($cl == "count") {
+                            $jsonString .= $vl . '},';
+                        } else {
+                            $jsonString .= '{"' . $cl . '" :';
+                        }
                     }
-                    $jsonString = substr($jsonString, 0, -1);
-                    $jsonString .= "]";
+                }
+                $jsonString = substr($jsonString, 0, -1);
+                $jsonString .= "]";
             }
         }
         $jsonString .= "}]";
-        //echo $jsonString;
+        echo $jsonString;
     }
 }
