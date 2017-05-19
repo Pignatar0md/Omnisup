@@ -39,13 +39,14 @@ class Campana_Model {
       $day = date("d");
       $month = date("m");
       $year = date("Y");
+      $CampName = $CampName."%";
       try {
         $cnn = new PDO($this->argPdo);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':clid', $CampName . "%");
+        $query->bindParam(':clid', $CampName);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -177,3 +178,7 @@ class Campana_Model {
         return $result;
     }
 }
+$cmp = new Campana_Model();
+$res = $cmp->getProcessedCalls("multinum-03");
+var_dump($res);
+echo date("Y m d");
