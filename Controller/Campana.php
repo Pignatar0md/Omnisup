@@ -73,7 +73,7 @@ class Campana {
         return $rawArrayData;
     }
 
-    function traerCampanasPorAgente($agente) {
+    /*function traerCampanasPorAgente($agente) {
         $res = $this->Campana_Model->getCampaignsByAgent($agente);
         return $res;
     }
@@ -105,7 +105,7 @@ class Campana {
     function traerCantidadDeCalificadas($NomCamp) {
         $llamadasCalificadas = $this->Campana_Model->getScoreCuantity($NomCamp);
         return $llamadasCalificadas;
-    }
+    }*/
 
     function traerInfoReporteRealTimeCamp($NomCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);

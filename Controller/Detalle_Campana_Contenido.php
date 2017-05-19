@@ -45,14 +45,15 @@ if ($_GET['nomcamp']) {
       $jsonString = substr($jsonString, 0, -1);
       echo $jsonString . ']';
     } else if ($_GET['op'] == 'campstatus') {
-        //$resul = $Controller_Campana->traerInfoReporteRealTimeCamp($_GET['nomcamp']);
-        $discadas = $Controller_Campana->traerLlamadasDiscadas($_GET['nomcamp']);
+        $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($_GET['nomcamp']);
+        var_dump($resul);
+        /*$discadas = $Controller_Campana->traerLlamadasDiscadas($_GET['nomcamp']);
         $conectadas = $Controller_Campana->traerLlamadasConectadas($_GET['nomcamp']);
         $procesadas = $Controller_Campana->traerLlamadasProcesadas($_GET['nomcamp']);
         $perdidas = $Controller_Campana->traerLlamadasPerdidas($_GET['nomcamp']);
         $ocupadas = $Controller_Campana->traerLlamadasOcupadas($_GET['nomcamp']);
-        $calificadas = $Controller_Campana->traerCantidadDeCalificadas($_GET['nomcamp']);
-        var_dump($calificadas);
+        $calificadas = $Controller_Campana->traerCantidadDeCalificadas($_GET['nomcamp']);*/
+
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {
