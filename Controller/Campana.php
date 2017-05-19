@@ -92,6 +92,11 @@ class Campana {
         return $llamadasConectadas;
     }
 
+    function traerLlamadasPerdidas($NomCamp) {
+        $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
+        return $llamadasPerdidas;
+    }
+
     function traerInfoReporteRealTimeCamp($NomCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
         $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);

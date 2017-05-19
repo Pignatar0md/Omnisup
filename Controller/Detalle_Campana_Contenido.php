@@ -49,7 +49,8 @@ if ($_GET['nomcamp']) {
         $discadas = $Controller_Campana->traerLlamadasDiscadas($_GET['nomcamp']);
         $conectadas = $Controller_Campana->traerLlamadasConectadas($_GET['nomcamp']);
         $procesadas = $Controller_Campana->traerLlamadasProcesadas($_GET['nomcamp']);
-        var_dump($procesadas);
+        $perdidas = $Controller_Campana->traerLlamadasPerdidas($_GET['nomcamp']);
+        var_dump($perdidas);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {

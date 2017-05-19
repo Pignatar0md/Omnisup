@@ -101,9 +101,8 @@ class Campana_Model {
     }
 
     function getLostCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia " .
-      "and EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ABANDON' and " .
-      "event like 'EXITWITHTIMEOUT' and queuename like :campname";
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes " .
+      "and EXTRACT(YEAR FROM time) = :ano and (event='ABANDON') or (event='EXITWITHTIMEOUT') and queuename like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -179,6 +178,5 @@ class Campana_Model {
     }
 }
 $cmp = new Campana_Model();
-$res = $cmp->getProcessedCalls("multinum-03");
+$res = $cmp->getLostCalls("multinum-03");
 var_dump($res);
-echo date("Y m d");
