@@ -77,7 +77,7 @@ if ($_GET['nomcamp']) {
                             foreach ($value as $k => $v) {
                                 foreach ($v as $cl => $vl) {
                                   if($cl == "count") {
-                                    $jsonString .= $v . '},';
+                                    $jsonString .= $vl . '},';
                                   } else {
                                     $jsonString .= '{"' . $cl . '" :';
                                   }
