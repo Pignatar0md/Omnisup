@@ -46,7 +46,6 @@ if ($_GET['nomcamp']) {
       echo $jsonString . ']';
     } else if ($_GET['op'] == 'campstatus') {
         $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($_GET['nomcamp']);
-        var_dump($resul);
         /*$discadas = $Controller_Campana->traerLlamadasDiscadas($_GET['nomcamp']);
         $conectadas = $Controller_Campana->traerLlamadasConectadas($_GET['nomcamp']);
         $procesadas = $Controller_Campana->traerLlamadasProcesadas($_GET['nomcamp']);
@@ -71,17 +70,23 @@ if ($_GET['nomcamp']) {
             if($clave == "busy") {
                 $jsonString .= '"ocupadas": "' . $val . '",';
             }
-            if(is_array($valor)) {
-                $jsonString .= '"calificaciones": [';
-                foreach ($valor as $key => $value) {
-                    if ($key == "score") {
-                        foreach ($value as $k => $v) {
-                            $jsonString .= '{"' . $k . '" :' . $v . '},';
+            if($clave == "score") {
+                    $jsonString .= '"calificaciones": [';
+                    foreach ($valor as $key => $value) {
+                        if ($key == "score") {
+                            foreach ($value as $k => $v) {
+                                foreach ($v as $cl => $vl) {
+                                  if($cl == "count") {
+                                    $jsonString .= $v . '},';
+                                  } else {
+                                    $jsonString .= '{"' . $cl . '" :';
+                                  }
+                                }
+                            }
                         }
                     }
-                }
-                $jsonString = substr($jsonString, 0, -1);
-                $jsonString .= "]";
+                    $jsonString = substr($jsonString, 0, -1);
+                    $jsonString .= "]";
             }
         }
         $jsonString .= "}]";
