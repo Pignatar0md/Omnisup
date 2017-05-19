@@ -74,9 +74,9 @@ if ($_GET['nomcamp']) {
                         }
                     }
                 }
+                $jsonString = substr($jsonString, 0, -1);
+                $jsonString .= "]";
             }
-            $jsonString = substr($jsonString, 0, -1);
-            $jsonString .= "]";
         }
         $jsonString .= "}]";
         echo $jsonString;
