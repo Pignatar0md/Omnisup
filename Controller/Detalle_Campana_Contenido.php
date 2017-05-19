@@ -73,8 +73,8 @@ if ($_GET['nomcamp']) {
                             $subJsonString1 .= $vl;
                         }
                     }
-
                     $jsonString .= '{"' . $subJsonString2 .'":"'. $subJsonString1 . '"},';
+                    $subJsonString2 = $subJsonString1 = "";
                 }
                 $jsonString = substr($jsonString, 0, -1);
                 $jsonString .= "]";
