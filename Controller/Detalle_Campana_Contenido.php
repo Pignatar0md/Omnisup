@@ -52,23 +52,23 @@ if ($_GET['nomcamp']) {
         $perdidas = $Controller_Campana->traerLlamadasPerdidas($_GET['nomcamp']);
         $ocupadas = $Controller_Campana->traerLlamadasOcupadas($_GET['nomcamp']);
         $calificadas = $Controller_Campana->traerCantidadDeCalificadas($_GET['nomcamp']);*/
-        var_dump($resul);
+        //var_dump($resul);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {
-                $jsonString .= '"discadas": "' . $val . '",';
+                $jsonString .= '"discadas": "' . $valor . '",';
             }
             if($clave == "connected") {
-                $jsonString .= '"conectadas": "' . $val . '",';
+                $jsonString .= '"conectadas": "' . $valor . '",';
             }
             if($clave == "processed") {
-                $jsonString .= '"procesadas": "' . $val . '",';
+                $jsonString .= '"procesadas": "' . $valor . '",';
             }
             if($clave == "abandoned") {
-                $jsonString .= '"abandonadas": "' . $val . '",';
+                $jsonString .= '"abandonadas": "' . $valor . '",';
             }
             if($clave == "busy") {
-                $jsonString .= '"ocupadas": "' . $val . '",';
+                $jsonString .= '"ocupadas": "' . $valor . '",';
             }
             if($clave == "score") {
                     $jsonString .= '"calificaciones": [';
