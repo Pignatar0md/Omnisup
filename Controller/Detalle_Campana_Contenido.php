@@ -55,7 +55,7 @@ if ($_GET['nomcamp']) {
         //var_dump($resul);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
-            if($clave == "dialed") {
+            /*if($clave == "dialed") {
                 $jsonString .= '"discadas": "' . $valor . '",';
             }
             if($clave == "connected") {
@@ -69,11 +69,12 @@ if ($_GET['nomcamp']) {
             }
             if($clave == "busy") {
                 $jsonString .= '"ocupadas": "' . $valor . '",';
-            }
+            }*/
             if($clave == "score") {
                     $jsonString .= '"calificaciones": [';
                     foreach ($valor as $key => $value) {
-                        if(is_array($value)) {
+                      echo "ckave ".$key . " - ".$value;
+/*                        if(is_array($value)) {
                           foreach ($v as $cl => $vl) {
                             if($cl == "count") {
                               $jsonString .= $vl . '},';
@@ -88,12 +89,12 @@ if ($_GET['nomcamp']) {
                             $jsonString .= '{"' . $key . '" :';
                           }
                         }
-                    }
+                    }*/
                     $jsonString = substr($jsonString, 0, -1);
                     $jsonString .= "]";
             }
         }
         $jsonString .= "}]";
-        echo $jsonString;
+        //echo $jsonString;
     }
 }
