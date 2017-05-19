@@ -52,7 +52,7 @@ if ($_GET['nomcamp']) {
         $perdidas = $Controller_Campana->traerLlamadasPerdidas($_GET['nomcamp']);
         $ocupadas = $Controller_Campana->traerLlamadasOcupadas($_GET['nomcamp']);
         $calificadas = $Controller_Campana->traerCantidadDeCalificadas($_GET['nomcamp']);*/
-
+        var_dump($resul);
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {
