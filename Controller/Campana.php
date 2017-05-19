@@ -102,6 +102,11 @@ class Campana {
         return $llamadasOcupadas;
     }
 
+    function traerCantidadDeCalificadas($NomCamp) {
+        $llamadasCalificadas = $this->Campana_Model->getScoreCuantity($NomCamp);
+        return $llamadasCalificadas;
+    }
+
     function traerInfoReporteRealTimeCamp($NomCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
         $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
