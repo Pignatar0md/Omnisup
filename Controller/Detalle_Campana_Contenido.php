@@ -69,13 +69,13 @@ if ($_GET['nomcamp']) {
                     foreach ($value as $cl => $vl) {
                         if($cl != "count") {
                             $subJsonString2 .=  $vl;
+                            $subJsonString3 .= str_replace(' ', '', $vl);
                         } else {
                             $subJsonString1 .= $vl;
-                            $subJsonString3 .= str_replace(' ', '', $vl);
                         }
                     }
                     //$jsonString .= '{"' . $subJsonString2 .'":"'. $subJsonString1 . '"},';
-                    $jsonString .= '{"cantidad": "'. $subJsonString2 . ', "calificacion": "' . $subJsonString1 . ',"tagId": "' . $subJsonString3 . '"},';
+                    $jsonString .= '{"cantidad": "'. $subJsonString1 . '", "calificacion": "' . $subJsonString2 . ', "tagId": "' . $subJsonString3 . '"},';
                     $subJsonString3 = $subJsonString2 = $subJsonString1 = "";
                 }
                 $jsonString = substr($jsonString, 0, -1);
