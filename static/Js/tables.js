@@ -63,11 +63,11 @@ function actualiza_contenido_camp() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        $("#dialed").html(mje.discadas);
-        $("#connected").html(mje.conectadas);
-        $("#processed").html(mje.procesadas);
-        $("#lost").html(mje.abandonadas);
-        $("#busy").html(mje.ocupadas);
+        $("#dialed").html(mje[0].discadas);
+        $("#connected").html(mje[0].conectadas);
+        $("#processed").html(mje[0].procesadas);
+        $("#lost").html(mje[0].abandonadas);
+        $("#busy").html(mje[0].ocupadas);
         debugger;
         var tabla = document.getElementById('bodyTableCampSummary');
         if($("#bodyTableCampSummary").children().length > 0) {
