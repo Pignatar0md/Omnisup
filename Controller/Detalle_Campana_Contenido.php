@@ -75,7 +75,7 @@ if ($_GET['nomcamp']) {
                         }
                     }
                     //$jsonString .= '{"' . $subJsonString2 .'":"'. $subJsonString1 . '"},';
-                    $jsonString .= '{"cantidad": "'. $subJsonString1 . '", "calificacion": "' . $subJsonString2 . ', "tagId": "' . $subJsonString3 . '"},';
+                    $jsonString .= '{"cantidad": "'. $subJsonString1 . '", "calificacion": "' . $subJsonString2 . '", "tagId": "' . $subJsonString3 . '"},';
                     $subJsonString3 = $subJsonString2 = $subJsonString1 = "";
                 }
                 $jsonString = substr($jsonString, 0, -1);
