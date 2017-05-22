@@ -69,6 +69,12 @@ function actualiza_contenido_camp() {
         $("#lost").html(mje[0].abandonadas);
         $("#busy").html(mje[0].ocupadas);
         for (var i = 0; i < mje[0].calificaciones.length; i++){
+          var tabla = document.getElementById('bodyTableCampSummary');
+          if($("#bodyTableCampSummary").children().length > 0) {
+            while(tabla.firstChild) {
+              tabla.removeChild(tabla.firstChild);
+            }
+          }
           debugger;
           var tdScoreContainer = document.createElement('td');
           var tdScoreLabel = document.createElement('td');
@@ -82,7 +88,6 @@ function actualiza_contenido_camp() {
           tdScoreLabel.appendChild(textScoreLabel);
           rowScore.appendChild(tdScoreLabel);
           rowScore.appendChild(tdScoreContainer);
-          var tabla = document.getElementById('bodyTableCampSummary');
           tabla.appendChild(rowScore);
           /*$("#").html(mje[0].calificaciones.Nointeresado);
           $("#").html(mje[0].calificaciones.Llamarmastarde);
