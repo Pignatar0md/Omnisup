@@ -68,14 +68,14 @@ function actualiza_contenido_camp() {
         $("#processed").html(mje.procesadas);
         $("#lost").html(mje.abandonadas);
         $("#busy").html(mje.ocupadas);
-        var tabla = document.getElementById('bodyTableCampSummary');
+        debugger;
         if($("#bodyTableCampSummary").children().length > 0) {
           while(tabla.firstChild) {
             tabla.removeChild(tabla.firstChild);
           }
         }
-        for (var i = 0; i < mje.calificaciones.length; i++){
-          debugger;
+        for (var i = 0; i < mje[0].calificaciones.length; i++){
+          var tabla = document.getElementById('bodyTableCampSummary');
           var tdScoreContainer = document.createElement('td');
           var tdScoreLabel = document.createElement('td');
           var rowScore = document.createElement('tr');
