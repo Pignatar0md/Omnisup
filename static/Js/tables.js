@@ -68,6 +68,13 @@ function actualiza_contenido_camp() {
         $("#processed").html(mje[0].procesadas);
         $("#lost").html(mje[0].abandonadas);
         $("#busy").html(mje[0].ocupadas);
+        for (var i = 0; i < mje[0].calificaciones.length; i++){
+          debugger;
+          var td = document.createElement();
+          $("#").html(mje[0].calificaciones.Nointeresado);
+          $("#").html(mje[0].calificaciones.Llamarmastarde);
+          $("#").html(mje[0].calificaciones.);
+        }
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
