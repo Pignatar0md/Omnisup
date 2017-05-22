@@ -69,13 +69,13 @@ function actualiza_contenido_camp() {
         $("#lost").html(mje.abandonadas);
         $("#busy").html(mje.ocupadas);
         debugger;
+        var tabla = document.getElementById('bodyTableCampSummary');
         if($("#bodyTableCampSummary").children().length > 0) {
           while(tabla.firstChild) {
             tabla.removeChild(tabla.firstChild);
           }
         }
         for (var i = 0; i < mje[0].calificaciones.length; i++){
-          var tabla = document.getElementById('bodyTableCampSummary');
           var tdScoreContainer = document.createElement('td');
           var tdScoreLabel = document.createElement('td');
           var rowScore = document.createElement('tr');
