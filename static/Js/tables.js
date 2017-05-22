@@ -70,10 +70,23 @@ function actualiza_contenido_camp() {
         $("#busy").html(mje[0].ocupadas);
         for (var i = 0; i < mje[0].calificaciones.length; i++){
           debugger;
-          var td = document.createElement();
-          $("#").html(mje[0].calificaciones.Nointeresado);
+          var tdScoreContainer = document.createElement('td');
+          var tdScoreLabel = document.createElement('td');
+          var rowScore = document.createElement('tr');
+
+          var textScoreContainer = document.createTextNode(mje[0].calificaciones[i].cantidad);
+          var textScoreLabel = document.createTextNode(mje[0].calificaciones[i].calificacion);
+
+          tdScoreLabel.id = mje[0].calificaciones[i].calificacion.tagId;
+          tdScoreContainer.appendChild(textScoreContainer);
+          tdScoreLabel.appendChild(textScoreLabel);
+          rowScore.appendChild(tdScoreLabel);
+          rowScore.appendChild(tdScoreContainer);
+          var tabla = document.getElementById('bodyTableCampSummary');
+          tabla.appendChild(rowScore);
+          /*$("#").html(mje[0].calificaciones.Nointeresado);
           $("#").html(mje[0].calificaciones.Llamarmastarde);
-          $("#").html(mje[0].calificaciones.);
+          $("#").html(mje[0].calificaciones.);*/
         }
       }
     },
