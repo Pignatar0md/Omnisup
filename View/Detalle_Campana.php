@@ -124,6 +124,11 @@
           <h4 class="subtitle">En espera</h4>
           <br>
           <table class="table table-striped table-condensed">
+              <thead>
+                <tr>
+                    <th>Tiempo</th><th>Nro Llam</th>
+                </tr>
+              </thead>
               <tbody id="tableQueuedCalls">
               </tbody>
           </table>
