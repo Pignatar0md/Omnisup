@@ -121,7 +121,7 @@ class Campana {
             $valor = explode(": ", $valor);
             $rawArrayData[] = $valor[1];
         }
-        $rawArrayData[] = array_filter($rawArrayData, "strlen");
+        $rawArrayData = array_filter($rawArrayData, "strlen");
         return $rawArrayData;
     }
 
