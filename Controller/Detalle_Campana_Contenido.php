@@ -86,7 +86,7 @@ if ($_GET['nomcamp']) {
         echo $jsonString;
     } else if ($_GET['op'] == 'queuedcalls') {
         $resul = $Controller_Campana->traerLlamadasEnCola($_GET['nomcamp']);
-        var_dump($resul);
+        //var_dump($resul);
         $jsonString .= '[{';
           $i = 1;
         foreach($resul as $clave => $valor) {
@@ -95,6 +95,6 @@ if ($_GET['nomcamp']) {
         }
         $jsonString = substr($jsonString, 0, -1);
         $jsonString .= "]";
-        //echo $jsonString;
+        echo $jsonString;
     }
 }
