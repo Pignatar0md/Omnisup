@@ -117,9 +117,8 @@ class Campana {
         $result = $this->Campana_Model->getQueuedCalls($NomCamp);
         $rawArrayData = array();
       	$result = explode(PHP_EOL, $result);
-        var_dump($result);
       	foreach($result as $clave => $valor) {
-            $valor = explode(":", $valor);
+            $valor = explode(": ", $valor);
             $rawArrayData = $valor[1];
         }
         return $rawArrayData;
