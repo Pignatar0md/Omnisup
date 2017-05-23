@@ -116,8 +116,8 @@ function actualiza_contenido_colas() {
           var tdTimeLabel = document.createElement('td');
           var rowTime = document.createElement('tr');
 
-          var textTimeContainer = document.createTextNode(msg.nroLlam);
-          var textTimeLabel = document.createTextNode(msg.tiempo);
+          var textTimeContainer = document.createTextNode(msg[i].nroLlam);
+          var textTimeLabel = document.createTextNode(msg[i].tiempo);
 
           tdTimeContainer.appendChild(textTimeContainer);
           tdTimeLabel.appendChild(textTimeLabel);
