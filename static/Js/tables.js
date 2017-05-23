@@ -62,12 +62,6 @@ function actualiza_contenido_camp() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-<<<<<<< HEAD
-        tabcamp.rows().remove().draw();
-        tabcamp.rows.add(mje).draw();
-      } else {
-        tabagt.rows().remove().draw();
-=======
         $("#dialed").html(mje[0].discadas);
         $("#connected").html(mje[0].conectadas);
         $("#processed").html(mje[0].procesadas);
@@ -94,11 +88,7 @@ function actualiza_contenido_camp() {
           rowScore.appendChild(tdScoreLabel);
           rowScore.appendChild(tdScoreContainer);
           tabla.appendChild(rowScore);
-          /*$("#").html(mje[0].calificaciones.Nointeresado);
-          $("#").html(mje[0].calificaciones.Llamarmastarde);
-          $("#").html(mje[0].calificaciones.);*/
         }
->>>>>>> NewInfo
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
