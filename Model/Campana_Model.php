@@ -194,11 +194,11 @@ class Campana_Model {
         return $result;
     }
 
-    /*function getQueuedCalls($CampName) {
+    function getQueuedCalls($CampName) {
       $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep wait |awk '{print $2}' FS='\(' |awk '{print $1}' FS=','";
       $data = shell_exec($cmd);
       return $data;
-    }*/
+    }
 }
 /*$cmp = new Campana_Model();
 $res = $cmp->getLostCalls("multinum-03");
