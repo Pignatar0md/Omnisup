@@ -115,9 +115,9 @@ class Campana {
 
     function traerLlamadasEnCola($NomCamp) {
         $result = $this->Campana_Model->getQueuedCalls($NomCamp);
-        var_dump($result);
         $rawArrayData = array();
       	$result = explode(PHP_EOL, $result);
+        var_dump($result);
       	foreach($result as $clave => $valor) {
             $valor = explode(":", $valor);
             $rawArrayData = $valor[1];
