@@ -126,6 +126,13 @@ function actualiza_contenido_colas() {
           rowTime.appendChild(tdTimeContainer);
           tabla.appendChild(rowTime);
         }
+      } else {
+        var tabla = document.getElementById('tableQueuedCalls');
+        if($("#tableQueuedCalls").children().length > 0) {
+          while(tabla.firstChild) {
+            tabla.removeChild(tabla.firstChild);
+          }
+        }
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
