@@ -27,6 +27,22 @@ class Campana_Model {
         return $data;
     }
 
+    /*function getCampaigns() {
+      $sql = "select nombre,'saliente' from ominicontacto_app_campanadialer where estado = 2 " .
+             "union " .
+             "select nombre,'entrante' from ominicontacto_app_campana where estado = 2";
+      try {
+        $cnn = new PDO($this->argPdo);
+        $query = $cnn->prepare($sql);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $cnn = NULL;
+      } catch (PDOException $e) {
+          $result= "Database Error: " . $e;
+      }
+      return $result;
+    }*/
+
     function getCampaign($CampName) {
         $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep from |awk '{print $1}' FS='has taken'|awk '{print $1, $2}' FS='\(ringinuse disabled\)' |awk '{print $1, $2}' FS='\(dynamic\)'";
         $data = shell_exec($cmd);
@@ -177,6 +193,12 @@ class Campana_Model {
         }
         return $result;
     }
+
+    /*function getQueuedCalls($CampName) {
+      $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep wait |awk '{print $2}' FS='\(' |awk '{print $1}' FS=','";
+      $data = shell_exec($cmd);
+      return $data;
+    }*/
 }
 /*$cmp = new Campana_Model();
 $res = $cmp->getLostCalls("multinum-03");

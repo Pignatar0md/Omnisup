@@ -94,7 +94,7 @@
           </table>
         </div>
         <div class="col-md-5"><!-- CUADRO AGENTES -->
-            <h4 class="subtitle">Estado De Agentes</h4>
+            <h4 class="subtitle">Agentes</h4>
             <table id="tableAgt" class="table table-striped table-condensed">
                 <thead>
                     <tr>
@@ -106,7 +106,7 @@
             </table>
         </div>
         <div class="col-md-3"><!-- CUADRO CANALES -->
-          <h4 class="subtitle">Actividad En Canales</h4>
+          <h4 class="subtitle">Lineas</h4>
           <table id="" class="table table-striped table-condensed">
               <thead>
                   <tr>
@@ -121,7 +121,7 @@
           </table>
         </div>
         <div class="col-md-2"><!-- CUADRO LLAMADAS EN COLA -->
-          <h4 class="subtitle">Llamadas En Cola</h4>
+          <h4 class="subtitle">Llamadas en espera</h4>
           <br>
           <table id="" class="table table-striped table-condensed">
               <tbody>
