@@ -119,7 +119,7 @@ class Campana {
       	$result = explode(PHP_EOL, $result);
       	foreach($result as $clave => $valor) {
             $valor = explode(": ", $valor);
-            $rawArrayData = $valor[1];
+            $rawArrayData[] = $valor[1];
         }
         return $rawArrayData;
     }
