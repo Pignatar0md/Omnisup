@@ -71,17 +71,65 @@
             </audio>
         </div>
     </div>
-    <div class="col-md-8 col-lg-offset-2">
-        <h3 class="col-md-5">Agentes en <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3>
-        <img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/>
-        <table id="tableAgt" class="table table-striped table-condensed">
-            <thead>
-                <tr>
-                    <th>Agentes</th><th>Estado</th><th>Tiempo</th><th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="tableAgBody">
-            </tbody>
-        </table>
+    <div class="col-md-12">
+        <h3><b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3><!-- NOMBRE CAMPANA -->
+        <br>
+        <div class="col-md-2"><!-- CUADRO RESUMEN CAMPANA -->
+          <h4 class="subtitle">Resumen De Campaña</h4>
+          <br>
+          <table id="tableCampSummary" class="table table-striped table-condensed">
+              <tbody>
+                <tr><td><b>Tipo</b></td><td>Dialer</td></tr>
+                <tr><td><b>Llamadas:</b></td><td></td></tr>
+                <tr><td>Discadas</td><td id="dialed"></td></tr>
+                <tr><td>Conectadas</td><td id="connected"></td></tr>
+                <tr><td>Procesadas</td><td id="processed"></td></tr>
+                <tr><td>Perdidas</td><td id="lost"></td></tr>
+                <tr><td>No Contestadas</td><td></td></tr>
+                <tr><td>Ocupadas</td><td id="busy"></td></tr>
+                <tr><td><b>Otros:</b></td><td></td></tr>
+              </tbody>
+              <tbody id="bodyTableCampSummary">
+              </tbody>
+          </table>
+        </div>
+        <div class="col-md-5"><!-- CUADRO AGENTES -->
+            <h4 class="subtitle">Agentes</h4>
+            <table id="tableAgt" class="table table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>Agentes</th><th>Estado</th><th>Tiempo</th><th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tableAgBody">
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3"><!-- CUADRO CANALES -->
+          <h4 class="subtitle">Lineas</h4>
+          <table id="" class="table table-striped table-condensed">
+              <thead>
+                  <tr>
+                      <th>Destino</th><th>Estado</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr><td>156285260</td><td>Estableciendo</td></tr>
+                <tr><td>0111562991754</td><td>Discando</td></tr>
+                <tr><td>4253160</td><td>Ringing</td></tr>
+              </tbody>
+          </table>
+        </div>
+        <div class="col-md-2"><!-- CUADRO LLAMADAS EN COLA -->
+          <h4 class="subtitle">Llamadas en espera</h4>
+          <br>
+          <table id="" class="table table-striped table-condensed">
+              <tbody>
+                <tr><td>Llamada 1</td><td>4332343432</td></tr>
+                <tr><td>Llamada 2</td><td>342434211</td></tr>
+                <tr><td>Llamada 3</td><td>141532263</td></tr>
+              </tbody>
+          </table>
+        </div>
     </div>
 </div>

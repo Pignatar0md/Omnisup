@@ -1,8 +1,7 @@
 <?php
-
 include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
-include controllers . '/Campana.php';
-include controllers . '/Agente.php';
+include '/var/www/html/Omnisup/Controller/Campana.php';
+include '/var/www/html/Omnisup/Controller/Agente.php';
 
 include helpers . '/time_helper.php';
 
@@ -50,28 +49,34 @@ if ($_GET['nomcamp']) {
         $jsonString .= '[{';
         foreach($resul as $clave => $valor) {
             if($clave == "dialed") {
-                $jsonString .= '"discadas": "' . $val . '",';
+                $jsonString .= '"discadas": "' . $valor . '",';
             }
             if($clave == "connected") {
-                $jsonString .= '"conectadas": "' . $val . '",';
+                $jsonString .= '"conectadas": "' . $valor . '",';
             }
             if($clave == "processed") {
-                $jsonString .= '"procesadas": "' . $val . '",';
+                $jsonString .= '"procesadas": "' . $valor . '",';
             }
             if($clave == "abandoned") {
-                $jsonString .= '"abandonadas": "' . $val . '",';
+                $jsonString .= '"abandonadas": "' . $valor . '",';
             }
             if($clave == "busy") {
-                $jsonString .= '"ocupadas": "' . $val . '",';
+                $jsonString .= '"ocupadas": "' . $valor . '",';
             }
-            if(is_array($valor)) {
+            if($clave == "score") {
                 $jsonString .= '"calificaciones": [';
                 foreach ($valor as $key => $value) {
-                    if ($key == "score") {
-                        foreach ($value as $k => $v) {
-                            $jsonString .= '{"' . $k . '" :' . $v . '},';
+                    foreach ($value as $cl => $vl) {
+                        if($cl != "count") {
+                            $subJsonString2 .=  $vl;
+                            $subJsonString3 .= str_replace(' ', '', $vl);
+                        } else {
+                            $subJsonString1 .= $vl;
                         }
                     }
+                    //$jsonString .= '{"' . $subJsonString2 .'":"'. $subJsonString1 . '"},';
+                    $jsonString .= '{"cantidad": "'. $subJsonString1 . '", "calificacion": "' . $subJsonString2 . '", "tagId": "' . $subJsonString3 . '"},';
+                    $subJsonString3 = $subJsonString2 = $subJsonString1 = "";
                 }
                 $jsonString = substr($jsonString, 0, -1);
                 $jsonString .= "]";
