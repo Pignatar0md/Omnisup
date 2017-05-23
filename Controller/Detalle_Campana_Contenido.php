@@ -95,6 +95,6 @@ if ($_GET['nomcamp']) {
         }
         $jsonString = substr($jsonString, 0, -1);
         $jsonString .= "]";
-        echo $jsonString;
+        //echo $jsonString;
     }
 }
