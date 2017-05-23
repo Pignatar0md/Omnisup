@@ -119,10 +119,9 @@ class Campana {
       	$result = explode(PHP_EOL, $result);
       	foreach($result as $clave => $valor) {
             $valor = explode(": ", $valor);
-            if(!is_null($valor)) {
-                $rawArrayData[] = $valor[1];
-            }
+            $rawArrayData[] = $valor[1];
         }
+        $rawArrayData[] = array_filter($rawArrayData, "strlen");
         return $rawArrayData;
     }
 
