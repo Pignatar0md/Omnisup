@@ -105,19 +105,20 @@ function actualiza_contenido_colas() {
     data: 'nomcamp='+nomcamp+'&op=queuedcalls',
     success: function (msg) {
       if(msg!=="]") {
+        var mje = JSON.parse(msg);
         var tabla = document.getElementById('tableQueuedCalls');
         if($("#tableQueuedCalls").children().length > 0) {
           while(tabla.firstChild) {
             tabla.removeChild(tabla.firstChild);
           }
         }
-        for (var i = 0; i < msg.length; i++) {
+        for (var i = 0; i < mje.length; i++) {
           var tdTimeContainer = document.createElement('td');
           var tdTimeLabel = document.createElement('td');
           var rowTime = document.createElement('tr');
 
-          var textTimeContainer = document.createTextNode(msg[i].nroLlam);
-          var textTimeLabel = document.createTextNode(msg[i].tiempo);
+          var textTimeContainer = document.createTextNode(mje[i].nroLlam);
+          var textTimeLabel = document.createTextNode(mje[i].tiempo);
 
           tdTimeContainer.appendChild(textTimeContainer);
           tdTimeLabel.appendChild(textTimeLabel);
