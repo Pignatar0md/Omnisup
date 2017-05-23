@@ -121,13 +121,15 @@
           </table>
         </div>
         <div class="col-md-2"><!-- CUADRO LLAMADAS EN COLA -->
-          <h4 class="subtitle">Llamadas en espera</h4>
+          <h4 class="subtitle">En espera</h4>
           <br>
-          <table id="" class="table table-striped table-condensed">
-              <tbody>
-                <tr><td>Llamada 1</td><td>4332343432</td></tr>
-                <tr><td>Llamada 2</td><td>342434211</td></tr>
-                <tr><td>Llamada 3</td><td>141532263</td></tr>
+          <table class="table table-striped table-condensed">
+              <thead>
+                <tr>
+                    <th>Tiempo</th><th>Nro Llam</th>
+                </tr>
+              </thead>
+              <tbody id="tableQueuedCalls">
               </tbody>
           </table>
         </div>

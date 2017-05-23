@@ -22,9 +22,9 @@ $(function () {
   });*/
   var url = window.location.href;
   if(url.indexOf('Detalle_Campana') !== -1) {
-    setInterval("actualiza_contenido_agt()", 1000);
+    //setInterval("actualiza_contenido_agt()", 1000);
     //setInterval("actualiza_contenido_camp()", 1000);
-    //setInterval("actualiza_contenido_queue()", 1000);
+    setInterval("actualiza_contenido_colas()", 1000);
     //setInterval("actualiza_contenido_wombat()", 1000);
     //actualiza_contenido();
   }
@@ -67,7 +67,6 @@ function actualiza_contenido_camp() {
         $("#processed").html(mje[0].procesadas);
         $("#lost").html(mje[0].abandonadas);
         $("#busy").html(mje[0].ocupadas);
-        debugger;
         var tabla = document.getElementById('bodyTableCampSummary');
         if($("#bodyTableCampSummary").children().length > 0) {
           while(tabla.firstChild) {
@@ -103,14 +102,37 @@ function actualiza_contenido_colas() {
     url: 'Controller/Detalle_Campana_Contenido.php',
     type: 'GET',
     dataType: 'html',
-    data: 'nomcamp='+nomcamp+'&op=queuestatus',
+    data: 'nomcamp='+nomcamp+'&op=queuedcalls',
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        tabqueue.rows().remove().draw();
-        tabqueue.rows.add(mje).draw();
+        var tabla = document.getElementById('tableQueuedCalls');
+        if($("#tableQueuedCalls").children().length > 0) {
+          while(tabla.firstChild) {
+            tabla.removeChild(tabla.firstChild);
+          }
+        }
+        for (var i = 0; i < mje.length; i++) {
+          var tdTimeContainer = document.createElement('td');
+          var tdTimeLabel = document.createElement('td');
+          var rowTime = document.createElement('tr');
+
+          var textTimeContainer = document.createTextNode(mje[i].nroLlam);
+          var textTimeLabel = document.createTextNode(mje[i].tiempo);
+
+          tdTimeContainer.appendChild(textTimeContainer);
+          tdTimeLabel.appendChild(textTimeLabel);
+          rowTime.appendChild(tdTimeLabel);
+          rowTime.appendChild(tdTimeContainer);
+          tabla.appendChild(rowTime);
+        }
       } else {
-        tabagt.rows().remove().draw();
+        var tabla = document.getElementById('tableQueuedCalls');
+        if($("#tableQueuedCalls").children().length > 0) {
+          while(tabla.firstChild) {
+            tabla.removeChild(tabla.firstChild);
+          }
+        }
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {

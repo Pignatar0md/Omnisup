@@ -74,7 +74,6 @@ if ($_GET['nomcamp']) {
                             $subJsonString1 .= $vl;
                         }
                     }
-                    //$jsonString .= '{"' . $subJsonString2 .'":"'. $subJsonString1 . '"},';
                     $jsonString .= '{"cantidad": "'. $subJsonString1 . '", "calificacion": "' . $subJsonString2 . '", "tagId": "' . $subJsonString3 . '"},';
                     $subJsonString3 = $subJsonString2 = $subJsonString1 = "";
                 }
@@ -83,6 +82,17 @@ if ($_GET['nomcamp']) {
             }
         }
         $jsonString .= "}]";
+        echo $jsonString;
+    } else if ($_GET['op'] == 'queuedcalls') {
+        $resul = $Controller_Campana->traerLlamadasEnCola($_GET['nomcamp']);
+        $jsonString .= '[';
+          $i = 1;
+        foreach($resul as $clave => $valor) {
+            $jsonString .= '{"nroLlam": ' . $i . ', "tiempo": "' . $valor . '"},';
+            $i++;
+        }
+        $jsonString = substr($jsonString, 0, -1);
+        $jsonString .= "]";
         echo $jsonString;
     }
 }
