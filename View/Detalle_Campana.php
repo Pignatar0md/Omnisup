@@ -113,8 +113,7 @@
                       <th>Destino</th><th>Estado</th>
                   </tr>
               </thead>
-              <!-- <tbody id="tableChannelsWombat"> -->
-              <tbody>
+              <tbody id="tableChannelsWombat">
               </tbody>
           </table>
         </div>

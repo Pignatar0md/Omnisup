@@ -93,7 +93,7 @@ if ($_GET['nomcamp']) {
         $jsonString = substr($jsonString, 0, -1);
         $jsonString .= "]";
         echo $jsonString;
-    }/* else if($_GET['op'] == 'wdstatus') {
+    } else if($_GET['op'] == 'wdstatus') {
         $resul = $Controller_Campana->traerEstadoDeCanales($_GET['nomcamp']);
         $jsonString .= '[';
         foreach ($resul as $value) {
@@ -103,5 +103,5 @@ if ($_GET['nomcamp']) {
         $jsonString = substr($jsonString, 0, -1);
         $jsonString .= "]";
         echo $jsonString;
-    }*/
+    }
 }

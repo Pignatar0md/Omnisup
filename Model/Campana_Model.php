@@ -200,7 +200,7 @@ class Campana_Model {
       return $data;
     }
 
-    /*function getChannelsStatus($CampName) {
+    function getChannelsStatus($CampName) {
       $process = curl_init("http://172.16.20.90:8080/wombat/api/live/calls/");
       curl_setopt($process, CURLOPT_HEADER, 0);
       curl_setopt($process, CURLOPT_USERPWD, "demoadmin:demo");
@@ -211,7 +211,7 @@ class Campana_Model {
       curl_close($process);
       $res = json_decode($res, true);
       return $res;
-    }*/
+    }
 }
 /*$cmp = new Campana_Model();
 $res = $cmp->getLostCalls("multinum-03");

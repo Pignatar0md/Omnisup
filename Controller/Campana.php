@@ -7,7 +7,7 @@ include entities. '/NumState.php';
 class Campana {
 
     private $Campana_Model;
-    //private $NumState;
+    private $NumState;
 
     function __construct() {
         $this->Campana_Model = new Campana_Model();
@@ -127,7 +127,7 @@ class Campana {
         return $rawArrayData;
     }
 
-    /*function traerEstadoDeCanales($NomCamp) {
+    function traerEstadoDeCanales($NomCamp) {
         $result = $this->Campana_Model->getChannelsStatus($NomCamp);
         $datosUtiles = array();
         foreach($result as $clave => $valor) {
@@ -148,6 +148,6 @@ class Campana {
             }
         }
         return $datosUtiles;
-    }*/
+    }
 
 }
