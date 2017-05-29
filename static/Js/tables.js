@@ -1,6 +1,6 @@
 var tabagt;
 $(function () {
-  /*  tabagt = $('#tableAgt').DataTable({
+    tabagt = $('#tableAgt').DataTable({
     columns: [
         {data: 'agente'},
         {data: 'estado'},
@@ -19,12 +19,12 @@ $(function () {
         "previous":   "Anterior"
       }
     }
-  });*/
+  });
   var url = window.location.href;
   if(url.indexOf('Detalle_Campana') !== -1) {
-    //setInterval("actualiza_contenido_agt()", 1000);
-    //setInterval("actualiza_contenido_camp()", 1000);
-    //setInterval("actualiza_contenido_colas()", 1000);
+    setInterval("actualiza_contenido_agt()", 1000);
+    setInterval("actualiza_contenido_camp()", 1000);
+    setInterval("actualiza_contenido_colas()", 1000);
     setInterval("actualiza_contenido_wombat()", 1000);
   }
 });
