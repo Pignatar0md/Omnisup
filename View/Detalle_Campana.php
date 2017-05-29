@@ -71,8 +71,13 @@
             </audio>
         </div>
     </div>
+    <div class="col-md-1">
+        <img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/>
+    </div>
+    <div class="col-md-11">
+        <h3 class="col-md-offset-1"><b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3><!-- NOMBRE CAMPANA -->
+    </div>
     <div class="col-md-12">
-        <h3><b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3><!-- NOMBRE CAMPANA -->
         <br>
         <div class="col-md-2"><!-- CUADRO RESUMEN CAMPANA -->
           <h4 class="subtitle">Resumen De Campaña</h4>
