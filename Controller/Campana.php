@@ -135,7 +135,7 @@ class Campana {
                 foreach($valor as $key => $value) {
                     if($key == "hopperState") {
                         foreach($value as $clav => $valo) {
-                            if(in_array("test2205", $valo)) {
+                            if(in_array($NomCamp, $valo)) {
                                 $this->NumState = new NumState();
                                 $this->NumState->setNumber($valo['number']);
                                 $this->NumState->setState($valo['state']);
