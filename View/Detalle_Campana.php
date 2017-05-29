@@ -84,13 +84,13 @@
           <br>
           <table id="tableCampSummary" class="table table-striped table-condensed">
               <tbody>
-                <tr><td><b>Tipo</b></td><td>Dialer</td></tr>
+                <!-- <tr><td><b>Tipo</b></td><td>Dialer</td></tr> -->
                 <tr><td><b>Llamadas:</b></td><td></td></tr>
                 <tr><td>Discadas</td><td id="dialed"></td></tr>
                 <tr><td>Conectadas</td><td id="connected"></td></tr>
                 <tr><td>Procesadas</td><td id="processed"></td></tr>
                 <tr><td>Perdidas</td><td id="lost"></td></tr>
-                <tr><td>No Contestadas</td><td></td></tr>
+                <!-- <tr><td>No Contestadas</td><td></td></tr> -->
                 <tr><td>Ocupadas</td><td id="busy"></td></tr>
                 <tr><td><b>Otros:</b></td><td></td></tr>
               </tbody>
