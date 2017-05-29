@@ -162,9 +162,9 @@ class Campana_Model {
     }
 
     function getScoreCuantity($CampName) {
-      $sql = "select count(*),c.nombre FROM ominicontacto_app_campanadialer cd JOIN ominicontacto_app_calificacioncliente cc " .
-      "ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia " .
-      "AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre GROUP BY c.nombre";
+      $sql = "select count(*),c.nombre FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc 
+      ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
+      AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre GROUP BY c.nombre";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
