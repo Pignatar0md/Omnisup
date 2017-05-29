@@ -110,7 +110,7 @@
           <table id="" class="table table-striped table-condensed">
               <thead>
                   <tr>
-                      <th>Destino</th><th>Estado</th>
+                      <th>Estado</th><th>Destino</th>
                   </tr>
               </thead>
               <tbody id="tableChannelsWombat">
