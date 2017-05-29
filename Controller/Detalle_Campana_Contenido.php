@@ -2,7 +2,6 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 include '/var/www/html/Omnisup/Controller/Campana.php';
 include '/var/www/html/Omnisup/Controller/Agente.php';
-
 include helpers . '/time_helper.php';
 
 $Controller_Campana = new Campana();
@@ -94,5 +93,15 @@ if ($_GET['nomcamp']) {
         $jsonString = substr($jsonString, 0, -1);
         $jsonString .= "]";
         echo $jsonString;
-    }
+    }/* else if($_GET['op'] == 'wdstatus') {
+        $resul = $Controller_Campana->traerEstadoDeCanales($_GET['nomcamp']);
+        $jsonString .= '[';
+        foreach ($resul as $value) {
+            $ns = $value;
+            $jsonString .= '{"estado": "' . $ns->getState() . '", "numero": ' . $ns->getNumber() . '},';
+        }
+        $jsonString = substr($jsonString, 0, -1);
+        $jsonString .= "]";
+        echo $jsonString;
+    }*/
 }

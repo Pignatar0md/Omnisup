@@ -2,10 +2,12 @@
 
 include models . '/Campana_Model.php';
 include entities. '/QueueMember.php';
+include entities. '/NumState.php';
 
 class Campana {
 
     private $Campana_Model;
+    //private $NumState;
 
     function __construct() {
         $this->Campana_Model = new Campana_Model();
@@ -124,5 +126,28 @@ class Campana {
         $rawArrayData = array_filter($rawArrayData, "strlen");
         return $rawArrayData;
     }
+
+    /*function traerEstadoDeCanales($NomCamp) {
+        $result = $this->Campana_Model->getChannelsStatus($NomCamp);
+        $datosUtiles = array();
+        foreach($result as $clave => $valor) {
+            if($clave == "result") {
+                foreach($valor as $key => $value) {
+                    if($key == "hopperState") {
+                        foreach($value as $clav => $valo) {
+                            if(in_array("test2205", $valo)) {
+                                $this->NumState = new NumState();
+                                $this->NumState->setNumber($valo['number']);
+                                $this->NumState->setState($valo['state']);
+                                $datosUtiles[] = $this->NumState;
+                                $this->NumState = NULL;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $datosUtiles;
+    }*/
 
 }

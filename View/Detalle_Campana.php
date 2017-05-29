@@ -113,10 +113,8 @@
                       <th>Destino</th><th>Estado</th>
                   </tr>
               </thead>
+              <!-- <tbody id="tableChannelsWombat"> -->
               <tbody>
-                <tr><td>156285260</td><td>Estableciendo</td></tr>
-                <tr><td>0111562991754</td><td>Discando</td></tr>
-                <tr><td>4253160</td><td>Ringing</td></tr>
               </tbody>
           </table>
         </div>

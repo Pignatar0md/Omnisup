@@ -199,6 +199,19 @@ class Campana_Model {
       $data = shell_exec($cmd);
       return $data;
     }
+
+    /*function getChannelsStatus($CampName) {
+      $process = curl_init("http://172.16.20.90:8080/wombat/api/live/calls/");
+      curl_setopt($process, CURLOPT_HEADER, 0);
+      curl_setopt($process, CURLOPT_USERPWD, "demoadmin:demo");
+      curl_setopt($process, CURLOPT_POST, 1);
+      curl_setopt($process, CURLOPT_POSTFIELDS, $params);
+      curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
+      $res = curl_exec($process);
+      curl_close($process);
+      $res = json_decode($res, true);
+      return $res;
+    }*/
 }
 /*$cmp = new Campana_Model();
 $res = $cmp->getLostCalls("multinum-03");
