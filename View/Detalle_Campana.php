@@ -119,7 +119,6 @@
         </div>
         <div class="col-md-2"><!-- CUADRO LLAMADAS EN COLA -->
           <h4 class="subtitle">En espera</h4>
-          <br>
           <table class="table table-striped table-condensed">
               <thead>
                 <tr>
