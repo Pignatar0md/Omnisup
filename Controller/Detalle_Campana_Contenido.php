@@ -6,23 +6,9 @@ include helpers . '/time_helper.php';
 
 $Controller_Campana = new Campana();
 $Controller_Agente = new Agente();
-$jsonString = '';
 
-if ($_GET['nomcamp']) {
-    if($_GET['op'] == 'agstatus') {
-      echo mostrarEstadoAgentes($_GET['nomcamp']);
-
-    } else if ($_GET['op'] == 'campstatus') {
-      echo mostrarEstadoCampana($_GET['nomcamp']);
-
-    } else if ($_GET['op'] == 'queuedcalls') {
-      echo mostrarLlamadasEnCola($_GET['nomcamp']);
-
-    } else if($_GET['op'] == 'wdstatus') {
-      echo mostrarEstadoCanalesWombat($_GET['nomcamp']);
-    }
-}
 function mostrarEstadoAgentes($camp) {
+  $jsonString = '';
   $resul = $Controller_Campana->traerCampanaDet($camp);
   $jsonString .= '[';
   foreach($resul as $Obj) {
@@ -63,6 +49,7 @@ function mostrarEstadoAgentes($camp) {
 }
 
 function mostrarEstadoCampana($camp) {
+  $jsonString = '';
   $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($camp);
   $jsonString .= '[{';
   foreach($resul as $clave => $valor) {
@@ -104,6 +91,7 @@ function mostrarEstadoCampana($camp) {
 }
 
 function mostrarLlamadasEnCola($camp) {
+  $jsonString = '';
   $resul = $Controller_Campana->traerLlamadasEnCola($camp);
   $jsonString .= '[';
   $i = 1;
@@ -117,6 +105,7 @@ function mostrarLlamadasEnCola($camp) {
 }
 
 function mostrarEstadoCanalesWombat($camp) {
+  $jsonString = '';
   $resul = $Controller_Campana->traerEstadoDeCanales($camp);
   $jsonString .= '[';
   foreach ($resul as $value) {
@@ -126,4 +115,19 @@ function mostrarEstadoCanalesWombat($camp) {
   $jsonString = substr($jsonString, 0, -1);
   $jsonString .= "]";
   return $jsonString;
+}
+
+if ($_GET['nomcamp']) {
+    if($_GET['op'] == 'agstatus') {
+      echo mostrarEstadoAgentes($_GET['nomcamp']);
+
+    } else if ($_GET['op'] == 'campstatus') {
+      echo mostrarEstadoCampana($_GET['nomcamp']);
+
+    } else if ($_GET['op'] == 'queuedcalls') {
+      echo mostrarLlamadasEnCola($_GET['nomcamp']);
+
+    } else if($_GET['op'] == 'wdstatus') {
+      echo mostrarEstadoCanalesWombat($_GET['nomcamp']);
+    }
 }
