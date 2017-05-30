@@ -109,9 +109,7 @@ class Campana {
                 $arrInfo['busy'] = $v;
             }
         }
-
         $arrInfo['score'] = $cdadCalificaciones;
-
         return $arrInfo;
     }
 
