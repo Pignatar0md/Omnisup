@@ -9,7 +9,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-
                         <!-- -->
                         <div id="modalReceiveCalls" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
@@ -34,8 +33,6 @@
                             </div>
                         </div>
                         <!-- -->
-
-
                         <div class="row">
                             <br>
                             <div class="backgroundWebPhone col-md-10 col-md-offset-1">
