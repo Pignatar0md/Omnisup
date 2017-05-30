@@ -12,16 +12,6 @@ class Agente_Model {
         $this->agi = new Phpagi_asmanager();
     }
 
-    function getAgents() {
-        try {
-
-        } catch (Exception $ex) {
-            return "problemas de Conexion : " . $ex;
-        }
-
-        return $data;
-    }
-
     function getPauseAgents($agt) {
         try {
             $this->agi->connect(AMI_HOST, AMI_USERNAME, AMI_PASWORD);
