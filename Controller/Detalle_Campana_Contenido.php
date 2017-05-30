@@ -10,17 +10,16 @@ $jsonString = '';
 
 if ($_GET['nomcamp']) {
     if($_GET['op'] == 'agstatus') {
-      $res = mostrarEstadoAgentes($_GET['nomcamp']);
-      echo $res;
+      echo mostrarEstadoAgentes($_GET['nomcamp']);
+
     } else if ($_GET['op'] == 'campstatus') {
-      $res = mostrarEstadoCampana($_GET['nomcamp']);
-      echo $res;
+      echo mostrarEstadoCampana($_GET['nomcamp']);
+
     } else if ($_GET['op'] == 'queuedcalls') {
-      $res = mostrarLlamadasEnCola($_GET['nomcamp']);
-      echo $res;
+      echo mostrarLlamadasEnCola($_GET['nomcamp']);
+
     } else if($_GET['op'] == 'wdstatus') {
-      $res = mostrarEstadoCanalesWombat($_GET['nomcamp']);
-      echo $res;
+      echo mostrarEstadoCanalesWombat($_GET['nomcamp']);
     }
 }
 function mostrarEstadoAgentes($camp) {
