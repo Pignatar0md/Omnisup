@@ -28,9 +28,7 @@ class Campana_Model {
     }
 
     /*function getCampaigns() {
-      $sql = "select nombre,'saliente' from ominicontacto_app_campanadialer where estado = 2 " .
-             "union " .
-             "select nombre,'entrante' from ominicontacto_app_campana where estado = 2";
+      $sql = "select nombre from ominicontacto_app_campana where estado = 2";
       try {
         $cnn = new PDO($this->argPdo);
         $query = $cnn->prepare($sql);
@@ -162,7 +160,7 @@ class Campana_Model {
     }
 
     function getScoreCuantity($CampName) {
-      $sql = "select count(*),c.nombre FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc 
+      $sql = "select count(*),c.nombre FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
       AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre GROUP BY c.nombre";
       $day = date("d");
@@ -184,16 +182,6 @@ class Campana_Model {
       return $result;
     }
 
-    function getCampSummary($CampName) {
-      $sql = "";
-        try {
-
-        } catch (PDOException $e) {
-            $result= "Database Error: " . $e;
-        }
-        return $result;
-    }
-
     function getQueuedCalls($CampName) {
       $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep wait |awk '{print $2}' FS='\(' |awk '{print $1}' FS=','";
       $data = shell_exec($cmd);
@@ -213,6 +201,3 @@ class Campana_Model {
       return $res;
     }
 }
-/*$cmp = new Campana_Model();
-$res = $cmp->getLostCalls("multinum-03");
-var_dump($res);*/
