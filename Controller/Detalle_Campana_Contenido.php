@@ -10,16 +10,17 @@ $jsonString = '';
 
 if ($_GET['nomcamp']) {
     if($_GET['op'] == 'agstatus') {
-      mostrarEstadoAgentes($_GET['nomcamp']);
-
+      $res = mostrarEstadoAgentes($_GET['nomcamp']);
+      echo $res;
     } else if ($_GET['op'] == 'campstatus') {
-        mostrarEstadoCampana($_GET['nomcamp']);
-
+      $res = mostrarEstadoCampana($_GET['nomcamp']);
+      echo $res;
     } else if ($_GET['op'] == 'queuedcalls') {
-        mostrarLlamadasEnCola($_GET['nomcamp']);
-
+      $res = mostrarLlamadasEnCola($_GET['nomcamp']);
+      echo $res;
     } else if($_GET['op'] == 'wdstatus') {
-        mostrarEstadoCanalesWombat($_GET['nomcamp']);
+      $res = mostrarEstadoCanalesWombat($_GET['nomcamp']);
+      echo $res;
     }
 }
 function mostrarEstadoAgentes($camp) {
@@ -58,7 +59,8 @@ function mostrarEstadoAgentes($camp) {
      }
   }
   $jsonString = substr($jsonString, 0, -1);
-  echo $jsonString . ']';
+  $jsonString .=  ']';
+  return $jsonString;
 }
 
 function mostrarEstadoCampana($camp) {
@@ -99,7 +101,7 @@ function mostrarEstadoCampana($camp) {
       }
   }
   $jsonString .= "}]";
-  echo $jsonString;
+  return $jsonString;
 }
 
 function mostrarLlamadasEnCola($camp) {
@@ -112,7 +114,7 @@ function mostrarLlamadasEnCola($camp) {
   }
   $jsonString = substr($jsonString, 0, -1);
   $jsonString .= "]";
-  echo $jsonString;
+  return $jsonString;
 }
 
 function mostrarEstadoCanalesWombat($camp) {
@@ -124,5 +126,5 @@ function mostrarEstadoCanalesWombat($camp) {
   }
   $jsonString = substr($jsonString, 0, -1);
   $jsonString .= "]";
-  echo $jsonString;
+  return $jsonString;
 }
