@@ -4,10 +4,9 @@ include '/var/www/html/Omnisup/Controller/Campana.php';
 include '/var/www/html/Omnisup/Controller/Agente.php';
 include helpers . '/time_helper.php';
 
-$Controller_Campana = new Campana();
-$Controller_Agente = new Agente();
-
 function mostrarEstadoAgentes($camp) {
+  $Controller_Campana = new Campana();
+  $Controller_Agente = new Agente();
   $jsonString = '';
   $resul = $Controller_Campana->traerCampanaDet($camp);
   $jsonString .= '[';
@@ -49,6 +48,7 @@ function mostrarEstadoAgentes($camp) {
 }
 
 function mostrarEstadoCampana($camp) {
+  $Controller_Campana = new Campana();
   $jsonString = '';
   $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($camp);
   $jsonString .= '[{';
@@ -91,6 +91,7 @@ function mostrarEstadoCampana($camp) {
 }
 
 function mostrarLlamadasEnCola($camp) {
+  $Controller_Campana = new Campana();
   $jsonString = '';
   $resul = $Controller_Campana->traerLlamadasEnCola($camp);
   $jsonString .= '[';
@@ -105,6 +106,7 @@ function mostrarLlamadasEnCola($camp) {
 }
 
 function mostrarEstadoCanalesWombat($camp) {
+  $Controller_Campana = new Campana();
   $jsonString = '';
   $resul = $Controller_Campana->traerEstadoDeCanales($camp);
   $jsonString .= '[';
