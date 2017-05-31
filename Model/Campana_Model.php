@@ -27,7 +27,7 @@ class Campana_Model {
         return $data;
     }
 
-    /*function getCampaigns() {
+    function getCampaigns2() {
       $sql = "select nombre from ominicontacto_app_campana where estado = 2";
       try {
         $cnn = new PDO($this->argPdo);
@@ -39,7 +39,7 @@ class Campana_Model {
           $result= "Database Error: " . $e;
       }
       return $result;
-    }*/
+    }
 
     function getCampaign($CampName) {
         $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep 'from ' |awk '{print $1}' FS='has taken'|awk '{print $1, $2}' FS='\(ringinuse disabled\)' |awk '{print $1, $2}' FS='\(dynamic\)'";
@@ -163,6 +163,29 @@ class Campana_Model {
       $sql = "select count(*),c.nombre FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
       AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre GROUP BY c.nombre";
+      $day = date("d");
+      $month = date("m");
+      $year = date("Y");
+      try {
+        $cnn = new PDO($this->argPdo);
+        $query = $cnn->prepare($sql);
+        $query->bindParam(':dia', $day);
+        $query->bindParam(':mes', $month);
+        $query->bindParam(':ano', $year);
+        $query->bindParam(':nombre', $CampName);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $cnn = NULL;
+      } catch (PDOException $e) {
+          $result= "Database Error: " . $e;
+      }
+      return $result;
+    }
+
+    function getSells($CampName) {
+      $sql = "select count(*) FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
+      ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
+      AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre AND es_venta = 't'";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
