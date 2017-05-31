@@ -82,6 +82,7 @@ class Campana {
         $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
         $llamadasOcupadas = $this->Campana_Model->getBusyCalls($NomCamp);
         $cdadCalificaciones = $this->Campana_Model->getScoreCuantity($NomCamp);
+        $cdadVentas = $this->Campana_Model->getSells($NomCamp);
         $arrInfo = array();
 
         foreach ($llamadasDiscadas as $key => $value) {
