@@ -126,7 +126,7 @@
           <table class="table table-striped table-condensed">
               <thead>
                 <tr>
-                    <th>Tiempo</th><th>Nro Llam</th>
+                    <th>Tiempo</th><th>#</th>
                 </tr>
               </thead>
               <tbody id="tableQueuedCalls">
