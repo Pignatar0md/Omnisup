@@ -2,36 +2,20 @@
 //ini_set('display_errors', 'On');
 //error_reporting(E_ALL | E_STRICT);
 include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
-include_once entities . '/Phpagi_asmanager.php';
 
 class Campana_Model {
 
-    private $command;
-    private $agi;
-    private $argPdo;
-
     function __construct() {
-        $this->command = "queue show";
-        $this->agi = new Phpagi_asmanager();
         $this->argPdo = 'pgsql:host=172.16.20.90;dbname=kamailio;port=5432;user=kamailio;password=kamailiorw';
     }
 
-    function getCampaigns() {
-        try {
-            $this->agi->connect(AMI_HOST, AMI_USERNAME, AMI_PASWORD);
-        } catch (Exception $ex) {
-            return "problemas de Conexion AMI: ".$ex;
-        }
-        $data = $this->agi->Command($this->command);
-        $this->agi->disconnect();
-        return $data;
-    }
-
-    function getCampaigns2() {
-      $sql = "select nombre from ominicontacto_app_campana where estado = 2";
+    function getCampaigns($userId) {
+      $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
+      ac.reported_by_id = sp.user_id where estado = 2 and sp.user_id = :id";
       try {
         $cnn = new PDO($this->argPdo);
         $query = $cnn->prepare($sql);
+        $query->bindParam(':id', $userId);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;

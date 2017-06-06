@@ -53,6 +53,7 @@ function actualiza_contenido_agt() {
 
 function actualiza_contenido_camp() {
   var nomcamp = $("#nombreCamp").html();
+  var tabla = document.getElementById('bodyTableCampSummary');
   $.ajax({
     url: 'Controller/Detalle_Campana_Contenido.php',
     type: 'GET',
@@ -61,26 +62,39 @@ function actualiza_contenido_camp() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        $("#dialed").html(mje[0].discadas);
-        $("#connected").html(mje[0].conectadas);
-        $("#processed").html(mje[0].procesadas);
-        $("#lost").html(mje[0].abandonadas);
-        $("#busy").html(mje[0].ocupadas);
-        var tabla = document.getElementById('bodyTableCampSummary');
-        if($("#bodyTableCampSummary").children().length > 0) {
-          while(tabla.firstChild) {
-            tabla.removeChild(tabla.firstChild);
-          }
+        $("#dialed").html(mje.discadas);
+        $("#connected").html(mje.conectadas);
+        $("#processed").html(mje.procesadas);
+        $("#lost").html(mje.abandonadas);
+        $("#busy").html(mje.ocupadas);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+    }
+  });
+  $.ajax({
+    url: 'Controller/Detalle_Campana_Contenido.php',
+    type: 'GET',
+    dataType: 'html',
+    data: 'nomcamp='+nomcamp+'&op=scorestatus',
+    success: function (msg) {
+      if($("#bodyTableCampSummary").children().length > 0) {
+        while(tabla.firstChild) {
+          tabla.removeChild(tabla.firstChild);
         }
-        for (var i = 0; i < mje[0].calificaciones.length; i++){
+      }
+      if(msg!=="]") {
+        var mje = JSON.parse(msg);
+        for (var i = 0; i < mje.length; i++){
           var tdScoreContainer = document.createElement('td');
           var tdScoreLabel = document.createElement('td');
           var rowScore = document.createElement('tr');
 
-          var textScoreContainer = document.createTextNode(mje[0].calificaciones[i].cantidad);
-          var textScoreLabel = document.createTextNode(mje[0].calificaciones[i].calificacion);
+          var textScoreContainer = document.createTextNode(mje[i].cantidad);
+          var textScoreLabel = document.createTextNode(mje[i].calificacion);
 
-          tdScoreLabel.id = mje[0].calificaciones[i].calificacion.tagId;
+          tdScoreLabel.id = mje[i].tagId;
           tdScoreContainer.appendChild(textScoreContainer);
           tdScoreLabel.appendChild(textScoreLabel);
           rowScore.appendChild(tdScoreLabel);

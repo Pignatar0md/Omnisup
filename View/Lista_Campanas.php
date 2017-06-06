@@ -3,9 +3,11 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 include_once controllers . '/Campana.php';
-
-$Controller_Campana = new Campana();
-$resul = $Controller_Campana->traerCampanas();
+$SupervId = $_POST["supervId"] = 20;
+if($SupervId) {
+  $Controller_Campana = new Campana();
+  $resul = $Controller_Campana->traerCampanas($SupervId);
+}
 ?>
 <div class="col-md-3 col-lg-offset-4">
     <table id="tableCamp" class="table table-striped table-condensed">
@@ -15,13 +17,11 @@ $resul = $Controller_Campana->traerCampanas();
         <tbody>
             <?php
             foreach ($resul as $clave => $valor) {
-                foreach ($valor as $cla => $val) {
-                    ?>
-                    <tr>
-                        <td style='color:green'><a href="index.php?page=Detalle_Campana&nomcamp=<?= $val ?>"><?= $val ?></a></td>
-                    </tr>
-                    <?php
-                }
+            ?>
+            <tr>
+                <td style='color:green'><a href="index.php?page=Detalle_Campana&nomcamp=<?= $valor ?>"><?= $valor ?></a></td>
+            </tr>
+            <?php
             }
             ?>
         </tbody>

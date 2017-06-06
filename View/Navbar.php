@@ -10,13 +10,13 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="" title="Deslogueo">
+                    <!-- <a href="" title="Deslogueo">
                         <span class="glyphicon glyphicon-off"></span>
-                    </a>
+                    </a> -->
                 </li>
             </ul>
             <ul class="nav navbar-nav">
-                <li role="presentation" class="dropdown">
+                <!-- <li role="presentation" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                         Usuarios <span class="caret"></span>
                     </a>
@@ -149,7 +149,7 @@
                             <a href="https://<?php echo $_SERVER['SERVER_ADDR'] ?>/Omnisup/index.php?page=Lista_Agentes"><span class=" glyphicon glyphicon-earphone" aria-hidden="true"></span> Agentes</a>
                         </li>
                     </ul>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>
