@@ -19,6 +19,7 @@ $(function () {
     dataType: 'html',
     data: 'supId='+$("#userId").val(),
     success: function (msg) {
+      var msg = JSON.parse(msg);
       if(msg!=="]") {
         config.uri= 'sip:' + msg.sipuser + '@' + KamailioIp;
         config.ws_servers= 'wss://' + KamailioIp + ':443';
