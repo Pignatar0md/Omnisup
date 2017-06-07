@@ -24,9 +24,8 @@ $(function () {
     data: 'supId='+$("#userId").val(),
     success: function (msg) {
       if(msg!=="]") {
-        var mje = JSON.parse(msg);
-        $("#sipUser").val(mje.sipuser);
-        $("#sipPass").val(mje.sippass);
+        $("#sipUser").val(msj.sipuser);
+        $("#sipPass").val(msj.sippass);
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
