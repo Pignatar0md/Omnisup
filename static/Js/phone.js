@@ -39,6 +39,70 @@ $(function () {
           $("#Pause").prop('disabled',true);
           $("#Resume").prop('disabled',true);
         });
+
+        userAgent.on('registrationFailed', function(e) {  // cuando falla la registracion
+          setSipStatus("redcross.png", "  Registration failed", sipStatus);
+        });
+        //
+        userAgent.on('newRTCSession', function(e) {       // cuando se crea una sesion RTC
+          var originHeader = "";
+          e.session.on("ended",function() {               // Cuando Finaliza la llamada
+            var callerOrCalled = "";
+            if(entrante) {
+            	callerOrCalled = fromUser;
+            } else {
+              callerOrCalled =  num;
+            }
+            defaultCallState();
+          });
+          e.session.on("failed",function(e) {  // cuando falla el establecimiento de la llamada
+            $("#modalReceiveCalls").modal('hide');
+            Sounds("","stop");
+          });
+          if(e.originator=="remote") {         // Origen de llamada Remoto
+            entrante = true;
+            fromUser = e.request.headers.From[0].raw;
+            var endPos = fromUser.indexOf("@");
+            var startPos = fromUser.indexOf(":");
+            fromUser = fromUser.substring(startPos+1,endPos);
+            $("#callerid").text(fromUser);
+            if($("#modalWebCall").is(':visible')) {
+              $("#modalReceiveCalls").modal('show');
+            } else {
+              $("#modalWebCall").modal('show');
+              $("#modalReceiveCalls").modal('show');
+            }
+            Sounds("In", "play");
+            var atiendoSi = document.getElementById('answer');
+            var atiendoNo = document.getElementById('doNotAnswer');
+            var session_incoming = e.session;
+
+            session_incoming.on('addstream',function(e) {       // al cerrar el canal de audio entre los peers
+              lastPause = $("#UserStatus").html();
+              remote_stream = e.stream;
+              remoto = JsSIP.rtcninja.attachMediaStream(remoto, remote_stream);
+            });
+            var options = {'mediaConstraints': {'audio': true, 'video': false}};
+
+            atiendoSi.onclick = function() {
+              $("#modalReceiveCalls").modal('hide');
+              session_incoming.answer(options);
+              setCallState("Connected", "orange");
+              Sounds("","stop");
+            };
+
+            atiendoNo.onclick = function() {
+              $("#modalReceiveCalls").modal('hide');
+              userAgent.terminateSessions();
+              defaultCallState();
+            };
+          }
+
+          e.session.on("accepted", function() { 			// cuando se establece una llamada
+            Sounds("", "stop");
+            lastPause = $("#UserStatus").html();
+          });
+        });
         /*$("#sipUser").val(msg.sipuser);
         $("#sipPass").val(msg.sippass);*/
       }
@@ -127,70 +191,6 @@ $(function () {
     Sounds("", "stop");
     userAgent.terminateSessions();
     defaultCallState();
-  });
-
-  userAgent.on('registrationFailed', function(e) {  // cuando falla la registracion
-    setSipStatus("redcross.png", "  Registration failed", sipStatus);
-  });
-  //
-  userAgent.on('newRTCSession', function(e) {       // cuando se crea una sesion RTC
-    var originHeader = "";
-    e.session.on("ended",function() {               // Cuando Finaliza la llamada
-      var callerOrCalled = "";
-      if(entrante) {
-      	callerOrCalled = fromUser;
-      } else {
-        callerOrCalled =  num;
-      }
-      defaultCallState();
-    });
-    e.session.on("failed",function(e) {  // cuando falla el establecimiento de la llamada
-      $("#modalReceiveCalls").modal('hide');
-      Sounds("","stop");
-    });
-    if(e.originator=="remote") {         // Origen de llamada Remoto
-      entrante = true;
-      fromUser = e.request.headers.From[0].raw;
-      var endPos = fromUser.indexOf("@");
-      var startPos = fromUser.indexOf(":");
-      fromUser = fromUser.substring(startPos+1,endPos);
-      $("#callerid").text(fromUser);
-      if($("#modalWebCall").is(':visible')) {
-        $("#modalReceiveCalls").modal('show');
-      } else {
-        $("#modalWebCall").modal('show');
-        $("#modalReceiveCalls").modal('show');
-      }
-      Sounds("In", "play");
-      var atiendoSi = document.getElementById('answer');
-      var atiendoNo = document.getElementById('doNotAnswer');
-      var session_incoming = e.session;
-
-      session_incoming.on('addstream',function(e) {       // al cerrar el canal de audio entre los peers
-        lastPause = $("#UserStatus").html();
-        remote_stream = e.stream;
-        remoto = JsSIP.rtcninja.attachMediaStream(remoto, remote_stream);
-      });
-      var options = {'mediaConstraints': {'audio': true, 'video': false}};
-
-      atiendoSi.onclick = function() {
-        $("#modalReceiveCalls").modal('hide');
-        session_incoming.answer(options);
-        setCallState("Connected", "orange");
-        Sounds("","stop");
-      };
-
-      atiendoNo.onclick = function() {
-        $("#modalReceiveCalls").modal('hide');
-        userAgent.terminateSessions();
-        defaultCallState();
-      };
-    }
-
-    e.session.on("accepted", function() { 			// cuando se establece una llamada
-      Sounds("", "stop");
-      lastPause = $("#UserStatus").html();
-    });
   });
   //
 
