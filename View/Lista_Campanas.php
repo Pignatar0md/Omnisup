@@ -3,7 +3,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 include_once controllers . '/Campana.php';
-$SupervId = $_POST["supervId"] = 20;
+$SupervId = isset($_GET["supervId"]) ? $_GET["supervId"] : "";
 if($SupervId) {
   $Controller_Campana = new Campana();
   $resul = $Controller_Campana->traerCampanas($SupervId);
@@ -19,7 +19,7 @@ if($SupervId) {
             foreach ($resul as $clave => $valor) {
             ?>
             <tr>
-                <td style='color:green'><a href="index.php?page=Detalle_Campana&nomcamp=<?= $valor ?>"><?= $valor ?></a></td>
+                <td style='color:green'><a href="index.php?page=Detalle_Campana&nomcamp=<?= $valor ?>&supervId=<? $SupervId ?>"><?= $valor ?></a></td>
             </tr>
             <?php
             }

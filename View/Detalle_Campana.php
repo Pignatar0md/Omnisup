@@ -1,5 +1,7 @@
 <br/><br/>
 <div class="container-fluid">
+  <input type="hidden" id="sipUser" name="sipUser" value="" />
+  <input type="hidden" id="sipPass" name="sipPass" value="" />
     <div class="modal fade" id="modalWebCall" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content Modal-Content">
@@ -10,6 +12,7 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <!-- -->
+                        <input type="hidden" value="<?= $_GET['supervId'] ?>" id="userId"/>
                         <div id="modalReceiveCalls" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">

@@ -134,6 +134,33 @@ function mostrarEstadoCanalesWombat($camp) {
   return $jsonString;
 }
 
+function mostrarUserPassSip() {
+  $Controller_Campana = new Campana();
+  $jsonString = '';
+  $resul = $Controller_Campana->traerEstadoDeCanales($camp);
+  $jsonString .= '[';
+  $user = $pass = "";
+  foreach ($resul as $key => $value) {
+      if(is_array($value)) {
+          foreach($value as $cla => $val) {
+              if($cla == "sip_extension") {
+                  $user = $val;
+              } else {
+                  $pass = $val;
+              }
+          }
+      } else {
+          if($key == "sip_extension") {
+              $user = $value;
+          } else {
+              $pass = $value;
+          }
+      }
+  }
+  $jsonString .= '{"sipuser": "' . $user . '", "sippass": ' . $pass .'}';
+  $jsonString = substr($jsonString, 0, -1);
+  return $jsonString;
+}
 if ($_GET['nomcamp']) {
     if($_GET['op'] == 'agstatus') {
         echo mostrarEstadoAgentes($_GET['nomcamp']);
@@ -150,4 +177,7 @@ if ($_GET['nomcamp']) {
     } else if($_GET['op'] == 'scorestatus') {
         echo mostrarCalificaciones($_GET['nomcamp']);
     }
+}
+if($_GET['supId']) {
+    echo mostrarUserPassSip($_GET['supId']);
 }

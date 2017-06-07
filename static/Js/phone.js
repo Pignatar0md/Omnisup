@@ -10,12 +10,29 @@ $(function () {
   var local = document.getElementById('localAudio');
   var remoto = document.getElementById('remoteAudio');
   var config = {
-    uri: 'sip:1003' + '@' + KamailioIp,
+    uri: 'sip:' + $("#sipUser").val() + '@' + KamailioIp,
     ws_servers: 'wss://' + KamailioIp + ':443',
-    password: 'dzheD4PfXn',
+    password: $("#sipPass").val(),
     hack_ip_in_contact: true,
     session_timers: false
   };
+
+  $.ajax({
+    url: 'Controller/Detalle_Campana_Contenido.php',
+    type: 'GET',
+    dataType: 'html',
+    data: 'supId='+$("#userId").val(),
+    success: function (msg) {
+      if(msg!=="]") {
+        var mje = JSON.parse(msg);
+        $("#sipUser").val(mje.sipuser);
+        $("#sipPass").val(mje.sippass);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
+    }
+  });
 
   var userAgent = new JsSIP.UA(config);
   var sipSession = userAgent.start();

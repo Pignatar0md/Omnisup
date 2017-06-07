@@ -11,7 +11,7 @@ class Campana_Model {
 
     function getCampaigns($userId) {
       $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
-      ac.reported_by_id = sp.user_id where estado = 2 and sp.user_id = :id";
+      ac.reported_by_id = sp.user_id where estado = 2 and sp.id = :id";
       try {
         $cnn = new PDO($this->argPdo);
         $query = $cnn->prepare($sql);
@@ -209,5 +209,20 @@ class Campana_Model {
       curl_close($process);
       $res = json_decode($res, true);
       return $res;
+    }
+
+    function getSIPcredentialsByUserId($userId) {
+      $sql = "select sip_extension, sip_password FROM ominicontacto_app_supervisorprofile where id = :id";
+      try {
+        $cnn = new PDO($this->argPdo);
+        $query = $cnn->prepare($sql);
+        $query->bindParam(':id', $userId);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $cnn = NULL;
+      } catch (PDOException $e) {
+          $result= "Database Error: " . $e;
+      }
+      return $result;
     }
 }

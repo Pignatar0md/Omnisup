@@ -143,4 +143,9 @@ class Campana {
         return $datosUtiles;
     }
 
+    function traerUserClaveSIP($userId) {
+        $result = $this->Campana_Model->getSIPcredentialsByUserId($userId);
+        return $result;
+    }
+
 }
