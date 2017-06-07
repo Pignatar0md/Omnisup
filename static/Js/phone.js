@@ -10,11 +10,6 @@ $(function () {
   var local = document.getElementById('localAudio');
   var remoto = document.getElementById('remoteAudio');
   var config = {
-    uri: 'sip:' + $("#sipUser").val() + '@' + KamailioIp,
-    ws_servers: 'wss://' + KamailioIp + ':443',
-    password: $("#sipPass").val(),
-    hack_ip_in_contact: true,
-    session_timers: false
   };
 
   $.ajax({
@@ -24,8 +19,13 @@ $(function () {
     data: 'supId='+$("#userId").val(),
     success: function (msg) {
       if(msg!=="]") {
-        $("#sipUser").val(msj.sipuser);
-        $("#sipPass").val(msj.sippass);
+        config.uri: 'sip:' + msg.sipuser + '@' + KamailioIp;
+        config.ws_servers: 'wss://' + KamailioIp + ':443';
+        config.password: msg.sippass;
+        config.hack_ip_in_contact: true;
+        config.session_timers: false;
+        /*$("#sipUser").val(msg.sipuser);
+        $("#sipPass").val(msg.sippass);*/
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
