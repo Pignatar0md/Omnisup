@@ -11,7 +11,8 @@ $(function () {
   var remoto = document.getElementById('remoteAudio');
   var config = {
   };
-
+  var userAgent;
+  var sipSession;
   $.ajax({
     url: 'Controller/Detalle_Campana_Contenido.php',
     type: 'GET',
@@ -19,11 +20,14 @@ $(function () {
     data: 'supId='+$("#userId").val(),
     success: function (msg) {
       if(msg!=="]") {
-        config.uri: 'sip:' + msg.sipuser + '@' + KamailioIp;
-        config.ws_servers: 'wss://' + KamailioIp + ':443';
-        config.password: msg.sippass;
-        config.hack_ip_in_contact: true;
-        config.session_timers: false;
+        config.uri= 'sip:' + msg.sipuser + '@' + KamailioIp;
+        config.ws_servers= 'wss://' + KamailioIp + ':443';
+        config.password= msg.sippass;
+        config.hack_ip_in_contact= true;
+        config.session_timers= false;
+        
+        userAgent = new JsSIP.UA(config);
+        sipSession = userAgent.start();
         /*$("#sipUser").val(msg.sipuser);
         $("#sipPass").val(msg.sippass);*/
       }
@@ -32,9 +36,6 @@ $(function () {
       console.log("Error al ejecutar => " + textStatus + " - " + errorThrown);
     }
   });
-
-  var userAgent = new JsSIP.UA(config);
-  var sipSession = userAgent.start();
 
   $("#tableAgBody").on('click', '.info', function () {
     var id = this.id;
