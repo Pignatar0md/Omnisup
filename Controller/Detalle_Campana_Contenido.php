@@ -134,10 +134,10 @@ function mostrarEstadoCanalesWombat($camp) {
   return $jsonString;
 }
 
-function mostrarUserPassSip() {
+function mostrarUserPassSip($userID) {
   $Controller_Campana = new Campana();
   $jsonString = '';
-  $resul = $Controller_Campana->traerEstadoDeCanales($camp);
+  $resul = $Controller_Campana->traerUserClaveSIP($userID);
   $jsonString .= '[';
   $user = $pass = "";
   foreach ($resul as $key => $value) {
