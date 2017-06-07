@@ -136,9 +136,8 @@ function mostrarEstadoCanalesWombat($camp) {
 
 function mostrarUserPassSip($userID) {
   $Controller_Campana = new Campana();
-  $jsonString = '';
   $resul = $Controller_Campana->traerUserClaveSIP($userID);
-  $jsonString .= '[';
+  $jsonString = '';
   $user = $pass = "";
   foreach ($resul as $key => $value) {
       if(is_array($value)) {
@@ -158,7 +157,6 @@ function mostrarUserPassSip($userID) {
       }
   }
   $jsonString .= '{"sipuser": "' . $user . '", "sippass": ' . $pass .'}';
-  $jsonString = substr($jsonString, 0, -1);
   return $jsonString;
 }
 if ($_GET['nomcamp']) {
