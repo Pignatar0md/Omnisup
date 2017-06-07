@@ -156,7 +156,7 @@ function mostrarUserPassSip($userID) {
           }
       }
   }
-  $jsonString .= '{"sipuser": "' . $user . '", "sippass": ' . $pass .'}';
+  $jsonString .= '{"sipuser": "' . $user . '", "sippass": "' . $pass .'"}';
   return $jsonString;
 }
 if ($_GET['nomcamp']) {
