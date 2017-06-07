@@ -25,9 +25,20 @@ $(function () {
         config.password= msg.sippass;
         config.hack_ip_in_contact= true;
         config.session_timers= false;
-        
+
         userAgent = new JsSIP.UA(config);
         sipSession = userAgent.start();
+
+        userAgent.on('registered', function(e) { // cuando se registra la entidad SIP
+          setSipStatus("greendot.png", "  Registered", sipStatus);
+          defaultCallState();
+        });
+
+        userAgent.on('unregistered', function(e) {  // cuando se desregistra la entidad SIP
+          setSipStatus("reddot.png", "  Unregistered", sipStatus);
+          $("#Pause").prop('disabled',true);
+          $("#Resume").prop('disabled',true);
+        });
         /*$("#sipUser").val(msg.sipuser);
         $("#sipPass").val(msg.sippass);*/
       }
@@ -110,17 +121,6 @@ $(function () {
     ag = 'nombreAgente: '+ ag;
     makeCall(ag);
     num = null;
-  });
-
-  userAgent.on('registered', function(e) { // cuando se registra la entidad SIP
-    setSipStatus("greendot.png", "  Registered", sipStatus);
-    defaultCallState();
-  });
-
-  userAgent.on('unregistered', function(e) {  // cuando se desregistra la entidad SIP
-    setSipStatus("reddot.png", "  Unregistered", sipStatus);
-    $("#Pause").prop('disabled',true);
-    $("#Resume").prop('disabled',true);
   });
 
   $("#endCall").click(function() {
