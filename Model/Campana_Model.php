@@ -6,16 +6,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 class Campana_Model {
 
     function __construct() {
-        $this->argPdo = 'pgsql:host=172.16.20.90;dbname=kamailio;port=5432;user=kamailio;password=kamailiorw';
+        $this->argPdo = 'pgsql:host=' . PG_HOST . ';dbname=kamailio;port=5432';
     }
 
     function getCampaignsForAdm() {
       $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
       ac.reported_by_id = sp.user_id where estado = 2";
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
-        $query->bindParam(':id', $userId);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -29,7 +28,7 @@ class Campana_Model {
       $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
       ac.reported_by_id = sp.user_id where estado = 2 and sp.id = :id";
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':id', $userId);
         $query->execute();
@@ -55,7 +54,7 @@ class Campana_Model {
       $year = date("Y");
       $CampName = "%".$CampName."%";
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -77,7 +76,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -99,7 +98,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -121,7 +120,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -144,7 +143,7 @@ class Campana_Model {
       $year = date("Y");
       $CampName = "%".$CampName."%";
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -170,7 +169,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -193,7 +192,7 @@ class Campana_Model {
       $month = date("m");
       $year = date("Y");
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
@@ -230,7 +229,7 @@ class Campana_Model {
     function getSIPcredentialsByUserId($userId) {
       $sql = "select sip_extension, sip_password FROM ominicontacto_app_supervisorprofile where id = :id";
       try {
-        $cnn = new PDO($this->argPdo);
+        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':id', $userId);
         $query->execute();
