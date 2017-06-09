@@ -13,9 +13,13 @@ class Campana {
         $this->Campana_Model = new Campana_Model();
     }
 
-    function traerCampanas($supervId) {
+    function traerCampanas($supervId=NULL) {
         $arrData = array();
-        $campanas = $this->Campana_Model->getCampaigns($supervId);
+        if($supervId!=NULL) {
+            $campanas = $this->Campana_Model->getCampaigns($supervId);
+        } else {
+            $campanas = $this->Campana_Model->getCampaignsForAdm();
+        }
         foreach ($campanas as $clave => $valor) {
             if(is_array($valor)) {
                 foreach ($valor as $cla => $val) {

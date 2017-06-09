@@ -9,6 +9,22 @@ class Campana_Model {
         $this->argPdo = 'pgsql:host=172.16.20.90;dbname=kamailio;port=5432;user=kamailio;password=kamailiorw';
     }
 
+    function getCampaignsForAdm() {
+      $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
+      ac.reported_by_id = sp.user_id where estado = 2";
+      try {
+        $cnn = new PDO($this->argPdo);
+        $query = $cnn->prepare($sql);
+        $query->bindParam(':id', $userId);
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $cnn = NULL;
+      } catch (PDOException $e) {
+          $result= "Database Error: " . $e;
+      }
+      return $result;
+    }
+
     function getCampaigns($userId) {
       $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
       ac.reported_by_id = sp.user_id where estado = 2 and sp.id = :id";
