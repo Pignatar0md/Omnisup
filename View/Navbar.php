@@ -1,3 +1,6 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
+?>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid col-lg-12">
         <div class="navbar-header col-lg-2">
@@ -9,10 +12,19 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+              <?php
+              if($_GET['page'] == "Detalle_Campana") {
+              ?>
                 <li>
-                    <!-- <a href="" title="Deslogueo">
-                        <span class="glyphicon glyphicon-off"></span>
-                    </a> -->
+                    <a href="/Omnisup">Volver a Campañas
+                    </a>
+                </li>
+              <?php
+              }
+              ?>
+                <li>
+                    <a href="https://<?= PG_HOST ?>">Volver a Principal
+                   </a>
                 </li>
             </ul>
             <ul class="nav navbar-nav">

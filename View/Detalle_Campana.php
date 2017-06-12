@@ -73,16 +73,14 @@
             </audio>
         </div>
     </div>
-    <div class="col-md-1">
-        <img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/>
-    </div>
     <div class="col-md-11">
-        <h3 class="col-md-offset-1"><b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3><!-- NOMBRE CAMPANA -->
+        <img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/>
+        <h3 class="col-md-5">Campaña: <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b></h3><!-- NOMBRE CAMPANA -->
     </div>
     <div class="col-md-12">
         <br>
         <div class="col-md-2"><!-- CUADRO RESUMEN CAMPANA -->
-          <h4 class="subtitle">Resumen De Campaña</h4>
+          <h4 class="subtitle">Resumen y calificaciones</h4>
           <br>
           <table id="tableCampSummary" class="table table-striped table-condensed">
               <tbody>
@@ -125,7 +123,7 @@
           </table>
         </div>
         <div class="col-md-2"><!-- CUADRO LLAMADAS EN COLA -->
-          <h4 class="subtitle">En espera</h4>
+          <h4 class="subtitle">Llamadas en espera</h4>
           <table class="table table-striped table-condensed">
               <thead>
                 <tr>
