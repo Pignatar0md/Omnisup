@@ -30,6 +30,9 @@ $(function () {
         userAgent = new JsSIP.UA(config);
         sipSession = userAgent.start();
 
+        $("#sipuser").val(msg.sipuser);
+        $("#sippass").val(msg.sippass);
+
         userAgent.on('registered', function(e) { // cuando se registra la entidad SIP
           setSipStatus("greendot.png", "  Registered", sipStatus);
           defaultCallState();
@@ -115,11 +118,12 @@ $(function () {
 
   $("#tableAgBody").on('click', '.info', function () {
     var id = this.id;
+    var sipExt = $("#sipUser").val();
     $.ajax({
       url: 'Controller/GetInfo.php',
       type: 'GET',
       dataType: 'html',
-      data: 'sip='+id,
+      data: 'sip='+id+'&sipext='+sipExt,
       success: function (msg) {
         window.location.href = "index.php?page=agentInfo";
       },
@@ -132,11 +136,12 @@ $(function () {
 
   $("#tableAgBody").on('click', '.chanspy', function () {
     var id = this.id;
+    var sipExt = $("#sipUser").val();
     $.ajax({
       url: 'Controller/ChanSpy.php',
       type: 'GET',
       dataType: 'html',
-      data: 'sip='+id,
+      data: 'sip='+id+'&sipext='+sipExt,
       success: function (msg) {
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -148,11 +153,12 @@ $(function () {
 
   $("#tableAgBody").on('click', '.chanspywhisper', function () {
     var id = this.id;
+    var sipExt = $("#sipUser").val();
     $.ajax({
       url: 'Controller/ChanSpyWhisper.php',
       type: 'GET',
       dataType: 'html',
-      data: 'sip='+id,
+      data: 'sip='+id+'&sipext='+sipExt,
       success: function (msg) {
       },
       error: function (jqXHR, textStatus, errorThrown) {
@@ -164,11 +170,12 @@ $(function () {
 
   $("#tableAgBody").on('click', '.conference', function () {
     var id = this.id;
+    var sipExt = $("#sipUser").val();
     $.ajax({
       url: 'Controller/Conference.php',
       type: 'GET',
       dataType: 'html',
-      data: 'sip='+id,
+      data: 'sip='+id+'&sipext='+sipExt,
       success: function (msg) {
       },
       error: function (jqXHR, textStatus, errorThrown) {
