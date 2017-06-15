@@ -30,8 +30,8 @@ $(function () {
         userAgent = new JsSIP.UA(config);
         sipSession = userAgent.start();
 
-        $("#sipuser").val(msg.sipuser);
-        $("#sippass").val(msg.sippass);
+        $("#sipUser").val(msg.sipuser);
+        $("#sipPass").val(msg.sippass);
 
         userAgent.on('registered', function(e) { // cuando se registra la entidad SIP
           setSipStatus("greendot.png", "  Registered", sipStatus);
