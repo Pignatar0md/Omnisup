@@ -216,9 +216,9 @@ class Campana_Model {
     }
 
     function getChannelsStatus($CampName) {
-      $process = curl_init("http://172.16.20.90:8080/wombat/api/live/calls/");
+      $process = curl_init("http://" . PG_HOST . ":8080/wombat/api/live/calls/");
       curl_setopt($process, CURLOPT_HEADER, 0);
-      curl_setopt($process, CURLOPT_USERPWD, "demoadmin:demo");
+      curl_setopt($process, CURLOPT_USERPWD, WD_API_USER . ":" . WD_API_PASS);
       curl_setopt($process, CURLOPT_POST, 1);
       curl_setopt($process, CURLOPT_POSTFIELDS, $params);
       curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);

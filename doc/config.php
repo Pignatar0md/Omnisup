@@ -8,6 +8,8 @@ define('AMI_HOST','');
 define('PG_USER', '');
 define('PG_PASSWORD', '');
 define('PG_HOST', '');
+define('WD_API_USER', '');
+define('WD_API_PASS', '');
 
 define("entities", $_SERVER['DOCUMENT_ROOT'].'/Omnisup/entities');
 define("helpers", $_SERVER['DOCUMENT_ROOT'].'/Omnisup/helpers');
