@@ -1,5 +1,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
+$SupervId = isset($_GET["supervId"]) ? $_GET["supervId"] : "";
+$admin = isset($_GET['es_admin']) ? $_GET['es_admin'] : "";
 ?>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid col-lg-12">
@@ -16,7 +18,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
               if($_GET['page'] == "Detalle_Campana") {
               ?>
                 <li>
-                    <a href="/Omnisup">Volver a Campañas
+                    <a href="/Omnisup/index.php?page=Lista_Campanas&supervId=<?= $SupervId ?>&es_admin=<?= $admin ?>">Volver a Campañas
                     </a>
                 </li>
               <?php
