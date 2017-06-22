@@ -10,6 +10,7 @@ $(function () {
     ordering: false,
     searching: false,
     bLengthChange: false,
+    paging: false/*,
     language: {
       "info": "pagina _PAGE_ de _PAGES_",
       "paginate": {
@@ -17,15 +18,15 @@ $(function () {
         "last":       "Ultimo",
         "next":       "Siguiente",
         "previous":   "Anterior"
-      }
-    }
+      },
+    }*/
   });
   var url = window.location.href;
   if(url.indexOf('Detalle_Campana') !== -1) {
-    setInterval("actualiza_contenido_agt()", 1000);
-    setInterval("actualiza_contenido_camp()", 1000);
-    setInterval("actualiza_contenido_colas()", 1000);
-    setInterval("actualiza_contenido_wombat()", 1000);
+    setInterval("actualiza_contenido_agt()", 4000);
+    setInterval("actualiza_contenido_camp()", 4000);
+    setInterval("actualiza_contenido_colas()", 4000);
+    setInterval("actualiza_contenido_wombat()", 4000);
   }
 });
 
