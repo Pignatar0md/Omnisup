@@ -1,6 +1,6 @@
 <?php
 
-include_once entities . '/var/lib/asterisk/agi-bin/Phpagi_asmanager.php';
+include_once entities . '/Phpagi_asmanager.php';
 
 class Agente_Model {
 
