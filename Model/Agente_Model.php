@@ -1,6 +1,6 @@
 <?php
 
-include_once entities . '/Phpagi_asmanager.php';
+include_once entities . '/var/lib/asterisk/agi-bin/Phpagi_asmanager.php';
 
 class Agente_Model {
 
@@ -31,7 +31,7 @@ class Agente_Model {
         } catch (Exception $ex) {
             return "problemas de Conexion AMI: " . $ex;
         }
-        $this->agi->Originate("SIP/$exten", "001$agt", 'fts-sup', 1, NULL, NULL, '25000', NULL, NULL, NULL, NULL, false, NULL);
+        $this->agi->Originate("SIP/$exten", "001$agt", 'fts-sup', 1, NULL, NULL, '25000', "supervision", NULL, NULL);
         $this->agi->disconnect();
     }
 
@@ -41,7 +41,7 @@ class Agente_Model {
         } catch (Exception $ex) {
             return "problemas de Conexion AMI: " . $ex;
         }
-        $this->agi->Originate('SIP/' . $exten, "002$agt", 'fts-sup', 1, NULL, NULL, '25000', NULL, NULL, NULL, NULL, false, NULL);
+        $this->agi->Originate('SIP/' . $exten, "002$agt", 'fts-sup', 1, NULL, NULL, '25000', "supervision", NULL, NULL);
         $this->agi->disconnect();
     }
 
@@ -51,7 +51,7 @@ class Agente_Model {
         } catch (Exception $ex) {
             return "problemas de Conexion AMI: " . $ex;
         }
-        $this->agi->Originate('SIP/' . $exten, "006$agt", 'fts-sup', 1, NULL, NULL, '25000', NULL, NULL, NULL, NULL, false, NULL);
+        $this->agi->Originate('SIP/' . $exten, "006$agt", 'fts-sup', 1, NULL, NULL, '25000', "supervision", NULL, NULL);
         $this->agi->disconnect();
     }
 
