@@ -32,7 +32,7 @@ class Campana_Model {
               union
               select nombre from ominicontacto_app_campana ac join ominicontacto_app_campana_supervisors cs on ac.id = cs.campana_id
               join  ominicontacto_app_supervisorprofile sp on sp.user_id = cs.user_id
-              where ac.estado = 2 and sp.id = :id;";
+              where ac.estado = 2 and sp.id = :id";
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
