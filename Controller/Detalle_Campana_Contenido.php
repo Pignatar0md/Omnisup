@@ -69,23 +69,6 @@ function mostrarEstadoCampana($camp) {
         if($clave == "busy") {
             $jsonString .= '"ocupadas": "' . $valor . '",';
         }
-        /*if($clave == "score") {
-            $jsonString .= '"calificaciones": [';
-            foreach ($valor as $key => $value) {
-                foreach ($value as $cl => $vl) {
-                    if($cl != "count") {
-                        $subJsonString2 .=  $vl;
-                        $subJsonString3 .= str_replace(' ', '', $vl);
-                    } else {
-                        $subJsonString1 .= $vl;
-                    }
-                }
-                $jsonString .= '{"cantidad": "'. $subJsonString1 . '", "calificacion": "' . $subJsonString2 . '", "tagId": "' . $subJsonString3 . '"},';
-                $subJsonString3 = $subJsonString2 = $subJsonString1 = "";
-            }
-            $jsonString = substr($jsonString, 0, -1);
-            $jsonString .= "]";
-        }*/
     }
     $jsonString = substr($jsonString, 0, -1);
     $jsonString .= "}";
