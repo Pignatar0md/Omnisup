@@ -7,7 +7,6 @@ include entities. '/NumState.php';
 class Campana {
 
     private $Campana_Model;
-    private $NumState;
 
     function __construct() {
         $this->Campana_Model = new Campana_Model();
@@ -133,11 +132,11 @@ class Campana {
                     if($key == "hopperState") {
                         foreach($value as $clav => $valo) {
                             if(in_array($NomCamp, $valo)) {
-                                $this->NumState = new NumState();
-                                $this->NumState->setNumber($valo['number']);
-                                $this->NumState->setState($valo['state']);
-                                $datosUtiles[] = $this->NumState;
-                                $this->NumState = NULL;
+                                $NumState = new NumState();
+                                $NumState->setNumber($valo['number']);
+                                $NumState->setState($valo['state']);
+                                $datosUtiles[] = $NumState;
+                                $NumState = NULL;
                             }
                         }
                     }
