@@ -224,7 +224,7 @@ class Campana_Model {
       curl_setopt($process, CURLOPT_HEADER, 0);
       curl_setopt($process, CURLOPT_USERPWD, WD_API_USER . ":" . WD_API_PASS);
       curl_setopt($process, CURLOPT_POST, 1);
-      curl_setopt($process, CURLOPT_POSTFIELDS, $params);
+      curl_setopt($process, CURLOPT_POSTFIELDS, $CampName);
       curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
       $res = curl_exec($process);
       curl_close($process);
