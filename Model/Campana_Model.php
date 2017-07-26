@@ -53,8 +53,8 @@ class Campana_Model {
     }
 
     function getDialedCalls($CampName) {
-      $sql = "select count(*) from cdr where EXTRACT(DAY FROM calldate) = :dia and EXTRACT(MONTH FROM calldate) = :mes and " .
-      "EXTRACT(YEAR FROM calldate) = :ano and clid like :clid";
+      $sql = "select count(*) from cdr where EXTRACT(DAY FROM calldate) = :dia and EXTRACT(MONTH FROM calldate) = :mes and
+      EXTRACT(YEAR FROM calldate) = :ano and clid like :clid";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -120,8 +120,8 @@ class Campana_Model {
     }
 
     function getLostCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes " .
-      "and EXTRACT(YEAR FROM time) = :ano and (event='ABANDON') or (event='EXITWITHTIMEOUT') and queuename like :campname";
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes 
+      and EXTRACT(YEAR FROM time) = :ano and (event='ABANDON') or (event='EXITWITHTIMEOUT') and queuename like :campname";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
