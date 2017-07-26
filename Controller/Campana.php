@@ -22,7 +22,11 @@ class Campana {
         foreach ($campanas as $clave => $valor) {
             if(is_array($valor)) {
                 foreach ($valor as $cla => $val) {
-                    $arrData[] = $val;
+                  if($cla == "id") {
+                    $arrData[$val] = $v;
+                  } else {
+                    $v = $val;
+                  }
                 }
             } else {
               $arrData[] = $valor;

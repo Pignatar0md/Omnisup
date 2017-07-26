@@ -12,7 +12,7 @@ class Campana_Model {
     }
 
     function getCampaignsForAdm() {
-      $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
+      $sql = "select nombre, ac.id from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
       ac.reported_by_id = sp.user_id where estado = 2";
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
@@ -27,10 +27,10 @@ class Campana_Model {
     }
 
     function getCampaigns($userId) {
-      $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on ac.reported_by_id = sp.user_id
+      $sql = "select nombre, ac.id from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on ac.reported_by_id = sp.user_id
               where estado = 2 and sp.id = :id
               union
-              select nombre from ominicontacto_app_campana ac join ominicontacto_app_campana_supervisors cs on ac.id = cs.campana_id
+              select nombre, ac.id from ominicontacto_app_campana ac join ominicontacto_app_campana_supervisors cs on ac.id = cs.campana_id
               join  ominicontacto_app_supervisorprofile sp on sp.user_id = cs.user_id
               where ac.estado = 2 and sp.id = :id";
       try {
@@ -120,7 +120,7 @@ class Campana_Model {
     }
 
     function getLostCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes 
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes
       and EXTRACT(YEAR FROM time) = :ano and (event='ABANDON') or (event='EXITWITHTIMEOUT') and queuename like :campname";
       $day = date("d");
       $month = date("m");
@@ -188,6 +188,31 @@ class Campana_Model {
           $result= "Database Error: " . $e;
       }
       return $result;
+    }
+
+    function getAnswererDetected($CampId) {
+      $sql = "select ominicontacto_app_wombatlog.estado, ominicontacto_app_wombatlog.calificacion,
+             COUNT(ominicontacto_app_wombatlog.estado) AS 'estado__count' FROM ominicontacto_app_wombatlog
+         WHERE (ominicontacto_app_wombatlog.campana_id = 68 AND ominicontacto_app_wombatlog.calificacion LIKE 'CONTESTADOR'
+         AND ominicontacto_app_wombatlog.fecha_hora LIKE ':ano-:mes-:dia')
+         GROUP BY ominicontacto_app_wombatlog.estado, ominicontacto_app_wombatlog.calificacion";
+         $day = date("d");
+         $month = date("m");
+         $year = date("Y");
+         try {
+           $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+           $query = $cnn->prepare($sql);
+           $query->bindParam(':dia', $day);
+           $query->bindParam(':mes', $month);
+           $query->bindParam(':ano', $year);
+           $query->bindParam(':nombre', $CampId);
+           $query->execute();
+           $result = $query->fetchAll(PDO::FETCH_ASSOC);
+           $cnn = NULL;
+         } catch (PDOException $e) {
+             $result= "Database Error: " . $e;
+         }
+         return $result;
     }
 
     function getSells($CampName) {
