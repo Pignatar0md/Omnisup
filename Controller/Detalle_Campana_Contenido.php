@@ -69,6 +69,9 @@ function mostrarEstadoCampana($camp, $idcamp) {
         if($clave == "busy") {
             $jsonString .= '"ocupadas": "' . $valor . '",';
         }
+        if($clave == "answererdetected") {
+            $jsonString .= '"contestador_detectado": "' . $valor . '",';
+        }
     }
     $jsonString = substr($jsonString, 0, -1);
     $jsonString .= "}";
@@ -81,4 +84,77 @@ function mostrarCalificaciones($camp) {
     $jsonString = '[';
     foreach ($resul as $key => $value) {
         $noSpaceKey = str_replace(' ', '', $key);
-        $jsonSt
+        $jsonString .= '{"cantidad": "'. $value . '", "calificacion": "' . $key . '", "tagId": "' . $noSpaceKey . '"},';
+    }
+    $jsonString = substr($jsonString, 0, -1);
+    $jsonString .= "]";
+    return $jsonString;
+}
+function mostrarLlamadasEnCola($camp) {
+    $Controller_Campana = new Campana();
+    $jsonString = '';
+    $resul = $Controller_Campana->traerLlamadasEnCola($camp);
+    $jsonString .= '[';
+    $i = 1;
+    foreach($resul as $clave => $valor) {
+        $jsonString .= '{"nroLlam": ' . $i . ', "tiempo": "' . $valor . '"},';
+        $i++;
+    }
+    $jsonString = substr($jsonString, 0, -1);
+    $jsonString .= "]";
+    return $jsonString;
+}
+function mostrarEstadoCanalesWombat($camp) {
+  $Controller_Campana = new Campana();
+  $jsonString = '';
+  $resul = $Controller_Campana->traerEstadoDeCanales($camp);
+  $jsonString .= '[';
+  foreach ($resul as $value) {
+      $ns = $value;
+      $jsonString .= '{"estado": "' . $ns->getState() . '", "numero": "' . $ns->getNumber() . '"},';
+  }
+  $jsonString = substr($jsonString, 0, -1);
+  $jsonString .= "]";
+  return $jsonString;
+}
+function mostrarUserPassSip($userID) {
+  $Controller_Campana = new Campana();
+  $resul = $Controller_Campana->traerUserClaveSIP($userID);
+  $jsonString = '';
+  $user = $pass = "";
+  foreach ($resul as $key => $value) {
+      if(is_array($value)) {
+          foreach($value as $cla => $val) {
+              if($cla == "sip_extension") {
+                  $user = $val;
+              } else {
+                  $pass = $val;
+              }
+          }
+      } else {
+          if($key == "sip_extension") {
+              $user = $value;
+          } else {
+              $pass = $value;
+          }
+      }
+  }
+  $jsonString .= '{"sipuser": "' . $user . '", "sippass": "' . $pass .'"}';
+  return $jsonString;
+}
+if ($_GET['nomcamp']) {
+    if($_GET['op'] == 'agstatus') {
+        echo mostrarEstadoAgentes($_GET['nomcamp']);
+    } else if ($_GET['op'] == 'campstatus') {
+        echo mostrarEstadoCampana($_GET['nomcamp']);
+    } else if ($_GET['op'] == 'queuedcalls') {
+        echo mostrarLlamadasEnCola($_GET['nomcamp']);
+    } else if($_GET['op'] == 'wdstatus') {
+        echo mostrarEstadoCanalesWombat($_GET['nomcamp']);
+    } else if($_GET['op'] == 'scorestatus') {
+        echo mostrarCalificaciones($_GET['nomcamp']);
+    }
+}
+if($_GET['supId']) {
+    echo mostrarUserPassSip($_GET['supId']);
+}

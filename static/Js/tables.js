@@ -54,12 +54,13 @@ function actualiza_contenido_agt() {
 
 function actualiza_contenido_camp() {
   var nomcamp = $("#nombreCamp").html();
+    var campid = $("#campId").val();
   var tabla = document.getElementById('bodyTableCampSummary');
   $.ajax({
     url: 'Controller/Detalle_Campana_Contenido.php',
     type: 'GET',
     dataType: 'html',
-    data: 'nomcamp='+nomcamp+'&op=campstatus',
+    data: 'nomcamp='+nomcamp+'&op=campstatus&CampId=' + campid,
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
@@ -68,6 +69,7 @@ function actualiza_contenido_camp() {
         $("#processed").html(mje.procesadas);
         $("#lost").html(mje.abandonadas);
         $("#busy").html(mje.ocupadas);
+    //    $("#answererdetected").html(mje.contestador_detectado);
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {

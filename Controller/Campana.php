@@ -62,12 +62,13 @@ class Campana {
         return $rawArrayData;
     }
 
-    function traerInfoReporteRealTimeCamp($NomCamp) {
+    function traerInfoReporteRealTimeCamp($NomCamp, $IdCamp) {
         $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
         $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
         $llamadasProcesadas = $this->Campana_Model->getProcessedCalls($NomCamp);
         $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
         $llamadasOcupadas = $this->Campana_Model->getBusyCalls($NomCamp);
+        //$llamadasDetecContestador = $this->Campana_Model->getAnswererDetected($IdCamp);
         $cdadVentas = $this->Campana_Model->getSells($NomCamp);
         $arrInfo = array();
 
@@ -96,6 +97,11 @@ class Campana {
                 $arrInfo['busy'] = $v;
             }
         }
+        /*foreach ($llamadasDetecContestador as $key => $value) {
+          foreach($value as $k => $v) {
+              $arrInfo['answererdetected'] = $v;
+          }
+        }*/
         return $arrInfo;
     }
 
