@@ -12,7 +12,7 @@ class Campana_Model {
     }
 
     function getCampaignsForAdm() {
-      $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
+      $sql = "select nombre, ac.id from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on
       ac.reported_by_id = sp.user_id where estado = 2";
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
@@ -27,10 +27,10 @@ class Campana_Model {
     }
 
     function getCampaigns($userId) {
-      $sql = "select nombre from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on ac.reported_by_id = sp.user_id
+      $sql = "select nombre, ac.id from ominicontacto_app_campana ac join ominicontacto_app_supervisorprofile sp on ac.reported_by_id = sp.user_id
               where estado = 2 and sp.id = :id
               union
-              select nombre from ominicontacto_app_campana ac join ominicontacto_app_campana_supervisors cs on ac.id = cs.campana_id
+              select nombre, ac.id from ominicontacto_app_campana ac join ominicontacto_app_campana_supervisors cs on ac.id = cs.campana_id
               join  ominicontacto_app_supervisorprofile sp on sp.user_id = cs.user_id
               where ac.estado = 2 and sp.id = :id";
       try {
@@ -120,7 +120,7 @@ class Campana_Model {
     }
 
     function getLostCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes 
+      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes
       and EXTRACT(YEAR FROM time) = :ano and (event='ABANDON') or (event='EXITWITHTIMEOUT') and queuename like :campname";
       $day = date("d");
       $month = date("m");

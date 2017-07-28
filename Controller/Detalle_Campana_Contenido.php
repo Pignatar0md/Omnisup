@@ -69,6 +69,9 @@ function mostrarEstadoCampana($camp) {
         if($clave == "busy") {
             $jsonString .= '"ocupadas": "' . $valor . '",';
         }
+        if($clave == "answererdetected") {
+            $jsonString .= '"contestador_detectado": "' . $valor . '",';
+        }
     }
     $jsonString = substr($jsonString, 0, -1);
     $jsonString .= "}";
