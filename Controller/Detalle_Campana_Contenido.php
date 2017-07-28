@@ -48,10 +48,10 @@ function mostrarEstadoAgentes($camp) {
     return $jsonString;
 }
 
-function mostrarEstadoCampana($camp) {
+function mostrarEstadoCampana($camp, $idcamp) {
     $Controller_Campana = new Campana();
     $jsonString = '';
-    $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($camp);
+    $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($camp, $idcamp);
     $jsonString .= '{';
     foreach($resul as $clave => $valor) {
         if($clave == "dialed") {
@@ -90,7 +90,6 @@ function mostrarCalificaciones($camp) {
     $jsonString .= "]";
     return $jsonString;
 }
-
 function mostrarLlamadasEnCola($camp) {
     $Controller_Campana = new Campana();
     $jsonString = '';
@@ -105,7 +104,6 @@ function mostrarLlamadasEnCola($camp) {
     $jsonString .= "]";
     return $jsonString;
 }
-
 function mostrarEstadoCanalesWombat($camp) {
   $Controller_Campana = new Campana();
   $jsonString = '';
@@ -119,7 +117,6 @@ function mostrarEstadoCanalesWombat($camp) {
   $jsonString .= "]";
   return $jsonString;
 }
-
 function mostrarUserPassSip($userID) {
   $Controller_Campana = new Campana();
   $resul = $Controller_Campana->traerUserClaveSIP($userID);
@@ -148,16 +145,12 @@ function mostrarUserPassSip($userID) {
 if ($_GET['nomcamp']) {
     if($_GET['op'] == 'agstatus') {
         echo mostrarEstadoAgentes($_GET['nomcamp']);
-
     } else if ($_GET['op'] == 'campstatus') {
         echo mostrarEstadoCampana($_GET['nomcamp']);
-
     } else if ($_GET['op'] == 'queuedcalls') {
         echo mostrarLlamadasEnCola($_GET['nomcamp']);
-
     } else if($_GET['op'] == 'wdstatus') {
         echo mostrarEstadoCanalesWombat($_GET['nomcamp']);
-
     } else if($_GET['op'] == 'scorestatus') {
         echo mostrarCalificaciones($_GET['nomcamp']);
     }

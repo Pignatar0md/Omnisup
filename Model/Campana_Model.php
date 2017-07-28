@@ -190,6 +190,31 @@ class Campana_Model {
       return $result;
     }
 
+    function getAnswererDetected($CampId) {
+        $sql = "select ominicontacto_app_wombatlog.estado, ominicontacto_app_wombatlog.calificacion,
+               COUNT(ominicontacto_app_wombatlog.estado) AS 'estado__count' FROM ominicontacto_app_wombatlog
+               WHERE (ominicontacto_app_wombatlog.campana_id = 68 AND ominicontacto_app_wombatlog.calificacion LIKE 'CONTESTADOR'
+               AND ominicontacto_app_wombatlog.fecha_hora LIKE ':ano-:mes-:dia')
+              GROUP BY ominicontacto_app_wombatlog.estado, ominicontacto_app_wombatlog.calificacion";
+        $day = date("d");
+        $month = date("m");
+        $year = date("Y");
+        try {
+            $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+            $query = $cnn->prepare($sql);
+            $query->bindParam(':dia', $day);
+            $query->bindParam(':mes', $month);
+            $query->bindParam(':ano', $year);
+            $query->bindParam(':nombre', $CampId);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $cnn = NULL;
+        } catch (PDOException $e) {
+            $result= "Database Error: " . $e;
+        }
+        return $result;
+    }
+
     function getSells($CampName) {
       $sql = "select count(*) FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
