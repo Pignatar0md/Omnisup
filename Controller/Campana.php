@@ -68,7 +68,7 @@ class Campana {
         $llamadasProcesadas = $this->Campana_Model->getProcessedCalls($NomCamp);
         $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
         $llamadasOcupadas = $this->Campana_Model->getBusyCalls($NomCamp);
-        //$llamadasDetecContestador = $this->Campana_Model->getAnswererDetected($IdCamp);
+        $llamadasDetecContestador = $this->Campana_Model->getAnswererDetected($IdCamp);
         $cdadVentas = $this->Campana_Model->getSells($NomCamp);
         $arrInfo = array();
 
@@ -97,11 +97,11 @@ class Campana {
                 $arrInfo['busy'] = $v;
             }
         }
-        /*foreach ($llamadasDetecContestador as $key => $value) {
+        foreach ($llamadasDetecContestador as $key => $value) {
           foreach($value as $k => $v) {
               $arrInfo['answererdetected'] = $v;
           }
-        }*/
+        }
         return $arrInfo;
     }
 

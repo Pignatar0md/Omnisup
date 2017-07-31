@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
+// ini_set('display_errors', 'On');
+// error_reporting(E_ALL | E_STRICT);
 include $_SERVER['DOCUMENT_ROOT'] . '/Omnisup/config.php';
 
 class Campana_Model {
@@ -187,11 +187,12 @@ class Campana_Model {
            return $result;
          }
          function getAnswererDetected($CampId) {
-             $sql = "select ominicontacto_app_wombatlog.estado, ominicontacto_app_wombatlog.calificacion,
-                    COUNT(ominicontacto_app_wombatlog.estado) AS 'estado__count' FROM ominicontacto_app_wombatlog
-                    WHERE (ominicontacto_app_wombatlog.campana_id = 68 AND ominicontacto_app_wombatlog.calificacion LIKE 'CONTESTADOR'
-                    AND ominicontacto_app_wombatlog.fecha_hora LIKE ':ano-:mes-:dia')
-                   GROUP BY ominicontacto_app_wombatlog.estado, ominicontacto_app_wombatlog.calificacion";
+             $sql = 'select COUNT(ominicontacto_app_wombatlog.estado) AS "answererdetected" FROM ominicontacto_app_wombatlog
+                    WHERE (ominicontacto_app_wombatlog.campana_id = :cid
+                    AND ominicontacto_app_wombatlog.calificacion LIKE \'CONTESTADOR\')
+                    AND EXTRACT(DAY from ominicontacto_app_wombatlog.fecha_hora) = :dia
+                    AND EXTRACT(MONTH from ominicontacto_app_wombatlog.fecha_hora) = :mes
+                    AND EXTRACT(YEAR from ominicontacto_app_wombatlog.fecha_hora) = :ano';
              $day = date("d");
              $month = date("m");
              $year = date("Y");
@@ -201,7 +202,7 @@ class Campana_Model {
                  $query->bindParam(':dia', $day);
                  $query->bindParam(':mes', $month);
                  $query->bindParam(':ano', $year);
-                 $query->bindParam(':nombre', $CampId);
+                 $query->bindParam(':cid', $CampId);
                  $query->execute();
                  $result = $query->fetchAll(PDO::FETCH_ASSOC);
                  $cnn = NULL;

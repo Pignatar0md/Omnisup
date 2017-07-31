@@ -23,10 +23,10 @@ $(function () {
   });
   var url = window.location.href;
   if(url.indexOf('Detalle_Campana') !== -1) {
-    setInterval("actualiza_contenido_agt()", 4000);
+  //  setInterval("actualiza_contenido_agt()", 4000);
     setInterval("actualiza_contenido_camp()", 4000);
-    setInterval("actualiza_contenido_colas()", 4000);
-    setInterval("actualiza_contenido_wombat()", 4000);
+    //setInterval("actualiza_contenido_colas()", 4000);
+    //setInterval("actualiza_contenido_wombat()", 4000);
   }
 });
 
@@ -69,7 +69,7 @@ function actualiza_contenido_camp() {
         $("#processed").html(mje.procesadas);
         $("#lost").html(mje.abandonadas);
         $("#busy").html(mje.ocupadas);
-    //    $("#answererdetected").html(mje.contestador_detectado);
+        $("#answererdetected").html(mje.contestador_detectado);
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
