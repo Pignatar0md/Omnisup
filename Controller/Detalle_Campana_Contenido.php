@@ -146,7 +146,7 @@ if ($_GET['nomcamp']) {
     if($_GET['op'] == 'agstatus') {
         echo mostrarEstadoAgentes($_GET['nomcamp']);
     } else if ($_GET['op'] == 'campstatus') {
-        echo mostrarEstadoCampana($_GET['nomcamp']);
+        echo mostrarEstadoCampana($_GET['nomcamp'], $_GET['CampId']);
     } else if ($_GET['op'] == 'queuedcalls') {
         echo mostrarLlamadasEnCola($_GET['nomcamp']);
     } else if($_GET['op'] == 'wdstatus') {
