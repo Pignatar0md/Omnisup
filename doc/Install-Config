@@ -1,5 +1,9 @@
-1- editar el archivo /etc/php.ini y settear la variable error_reporting en 0.
-2- vim /etc/php5/apache2/php.ini y settear la linea error_reporting en valor cero. error_reporting = 0
-3- copiar el config.php ubicado en Omnisup/doc/ a Omnisup/
-4- crear o revisar usuario de Asterisk Manager (/etc/asterisk/manager_custom.conf) para configurar junto con dir ip en config.php
-5- crear y revisar usuario de postgreSQL para configurar junto con dir ip en config.php
+1- editar el archivo /etc/apache2/sites-available/000-default.conf y editar el virtual host para que quede como:
+
+ErrorLog /dev/null
+CustomLog /dev/null combined
+
+2- copiar el config.php ubicado en Omnisup/doc/ a Omnisup/
+3- crear o revisar usuario de Asterisk Manager (/etc/asterisk/manager_custom.conf) para configurar junto con dir ip en config.php
+4- crear y revisar usuario de postgreSQL para configurar junto con dir ip en config.php
+5- en Omnisup/static/Js/phone.js, asignar a la variable KamailioIp, la direccion ip de kamailio webrtc server 
