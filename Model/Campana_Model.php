@@ -54,20 +54,31 @@ class Campana_Model {
         return $data;
     }
 
-    function getDialedCalls($CampName) {
-      $sql = "select count(*) from cdr where EXTRACT(DAY FROM calldate) = :dia and EXTRACT(MONTH FROM calldate) = :mes and
-      EXTRACT(YEAR FROM calldate) = :ano and clid like :clid";
+    function getReceivedCalls($IdCamp) {
+      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
+                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
+                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
+                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
+                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
+                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
+                     ominicontacto_app_queuelog.data5
+              FROM ominicontacto_app_queuelog
+              WHERE (ominicontacto_app_queuelog.event IN (ENTERQUEUE)
+              AND ominicontacto_app_queuelog.campana_id = :campid
+              AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
+              AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
+              ORDER BY ominicontacto_app_queuelog.time DESC";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
-      $CampName = "%".$CampName."%";
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':clid', $CampName);
+        $query->bindParam(':campid', $IdCamp);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -77,9 +88,21 @@ class Campana_Model {
       return $result;
     }
 
-    function getConnectedCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and " .
-      "EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'ENTERQUEUE' and queuename like :campname";
+    function getAttendedCalls($IdCamp) {
+      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
+                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
+                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
+                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
+                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
+                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
+                     ominicontacto_app_queuelog.data5
+              FROM ominicontacto_app_queuelog
+              WHERE (ominicontacto_app_queuelog.event IN (CONNECT)
+              AND ominicontacto_app_queuelog.campana_id = :campid
+              AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
+              AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
+              ORDER BY ominicontacto_app_queuelog.time DESC";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -89,7 +112,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campname', $CampName);
+        $query->bindParam(':campid', $IdCamp);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -99,9 +122,21 @@ class Campana_Model {
       return $result;
     }
 
-    function getProcessedCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and " .
-      "EXTRACT(MONTH FROM time) = :mes and EXTRACT(YEAR FROM time) = :ano and event like 'CONNECT' and queuename like :campname";
+    function getAbandonedCalls($IdCamp) {
+      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
+                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
+                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
+                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
+                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
+                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
+                     ominicontacto_app_queuelog.data5
+              FROM ominicontacto_app_queuelog
+              WHERE (ominicontacto_app_queuelog.event IN (ABANDON)
+              AND ominicontacto_app_queuelog.campana_id = :campid
+              AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
+              AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
+              ORDER BY ominicontacto_app_queuelog.time DESC";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -111,7 +146,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campname', $CampName);
+        $query->bindParam(':campid', $IdCamp);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -121,9 +156,21 @@ class Campana_Model {
       return $result;
     }
 
-    function getLostCalls($CampName) {
-      $sql = "select count(*) from ominicontacto_app_queuelog where EXTRACT(DAY FROM time) = :dia and EXTRACT(MONTH FROM time) = :mes
-      and EXTRACT(YEAR FROM time) = :ano and (event='ABANDON') or (event='EXITWITHTIMEOUT') and queuename like :campname";
+    function getExpiredCalls($IdCamp) {
+      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
+                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
+                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
+                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
+                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
+                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
+                     ominicontacto_app_queuelog.data5
+              FROM ominicontacto_app_queuelog
+              WHERE (ominicontacto_app_queuelog.event IN (EXITWITHTIMEOUT)
+              AND ominicontacto_app_queuelog.campana_id = :campid
+              AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
+              AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
+              ORDER BY ominicontacto_app_queuelog.time DESC";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -133,7 +180,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campname', $CampName);
+        $query->bindParam(':campid', $IdCamp);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
@@ -143,27 +190,109 @@ class Campana_Model {
       return $result;
     }
 
-    function getBusyCalls($CampName) {
-      $sql = "select count(*) from cdr where EXTRACT(DAY FROM calldate) = :dia and EXTRACT(MONTH FROM calldate) = :mes and " .
-      "EXTRACT(YEAR FROM calldate) = :ano and disposition in ('NO ANSWER','BUSY') and clid like :campname";
+    function getManualCalls($IdCamp) {
+      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
+                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
+                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
+                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
+                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
+                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
+                     ominicontacto_app_queuelog.data5
+              FROM ominicontacto_app_queuelog
+              WHERE (ominicontacto_app_queuelog.event IN (ENTERQUEUE)
+              AND ominicontacto_app_queuelog.campana_id = :campid
+              AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
+              AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano
+               AND ominicontacto_app_queuelog.data4 = 'saliente')
+              ORDER BY ominicontacto_app_queuelog.time DESC";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
-      $CampName = "%".$CampName."%";
       try {
-        $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
-        $query = $cnn->prepare($sql);
-        $query->bindParam(':dia', $day);
-        $query->bindParam(':mes', $month);
-        $query->bindParam(':ano', $year);
-        $query->bindParam(':campname', $CampName);
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $cnn = NULL;
+          $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+          $query = $cnn->prepare($sql);
+          $query->bindParam(':dia', $day);
+          $query->bindParam(':mes', $month);
+          $query->bindParam(':ano', $year);
+          $query->bindParam(':campid', $IdCamp);
+          $query->execute();
+          $result = $query->fetchAll(PDO::FETCH_ASSOC);
+          $cnn = NULL;
       } catch (PDOException $e) {
           $result= "Database Error: " . $e;
       }
       return $result;
+    }
+
+    function getAttendedManualCalls($IdCamp) {
+        $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
+                       ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
+                       ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
+                       ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
+                       ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
+                       ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
+                       ominicontacto_app_queuelog.data5
+                FROM ominicontacto_app_queuelog
+                WHERE (ominicontacto_app_queuelog.event IN (CONNECT)
+                AND ominicontacto_app_queuelog.campana_id = :campid
+                AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
+                AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
+                AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano
+                AND ominicontacto_app_queuelog.data4 = 'saliente')
+                ORDER BY ominicontacto_app_queuelog.time DESC";
+        $day = date("d");
+        $month = date("m");
+        $year = date("Y");
+        try {
+            $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+            $query = $cnn->prepare($sql);
+            $query->bindParam(':dia', $day);
+            $query->bindParam(':mes', $month);
+            $query->bindParam(':ano', $year);
+            $query->bindParam(':campid', $IdCamp);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $cnn = NULL;
+        } catch (PDOException $e) {
+            $result= "Database Error: " . $e;
+        }
+        return $result;
+    }
+
+    function getNotAttendedManualCalls($IdCamp) {
+         $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
+                       ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
+                       ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
+                       ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
+                       ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
+                       ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
+                       ominicontacto_app_queuelog.data5
+                       FROM ominicontacto_app_queuelog
+                       WHERE (ominicontacto_app_queuelog.event IN (ABANDON)
+                       AND ominicontacto_app_queuelog.campana_id = :campid
+                       AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
+                       AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
+                       AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano
+                       AND ominicontacto_app_queuelog.data4 = 'saliente')
+                       ORDER BY ominicontacto_app_queuelog.time DESC";
+         $day = date("d");
+         $month = date("m");
+         $year = date("Y");
+         try {
+             $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+             $query = $cnn->prepare($sql);
+             $query->bindParam(':dia', $day);
+             $query->bindParam(':mes', $month);
+             $query->bindParam(':ano', $year);
+             $query->bindParam(':campid', $IdCamp);
+             $query->execute();
+             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+             $cnn = NULL;
+         } catch (PDOException $e) {
+             $result= "Database Error: " . $e;
+         }
+         return $result;
     }
 
     function getScoreCuantity($CampName) {
@@ -192,82 +321,88 @@ class Campana_Model {
       return $result;
     }
 
-         function getAnswererDetected($CampId) {
-             $sql = 'select COUNT(ominicontacto_app_wombatlog.estado) AS "answererdetected" FROM ominicontacto_app_wombatlog
-                    WHERE (ominicontacto_app_wombatlog.campana_id = :cid
-                    AND ominicontacto_app_wombatlog.calificacion LIKE \'CONTESTADOR\')
-                    AND EXTRACT(DAY from ominicontacto_app_wombatlog.fecha_hora) = :dia
-                    AND EXTRACT(MONTH from ominicontacto_app_wombatlog.fecha_hora) = :mes
-                    AND EXTRACT(YEAR from ominicontacto_app_wombatlog.fecha_hora) = :ano';
-             $day = date("d");
-             $month = date("m");
-             $year = date("Y");
-             try {
-                 $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
-                 $query = $cnn->prepare($sql);
-                 $query->bindParam(':dia', $day);
-                 $query->bindParam(':mes', $month);
-                 $query->bindParam(':ano', $year);
-                 $query->bindParam(':cid', $CampId);
-                 $query->execute();
-                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                 $cnn = NULL;
-             } catch (PDOException $e) {
-                 $result= "Database Error: " . $e;
-             }
-             return $result;
-         }
-         function getSells($CampName) {
-           $sql = "select count(*) FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
-           ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
-           AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre AND es_venta = 't'";
-           $day = date("d");
-           $month = date("m");
-           $year = date("Y");
-           try {
-             $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
-             $query = $cnn->prepare($sql);
-             $query->bindParam(':dia', $day);
-             $query->bindParam(':mes', $month);
-             $query->bindParam(':ano', $year);
-             $query->bindParam(':nombre', $CampName);
-             $query->execute();
-             $result = $query->fetchAll(PDO::FETCH_ASSOC);
-             $cnn = NULL;
-           } catch (PDOException $e) {
-               $result= "Database Error: " . $e;
-           }
-           return $result;
-         }
-         function getQueuedCalls($CampName) {
-           $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep wait |awk '{print $2}' FS='\(' |awk '{print $1}' FS=','";
-           $data = shell_exec($cmd);
-           return $data;
-         }
-         function getChannelsStatus($CampName) {
-           $process = curl_init("http://" . PG_HOST . ":8080/wombat/api/live/calls/");
-           curl_setopt($process, CURLOPT_HEADER, 0);
-           curl_setopt($process, CURLOPT_USERPWD, WD_API_USER . ":" . WD_API_PASS);
-           curl_setopt($process, CURLOPT_POST, 1);
-           curl_setopt($process, CURLOPT_POSTFIELDS, $CampName);
-           curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
-           $res = curl_exec($process);
-           curl_close($process);
-           $res = json_decode($res, true);
-           return $res;
-         }
-         function getSIPcredentialsByUserId($userId) {
-           $sql = "select sip_extension, sip_password FROM ominicontacto_app_supervisorprofile where id = :id";
-           try {
-             $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
-             $query = $cnn->prepare($sql);
-             $query->bindParam(':id', $userId);
-             $query->execute();
-             $result = $query->fetchAll(PDO::FETCH_ASSOC);
-             $cnn = NULL;
-           } catch (PDOException $e) {
-               $result= "Database Error: " . $e;
-           }
-           return $result;
-         }
-      }
+    function getAnswererDetected($IdCamp) {
+        $sql = 'select COUNT(ominicontacto_app_wombatlog.estado) AS "answererdetected" FROM ominicontacto_app_wombatlog
+                WHERE (ominicontacto_app_wombatlog.campana_id = :campid
+                AND ominicontacto_app_wombatlog.calificacion LIKE \'CONTESTADOR\')
+                AND EXTRACT(DAY from ominicontacto_app_wombatlog.fecha_hora) = :dia
+                AND EXTRACT(MONTH from ominicontacto_app_wombatlog.fecha_hora) = :mes
+                AND EXTRACT(YEAR from ominicontacto_app_wombatlog.fecha_hora) = :ano';
+        $day = date("d");
+        $month = date("m");
+        $year = date("Y");
+        try {
+            $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+            $query = $cnn->prepare($sql);
+            $query->bindParam(':dia', $day);
+            $query->bindParam(':mes', $month);
+            $query->bindParam(':ano', $year);
+            $query->bindParam(':campid', $IdCamp);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $cnn = NULL;
+        } catch (PDOException $e) {
+            $result= "Database Error: " . $e;
+        }
+        return $result;
+    }
+
+    function getSells($CampName) {
+        $sql = "select count(*) FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
+                ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
+                AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre AND es_venta = 't'";
+        $day = date("d");
+        $month = date("m");
+        $year = date("Y");
+        try {
+            $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+            $query = $cnn->prepare($sql);
+            $query->bindParam(':dia', $day);
+            $query->bindParam(':mes', $month);
+            $query->bindParam(':ano', $year);
+            $query->bindParam(':nombre', $CampName);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $cnn = NULL;
+        } catch (PDOException $e) {
+            $result= "Database Error: " . $e;
+        }
+        return $result;
+    }
+
+    function getQueuedCalls($CampName) {
+        $cmd = "asterisk  -rx 'queue show " . $CampName . "' |grep wait |awk '{print $2}' FS='\(' |awk '{print $1}' FS=','";
+        $data = shell_exec($cmd);
+        return $data;
+    }
+
+    function getChannelsStatus($CampName) {
+        $sql = "SELECT * FROM wombat.hop_calls, wombat.call_records B, wombat.call_lists C
+                WHERE callId = cr AND B.listId = C.listId AND name = :nomcamp ";
+        try {
+            $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+            $query = $cnn->prepare($sql);
+            $query->bindParam(':nomcamp', $CampName);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $cnn = NULL;
+        } catch (PDOException $e) {
+            $result= "Database Error: " . $e;
+        }
+    }
+
+    function getSIPcredentialsByUserId($userId) {
+        $sql = "select sip_extension, sip_password FROM ominicontacto_app_supervisorprofile where id = :id";
+        try {
+            $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+            $query = $cnn->prepare($sql);
+            $query->bindParam(':id', $userId);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $cnn = NULL;
+        } catch (PDOException $e) {
+            $result= "Database Error: " . $e;
+        }
+        return $result;
+    }
+}
