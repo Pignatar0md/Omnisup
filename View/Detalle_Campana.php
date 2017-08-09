@@ -87,13 +87,14 @@
               <tbody>
                 <!-- <tr><td><b>Tipo</b></td><td>Dialer</td></tr> -->
                 <tr><td><b>Llamadas:</b></td><td></td></tr>
-                <tr><td>Discadas</td><td id="dialed"></td></tr>
-                <tr><td>Conectadas</td><td id="connected"></td></tr>
-                <tr><td>Procesadas</td><td id="processed"></td></tr>
-                <tr><td>Perdidas</td><td id="lost"></td></tr>
+                <tr><td>Recibidas</td><td id="received"></td></tr>
+                <tr><td>Atendidas</td><td id="attended"></td></tr>
+                <tr><td>Abandonadas</td><td id="abandoned"></td></tr>
+                <tr><td>Expiradas</td><td id="expired"></td></tr>
+                <tr><td>Manuales</td><td id="manuals"></td></tr>
+                <tr><td>Manuales atendidas</td><td id="manualsa"></td></tr>
+                <tr><td>Manuales NO atendidas</td><td id="manualsna"></td></tr>
                 <tr><td>Contestador detectado</td><td id="answererdetected"></td></tr>
-                <!-- <tr><td>No Contestadas</td><td></td></tr> -->
-                <tr><td>Ocupadas</td><td id="busy"></td></tr>
                 <tr><td><b>Otros:</b></td><td></td></tr>
               </tbody>
               <tbody id="bodyTableCampSummary">

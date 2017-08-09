@@ -55,20 +55,13 @@ class Campana_Model {
     }
 
     function getReceivedCalls($IdCamp) {
-      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
-                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
-                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
-                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
-                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
-                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
-                     ominicontacto_app_queuelog.data5
+      $sql = "SELECT count(*)
               FROM ominicontacto_app_queuelog
-              WHERE (ominicontacto_app_queuelog.event IN (ENTERQUEUE)
+              WHERE (ominicontacto_app_queuelog.event like 'ENTERQUEUE')
               AND ominicontacto_app_queuelog.campana_id = :campid
               AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
               AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
-              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
-              ORDER BY ominicontacto_app_queuelog.time DESC";
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -89,20 +82,13 @@ class Campana_Model {
     }
 
     function getAttendedCalls($IdCamp) {
-      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
-                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
-                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
-                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
-                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
-                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
-                     ominicontacto_app_queuelog.data5
+      $sql = "SELECT count(*)
               FROM ominicontacto_app_queuelog
-              WHERE (ominicontacto_app_queuelog.event IN (CONNECT)
+              WHERE ominicontacto_app_queuelog.event like 'CONNECT'
               AND ominicontacto_app_queuelog.campana_id = :campid
               AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
               AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
-              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
-              ORDER BY ominicontacto_app_queuelog.time DESC";
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -123,20 +109,13 @@ class Campana_Model {
     }
 
     function getAbandonedCalls($IdCamp) {
-      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
-                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
-                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
-                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
-                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
-                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
-                     ominicontacto_app_queuelog.data5
+      $sql = "SELECT count(*)
               FROM ominicontacto_app_queuelog
-              WHERE (ominicontacto_app_queuelog.event IN (ABANDON)
+              WHERE (ominicontacto_app_queuelog.event like 'ABANDON'
               AND ominicontacto_app_queuelog.campana_id = :campid
               AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
               AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
-              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
-              ORDER BY ominicontacto_app_queuelog.time DESC";
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -157,20 +136,13 @@ class Campana_Model {
     }
 
     function getExpiredCalls($IdCamp) {
-      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
-                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
-                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
-                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
-                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
-                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
-                     ominicontacto_app_queuelog.data5
+      $sql = "SELECT count(*)
               FROM ominicontacto_app_queuelog
-              WHERE (ominicontacto_app_queuelog.event IN (EXITWITHTIMEOUT)
+              WHERE ominicontacto_app_queuelog.event like 'EXITWITHTIMEOUT'
               AND ominicontacto_app_queuelog.campana_id = :campid
               AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
               AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
-              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano)
-              ORDER BY ominicontacto_app_queuelog.time DESC";
+              AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -191,21 +163,14 @@ class Campana_Model {
     }
 
     function getManualCalls($IdCamp) {
-      $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
-                     ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
-                     ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
-                     ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
-                     ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
-                     ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
-                     ominicontacto_app_queuelog.data5
+      $sql = "SELECT count(*)
               FROM ominicontacto_app_queuelog
-              WHERE (ominicontacto_app_queuelog.event IN (ENTERQUEUE)
+              WHERE (ominicontacto_app_queuelog.event like 'ENTERQUEUE'
               AND ominicontacto_app_queuelog.campana_id = :campid
               AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
               AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
               AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano
-               AND ominicontacto_app_queuelog.data4 = 'saliente')
-              ORDER BY ominicontacto_app_queuelog.time DESC";
+               AND ominicontacto_app_queuelog.data4 = 'saliente')";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -226,21 +191,14 @@ class Campana_Model {
     }
 
     function getAttendedManualCalls($IdCamp) {
-        $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
-                       ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
-                       ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
-                       ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
-                       ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
-                       ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
-                       ominicontacto_app_queuelog.data5
+        $sql = "SELECT count(*)
                 FROM ominicontacto_app_queuelog
-                WHERE (ominicontacto_app_queuelog.event IN (CONNECT)
+                WHERE ominicontacto_app_queuelog.event like 'CONNECT'
                 AND ominicontacto_app_queuelog.campana_id = :campid
                 AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
                 AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
                 AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano
-                AND ominicontacto_app_queuelog.data4 = 'saliente')
-                ORDER BY ominicontacto_app_queuelog.time DESC";
+                AND ominicontacto_app_queuelog.data4 = 'saliente'";
         $day = date("d");
         $month = date("m");
         $year = date("Y");
@@ -261,21 +219,14 @@ class Campana_Model {
     }
 
     function getNotAttendedManualCalls($IdCamp) {
-         $sql = "SELECT ominicontacto_app_queuelog.id, ominicontacto_app_queuelog.time,
-                       ominicontacto_app_queuelog.callid, ominicontacto_app_queuelog.queuename,
-                       ominicontacto_app_queuelog.campana_id, ominicontacto_app_queuelog.agent,
-                       ominicontacto_app_queuelog.agent_id, ominicontacto_app_queuelog.event,
-                       ominicontacto_app_queuelog.data1, ominicontacto_app_queuelog.data2,
-                       ominicontacto_app_queuelog.data3, ominicontacto_app_queuelog.data4,
-                       ominicontacto_app_queuelog.data5
+         $sql = "SELECT COUNT(*)
                        FROM ominicontacto_app_queuelog
-                       WHERE (ominicontacto_app_queuelog.event IN (ABANDON)
+                       WHERE ominicontacto_app_queuelog.event LIKE 'ABANDON'
                        AND ominicontacto_app_queuelog.campana_id = :campid
                        AND EXTRACT(DAY from ominicontacto_app_queuelog.time) = :dia
                        AND EXTRACT(MONTH from ominicontacto_app_queuelog.time) = :mes
                        AND EXTRACT(YEAR from ominicontacto_app_queuelog.time) = :ano
-                       AND ominicontacto_app_queuelog.data4 = 'saliente')
-                       ORDER BY ominicontacto_app_queuelog.time DESC";
+                       AND ominicontacto_app_queuelog.data4 = 'saliente'";
          $day = date("d");
          $month = date("m");
          $year = date("Y");

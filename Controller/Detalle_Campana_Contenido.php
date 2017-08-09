@@ -48,26 +48,32 @@ function mostrarEstadoAgentes($camp) {
     return $jsonString;
 }
 
-function mostrarEstadoCampana($camp, $idcamp) {
+function mostrarEstadoCampana($nomcamp,$idcamp) {
     $Controller_Campana = new Campana();
     $jsonString = '';
-    $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($camp, $idcamp);
+    $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($nomcamp, $idcamp);
     $jsonString .= '{';
     foreach($resul as $clave => $valor) {
-        if($clave == "dialed") {
-            $jsonString .= '"discadas": "' . $valor . '",';
+        if($clave == "received") {
+            $jsonString .= '"recibidas": "' . $valor . '",';
         }
-        if($clave == "connected") {
-            $jsonString .= '"conectadas": "' . $valor . '",';
-        }
-        if($clave == "processed") {
-            $jsonString .= '"procesadas": "' . $valor . '",';
+        if($clave == "attended") {
+            $jsonString .= '"atendidas": "' . $valor . '",';
         }
         if($clave == "abandoned") {
             $jsonString .= '"abandonadas": "' . $valor . '",';
         }
-        if($clave == "busy") {
-            $jsonString .= '"ocupadas": "' . $valor . '",';
+        if($clave == "expired") {
+            $jsonString .= '"expiradas": "' . $valor . '",';
+        }
+        if($clave == "manuals") {
+            $jsonString .= '"manuales": "' . $valor . '",';
+        }
+        if($clave == "manualsa") {
+            $jsonString .= '"manualesatendidas": "' . $valor . '",';
+        }
+        if($clave == "manualsna") {
+            $jsonString .= '"manualesnoatendidas": "' . $valor . '",';
         }
         if($clave == "answererdetected") {
             $jsonString .= '"contestador_detectado": "' . $valor . '",';

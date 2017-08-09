@@ -64,11 +64,13 @@ function actualiza_contenido_camp() {
     success: function (msg) {
       if(msg!=="]") {
         var mje = JSON.parse(msg);
-        $("#dialed").html(mje.discadas);
-        $("#connected").html(mje.conectadas);
-        $("#processed").html(mje.procesadas);
-        $("#lost").html(mje.abandonadas);
-        $("#busy").html(mje.ocupadas);
+        $("#received").html(mje.recibidas);
+        $("#attended").html(mje.atendidas);
+        $("#abandoned").html(mje.abandonadas);
+        $("#expired").html(mje.expiradas);
+        $("#manuals").html(mje.manuales);
+        $("#manualsa").html(mje.manualesatendidas);
+        $("#manualsna").html(mje.manualesnoatendidas);
         $("#answererdetected").html(mje.contestador_detectado);
       }
     },

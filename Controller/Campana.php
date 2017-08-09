@@ -63,39 +63,51 @@ class Campana {
     }
 
     function traerInfoReporteRealTimeCamp($NomCamp, $IdCamp) {
-        $llamadasDiscadas = $this->Campana_Model->getDialedCalls($NomCamp);
-        $llamadasConectadas = $this->Campana_Model->getConnectedCalls($NomCamp);
-        $llamadasProcesadas = $this->Campana_Model->getProcessedCalls($NomCamp);
-        $llamadasPerdidas = $this->Campana_Model->getLostCalls($NomCamp);
-        $llamadasOcupadas = $this->Campana_Model->getBusyCalls($NomCamp);
+        $llamadasRecibidas = $this->Campana_Model->getReceivedCalls($IdCamp);
+        $llamadasAtendidas = $this->Campana_Model->getAttendedCalls($IdCamp);
+        $llamadasAbandonadas = $this->Campana_Model->getAbandonedCalls($IdCamp);
+        $llamadasExpiradas = $this->Campana_Model->getExpiredCalls($IdCamp);
+        $llamadasManuales = $this->Campana_Model->getManualCalls($IdCamp);
+        $llamadasManualesAtendidas = $this->Campana_Model->getAttendedManualCalls($IdCamp);
+        $llamadasManualesNoAtendidas = $this->Campana_Model->getNotAttendedManualCalls($IdCamp);
         $llamadasDetecContestador = $this->Campana_Model->getAnswererDetected($IdCamp);
 
         $cdadVentas = $this->Campana_Model->getSells($NomCamp);
         $arrInfo = array();
 
-        foreach ($llamadasDiscadas as $key => $value) {
+        foreach ($llamadasRecibidas as $key => $value) {
             foreach($value as $k => $v) {
-                $arrInfo['dialed'] = $v;
+                $arrInfo['received'] = $v;
             }
         }
-        foreach ($llamadasConectadas as $key => $value) {
+        foreach ($llamadasAtendidas as $key => $value) {
             foreach($value as $k => $v) {
-                $arrInfo['connected'] = $v;
+                $arrInfo['attended'] = $v;
             }
         }
-        foreach ($llamadasProcesadas as $key => $value) {
-            foreach($value as $k => $v) {
-                $arrInfo['processed'] = $v;
-            }
-        }
-        foreach ($llamadasPerdidas as $key => $value) {
+        foreach ($llamadasAbandonadas as $key => $value) {
             foreach($value as $k => $v) {
                 $arrInfo['abandoned'] = $v;
             }
         }
-        foreach ($llamadasOcupadas as $key => $value) {
+        foreach ($llamadasExpiradas as $key => $value) {
             foreach($value as $k => $v) {
-                $arrInfo['busy'] = $v;
+                $arrInfo['expired'] = $v;
+            }
+        }
+        foreach ($llamadasManuales as $key => $value) {
+            foreach($value as $k => $v) {
+                $arrInfo['manuals'] = $v;
+            }
+        }
+        foreach ($llamadasManualesAtendidas as $key => $value) {
+            foreach($value as $k => $v) {
+                $arrInfo['manualsa'] = $v;
+            }
+        }
+        foreach ($llamadasManualesNoAtendidas as $key => $value) {
+            foreach($value as $k => $v) {
+                $arrInfo['manualsna'] = $v;
             }
         }
         foreach ($llamadasDetecContestador as $key => $value) {
