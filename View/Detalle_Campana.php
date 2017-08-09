@@ -114,7 +114,7 @@
             </table>
         </div>
         <div class="col-md-3"><!-- CUADRO CANALES -->
-          <h4 class="subtitle">Lineas</h4>
+          <h4 class="subtitle">Estado general de lineas</h4>
           <table id="" class="table table-striped table-condensed">
               <thead>
                   <tr>

@@ -328,18 +328,16 @@ class Campana_Model {
     }
 
     function getChannelsStatus($CampName) {
-        $sql = "SELECT * FROM wombat.hop_calls, wombat.call_records B, wombat.call_lists C
-                WHERE callId = cr AND B.listId = C.listId AND name = :nomcamp ";
-        try {
-            $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
-            $query = $cnn->prepare($sql);
-            $query->bindParam(':nomcamp', $CampName);
-            $query->execute();
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-            $cnn = NULL;
-        } catch (PDOException $e) {
-            $result= "Database Error: " . $e;
-        }
+         $process = curl_init("http://" . PG_HOST . ":8080/wombat/api/live/calls/");
+         curl_setopt($process, CURLOPT_HEADER, 0);
+         curl_setopt($process, CURLOPT_USERPWD, WD_API_USER . ":" . WD_API_PASS);
+         curl_setopt($process, CURLOPT_POST, 1);
+         curl_setopt($process, CURLOPT_POSTFIELDS, $CampName);
+         curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
+         $res = curl_exec($process);
+         curl_close($process);
+         $res = json_decode($res, true);
+         return $res;
     }
 
     function getSIPcredentialsByUserId($userId) {
