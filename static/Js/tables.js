@@ -77,7 +77,8 @@ function actualiza_contenido_camp() {
         a = mje.objetivo_campana;
         b = mje.gestion_campana;
         n = (b / a) * 100;
-        $("#percent").html(n);
+        n = n.toFixed(2);
+        $("#percent").html(n+"%");
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
