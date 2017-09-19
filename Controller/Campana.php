@@ -171,6 +171,7 @@ class Campana {
 
     function traerObjetivoCampana($NomCamp) {
         $result = $this->Campana_Model->getGoalCampaign($NomCamp);
+        $numObj = "";
         foreach ($result as $key => $value) {
             if(is_array($value)) {
                 foreach ($value as $ky => $vl) {
@@ -180,7 +181,7 @@ class Campana {
               $numObj = $value;
             }
         }
-        return 'hola';
+        return $numObj;
     }
 
     function traerUserClaveSIP($userId) {
