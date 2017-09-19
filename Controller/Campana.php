@@ -176,6 +176,8 @@ class Campana {
                 foreach ($value as $ky => $vl) {
                   $numObj = $vl;
                 }
+            } else {
+              $numObj = $value;
             }
         }
         return $numObj;
