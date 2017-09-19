@@ -169,6 +169,18 @@ class Campana {
         return $datosUtiles;
     }
 
+    function traerObjetivoCampana($NomCamp) {
+        $result = $this->Campana_Model->getGoalCampaign($NomCamp);
+        foreach ($result as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $ky => $vl) {
+                  $numObj = $vl;
+                }
+            }
+        }
+        return $numObj;
+    }
+
     function traerUserClaveSIP($userId) {
         $result = $this->Campana_Model->getSIPcredentialsByUserId($userId);
         return $result;

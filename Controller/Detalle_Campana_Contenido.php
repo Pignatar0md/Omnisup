@@ -52,6 +52,7 @@ function mostrarEstadoCampana($nomcamp,$idcamp) {
     $Controller_Campana = new Campana();
     $jsonString = '';
     $resul = $Controller_Campana->traerInfoReporteRealTimeCamp($nomcamp, $idcamp);
+    $objresul = $Controller_Campana->traerObjetivoCampana($nomcamp);
     $jsonString .= '{';
     foreach($resul as $clave => $valor) {
         if($clave == "received") {
@@ -78,6 +79,9 @@ function mostrarEstadoCampana($nomcamp,$idcamp) {
         if($clave == "answererdetected") {
             $jsonString .= '"contestador_detectado": "' . $valor . '",';
         }
+    }
+    foreach ($objresul as $key => $value) {
+      $jsonString .= '"objetivo_campana": "' . $value . '",';
     }
     $jsonString = substr($jsonString, 0, -1);
     $jsonString .= "}";

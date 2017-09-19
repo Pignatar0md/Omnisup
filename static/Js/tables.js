@@ -72,6 +72,7 @@ function actualiza_contenido_camp() {
         $("#manualsa").html(mje.manualesatendidas);
         $("#manualsna").html(mje.manualesnoatendidas);
         $("#answererdetected").html(mje.contestador_detectado);
+        $("#objcampana").html(mje.objetivo_campana);
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
