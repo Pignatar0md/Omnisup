@@ -169,8 +169,8 @@ class Campana {
         return $datosUtiles;
     }
 
-    function traerObjetivoCampana($NomCamp) {
-        $result = $this->Campana_Model->getGoalCampaign($NomCamp);
+    function traerObjetivoCampana($IdCamp) {
+        $result = $this->Campana_Model->getGoalCampaign($IdCamp);
         $numObj = "";
         foreach ($result as $key => $value) {
             if(is_array($value)) {

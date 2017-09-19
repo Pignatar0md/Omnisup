@@ -48,12 +48,12 @@ class Campana_Model {
       return $result;
     }
 
-    function getGoalCampaign($CampName) {
-        $sql = "select objetivo from ominicontacto_app_campana where nombre = :nom";
+    function getGoalCampaign($CampId) {
+        $sql = "select objetivo from ominicontacto_app_campana where id = :cpmid";
         try {
           $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
           $query = $cnn->prepare($sql);
-          $query->bindParam(':nom', $CampName);
+          $query->bindParam(':cpmid', $CampId);
           $query->execute();
           $result = $query->fetchAll(PDO::FETCH_ASSOC);
           $cnn = NULL;
