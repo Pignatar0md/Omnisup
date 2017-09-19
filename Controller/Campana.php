@@ -178,7 +178,7 @@ class Campana {
                 $numGestion = $vl;
               }
           } else {
-            $numGestion = = $value;
+            $numGestion = $value;
           }
         }
         return $numGestion;
