@@ -76,7 +76,7 @@
     </div>
     <div class="col-md-11">
         <img class="webphone" src="static/Img/webCallTransp.png" alt="openWebPhone" id="webphone"/>
-        <h3 class="col-md-5">Campaña: <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b>.
+        <h3 class="col-md-8">Campaña: <b id='nombreCamp'><?= $_GET['nomcamp'] ?></b>.
                        &nbsp;Avance de objetivo: <b id="objcampana"></b>/<b id="gestioncampana"></b></h3><!-- NOMBRE CAMPANA -->
     </div>
     <div class="col-md-12">
