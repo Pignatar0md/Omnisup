@@ -74,9 +74,9 @@ function actualiza_contenido_camp() {
         $("#answererdetected").html(mje.contestador_detectado);
         $("#objcampana").html(mje.objetivo_campana);
         $("#gestioncampana").html(mje.gestion_campana);
-        int a = mje.objetivo_campana;
-        int b = mje.gestion_campana;
-        float n = (b / a) * 100;
+        a = mje.objetivo_campana;
+        b = mje.gestion_campana;
+        n = (b / a) * 100;
         $("#percent").html(n);
       }
     },
