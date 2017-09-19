@@ -265,7 +265,7 @@ class Campana_Model {
       $sql = "select count(*),cd.gestion as califica FROM ominicontacto_app_campana cd JOIN
       ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id AND EXTRACT(DAY from cc.fecha) = :dia AND EXTRACT(MONTH from cc.fecha) = :mes
-      AND EXTRACT(YEAR from cc.fecha) = :ano AND cc.es_venta = 't' and cd.id= :cpmid GROUP BY cd.gestion";
+      AND EXTRACT(YEAR from cc.fecha) = :ano AND cc.es_venta = 't' and cd.id= :cmpid GROUP BY cd.gestion";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -284,7 +284,7 @@ class Campana_Model {
       }
       return $result;
     }
-    
+
     function getScoreCuantity($CampName) {
       $sql = "select count(*),c.nombre as califica FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
