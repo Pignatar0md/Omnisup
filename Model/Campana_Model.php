@@ -285,13 +285,13 @@ class Campana_Model {
       return $result;
     }
 
-    function getScoreCuantity($CampName) {
+    function getScoreCuantity($CampId) {
       $sql = "select count(*),c.nombre as califica FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
-      AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre GROUP BY c.nombre
+      AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.id = :campid GROUP BY c.nombre
       UNION select count(*),cd.gestion as califica FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id AND EXTRACT(DAY from cc.fecha) = :dia AND EXTRACT(MONTH from cc.fecha) = :mes
-      AND EXTRACT(YEAR from cc.fecha) = :ano AND cd.nombre = :nombre AND cc.es_venta = 't' GROUP BY cd.gestion";
+      AND EXTRACT(YEAR from cc.fecha) = :ano AND cd.id = :campid AND cc.es_venta = 't' GROUP BY cd.gestion";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -301,7 +301,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':nombre', $CampName);
+        $query->bindParam(':campid', $CampId);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;

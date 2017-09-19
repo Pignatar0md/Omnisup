@@ -163,7 +163,7 @@ if ($_GET['nomcamp']) {
     } else if($_GET['op'] == 'wdstatus') {
         echo mostrarEstadoCanalesWombat($_GET['nomcamp']);
     } else if($_GET['op'] == 'scorestatus') {
-        echo mostrarCalificaciones($_GET['nomcamp']);
+        echo mostrarCalificaciones($_GET['CampId']);
     }
 }
 if($_GET['supId']) {
