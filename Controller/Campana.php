@@ -180,7 +180,7 @@ class Campana {
               $numObj = $value;
             }
         }
-        return $numObj;
+        return 'hola';
     }
 
     function traerUserClaveSIP($userId) {
