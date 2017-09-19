@@ -284,6 +284,7 @@ class Campana_Model {
       }
       return $result;
     }
+    
     function getScoreCuantity($CampName) {
       $sql = "select count(*),c.nombre as califica FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
