@@ -73,6 +73,7 @@ function actualiza_contenido_camp() {
         $("#manualsna").html(mje.manualesnoatendidas);
         $("#answererdetected").html(mje.contestador_detectado);
         $("#objcampana").html(mje.objetivo_campana);
+        $("#gestioncampana").html(mje.gestion_campana);
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
