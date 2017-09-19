@@ -80,9 +80,9 @@ function mostrarEstadoCampana($nomcamp,$idcamp) {
             $jsonString .= '"contestador_detectado": "' . $valor . '",';
         }
     }
-    foreach ($objresul as $key => $value) {
-      $jsonString .= '"objetivo_campana": "' . $value . '",';
-    }
+  //  foreach ($objresul as $key => $value) {
+      $jsonString .= '"objetivo_campana": "' . $objresul . '",';
+    //}
     $jsonString = substr($jsonString, 0, -1);
     $jsonString .= "}";
     return $jsonString;
