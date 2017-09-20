@@ -14,7 +14,7 @@ class Campana {
 
     function traerCampanas($supervId=NULL) {
         $arrData = array();
-        if($supervId!=NULL) {
+        if($supervId != NULL) {
             $campanas = $this->Campana_Model->getCampaigns($supervId);
         } else {
             $campanas = $this->Campana_Model->getCampaignsForAdm();
