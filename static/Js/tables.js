@@ -82,14 +82,14 @@ function actualiza_contenido_camp() {
     url: 'Controller/Detalle_Campana_Contenido.php',
     type: 'GET',
     dataType: 'html',
-    data: 'nomcamp='+nomcamp+'&op=scorestatus',
+    data: 'op=scorestatus&CampId=' + campid + '&nomcamp=' + nomcamp,
     success: function (msg) {
       if($("#bodyTableCampSummary").children().length > 0) {
         while(tabla.firstChild) {
           tabla.removeChild(tabla.firstChild);
         }
       }
-      if(msg!=="]") {
+      if(msg !== "]") {
         var mje = JSON.parse(msg);
         for (var i = 0; i < mje.length; i++){
           var tdScoreContainer = document.createElement('td');

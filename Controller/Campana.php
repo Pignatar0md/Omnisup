@@ -118,8 +118,8 @@ class Campana {
         return $arrInfo;
     }
 
-    function traerCalificaciones($NomCamp) {
-        $cdadCalificaciones = $this->Campana_Model->getScoreCuantity($NomCamp);
+    function traerCalificaciones($IdCamp) {
+        $cdadCalificaciones = $this->Campana_Model->getScoreCuantity($IdCamp);
         $arrCuant = $arrScore = $arrData = array();
         foreach ($cdadCalificaciones as $key => $value) {
           foreach ($value as $ky => $va) {
