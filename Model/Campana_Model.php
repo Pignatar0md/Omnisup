@@ -13,9 +13,7 @@ class Campana_Model {
 
     function getCampaignsForAdm() {
       $sql = "select distinct nombre, ac.id from ominicontacto_app_campana ac
-      join ominicontacto_app_campana_supervisors acs
-      on ac.id = acs.campana_id join ominicontacto_app_supervisorprofile sp on
-      acs.user_id = sp.user_id where estado = 2";
+      where estado = 2";
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);
@@ -46,21 +44,6 @@ class Campana_Model {
           $result= "Database Error: " . $e;
       }
       return $result;
-    }
-
-    function getGoalCampaign($CampId) {
-        $sql = "select objetivo from ominicontacto_app_campana where id = :cpmid";
-        try {
-          $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
-          $query = $cnn->prepare($sql);
-          $query->bindParam(':cpmid', $CampId);
-          $query->execute();
-          $result = $query->fetchAll(PDO::FETCH_ASSOC);
-          $cnn = NULL;
-        } catch (PDOException $e) {
-            $result= "Database Error: " . $e;
-        }
-        return $result;
     }
 
     function getCampaign($CampName) {
@@ -261,37 +244,13 @@ class Campana_Model {
          return $result;
     }
 
-    function getSpecialScore($CampId) {
-      $sql = "select count(*) as gestiones FROM ominicontacto_app_campana cd JOIN
-      ominicontacto_app_calificacioncliente cc
-      ON cd.id = cc.campana_id AND EXTRACT(DAY from cc.fecha) = :dia AND EXTRACT(MONTH from cc.fecha) = :mes
-      AND EXTRACT(YEAR from cc.fecha) = :ano AND cc.es_venta = 't' and cd.id= :cmpid";
-      $day = date("d");
-      $month = date("m");
-      $year = date("Y");
-      try {
-          $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
-          $query = $cnn->prepare($sql);
-          $query->bindParam(':dia', $day);
-          $query->bindParam(':mes', $month);
-          $query->bindParam(':ano', $year);
-          $query->bindParam(':cmpid', $CampId);
-          $query->execute();
-          $result = $query->fetchAll(PDO::FETCH_ASSOC);
-          $cnn = NULL;
-      } catch (PDOException $e) {
-          $result= "Database Error: " . $e;
-      }
-      return $result;
-    }
-
-    function getScoreCuantity($CampId) {
+    function getScoreCuantity($CampName) {
       $sql = "select count(*),c.nombre as califica FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id JOIN ominicontacto_app_calificacion c ON cc.calificacion_id = c.id AND EXTRACT(DAY from fecha) = :dia
-      AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.id = :campid GROUP BY c.nombre
+      AND EXTRACT(MONTH from fecha) = :mes AND EXTRACT(YEAR from fecha) = :ano AND cd.nombre = :nombre GROUP BY c.nombre
       UNION select count(*),cd.gestion as califica FROM ominicontacto_app_campana cd JOIN ominicontacto_app_calificacioncliente cc
       ON cd.id = cc.campana_id AND EXTRACT(DAY from cc.fecha) = :dia AND EXTRACT(MONTH from cc.fecha) = :mes
-      AND EXTRACT(YEAR from cc.fecha) = :ano AND cd.id = :campid AND cc.es_venta = 't' GROUP BY cd.gestion";
+      AND EXTRACT(YEAR from cc.fecha) = :ano AND cd.nombre = :nombre AND cc.es_venta = 't' GROUP BY cd.gestion";
       $day = date("d");
       $month = date("m");
       $year = date("Y");
@@ -301,7 +260,7 @@ class Campana_Model {
         $query->bindParam(':dia', $day);
         $query->bindParam(':mes', $month);
         $query->bindParam(':ano', $year);
-        $query->bindParam(':campid', $CampId);
+        $query->bindParam(':nombre', $CampName);
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $cnn = NULL;
