@@ -13,9 +13,7 @@ class Campana_Model {
 
     function getCampaignsForAdm() {
       $sql = "select distinct nombre, ac.id from ominicontacto_app_campana ac
-      join ominicontacto_app_campana_supervisors acs
-      on ac.id = acs.campana_id join ominicontacto_app_supervisorprofile sp on
-      acs.user_id = sp.user_id where estado = 2";
+      where estado = 2";
       try {
         $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
         $query = $cnn->prepare($sql);

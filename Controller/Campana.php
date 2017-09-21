@@ -169,6 +169,36 @@ class Campana {
         return $datosUtiles;
     }
 
+    function traerGestionCampana($IdCamp) {
+        $result = $this->Campana_Model->getSpecialScore($IdCamp);
+        $numGestion = "";
+        foreach ($result as $key => $value) {
+          if(is_array($value)) {
+              foreach ($value as $ky => $vl) {
+                $numGestion = $vl;
+              }
+          } else {
+            $numGestion = $value;
+          }
+        }
+        return $numGestion;
+    }
+
+    function traerObjetivoCampana($IdCamp) {
+        $result = $this->Campana_Model->getGoalCampaign($IdCamp);
+        $numObj = "";
+        foreach ($result as $key => $value) {
+            if(is_array($value)) {
+                foreach ($value as $ky => $vl) {
+                  $numObj = $vl;
+                }
+            } else {
+              $numObj = $value;
+            }
+        }
+        return $numObj;
+    }
+
     function traerUserClaveSIP($userId) {
         $result = $this->Campana_Model->getSIPcredentialsByUserId($userId);
         return $result;

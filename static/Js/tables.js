@@ -72,6 +72,13 @@ function actualiza_contenido_camp() {
         $("#manualsa").html(mje.manualesatendidas);
         $("#manualsna").html(mje.manualesnoatendidas);
         $("#answererdetected").html(mje.contestador_detectado);
+        $("#objcampana").html(mje.objetivo_campana);
+        $("#gestioncampana").html(mje.gestion_campana);
+        a = mje.objetivo_campana;
+        b = mje.gestion_campana;
+        n = (b / a) * 100;
+        n = n.toFixed(2);
+        $("#percent").html(n+"%");
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
