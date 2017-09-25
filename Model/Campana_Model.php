@@ -352,4 +352,43 @@ class Campana_Model {
         }
         return $result;
     }
+
+    function getGoalCampaign($CampName) {
+         $sql = "select objetivo from ominicontacto_app_campana where nombre = :nom";
+         try {
+           $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+           $query = $cnn->prepare($sql);
+           $query->bindParam(':nom', $CampName);
+           $query->execute();
+           $result = $query->fetchAll(PDO::FETCH_ASSOC);
+          $cnn = NULL;
+          } catch (PDOException $e) {
+             $result= "Database Error: " . $e;
+         }
+         return $result;
+     }
+
+     function getSpecialScore($CampId) {
+       $sql = "select count(*),cd.gestion as califica FROM ominicontacto_app_campana cd JOIN
+       ominicontacto_app_calificacioncliente cc
+       ON cd.id = cc.campana_id AND EXTRACT(DAY from cc.fecha) = :dia AND EXTRACT(MONTH from cc.fecha) = :mes
+       AND EXTRACT(YEAR from cc.fecha) = :ano AND cc.es_venta = 't' and cd.id= :cpmid GROUP BY cd.gestion";
+       $day = date("d");
+       $month = date("m");
+       $year = date("Y");
+       try {
+           $cnn = new PDO($this->argPdo, PG_USER, PG_PASSWORD);
+           $query = $cnn->prepare($sql);
+           $query->bindParam(':dia', $day);
+           $query->bindParam(':mes', $month);
+           $query->bindParam(':ano', $year);
+           $query->bindParam(':cmpid', $CampId);
+           $query->execute();
+           $result = $query->fetchAll(PDO::FETCH_ASSOC);
+           $cnn = NULL;
+       } catch (PDOException $e) {
+           $result= "Database Error: " . $e;
+       }
+       return $result;
+     }
 }
