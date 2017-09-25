@@ -78,7 +78,11 @@ function actualiza_contenido_camp() {
         b = mje.gestion_campana;
         n = (b / a) * 100;
         n = n.toFixed(2);
-        $("#percent").html(n+"%");
+        if(n != "NaN") {
+          $("#percent").html(n+" %");
+        } else {
+          $("#percent").html("0 %");
+        }
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
