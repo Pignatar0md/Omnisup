@@ -10,6 +10,7 @@
         <title>OmniLeads</title>
     </head>
     <body>
+        <script type="text/javascript" src="static/Js/config.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
         <script type="text/javascript" src="static/Js/jquery.dataTables.min.js"></script>

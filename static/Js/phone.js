@@ -2,7 +2,6 @@ $(function () {
   var sipStatus = document.getElementById('SipStatus');
   var modifyUserStat = document.getElementById("UserStatus");
   var callStatus = document.getElementById('CallStatus');
-  var KamailioIp = "172.16.20.88";
   var userAgent;
   var sipSession;
   var num;
