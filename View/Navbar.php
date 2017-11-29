@@ -25,7 +25,7 @@ $admin = isset($_GET['es_admin']) ? $_GET['es_admin'] : "";
               }
               ?>
                 <li>
-                    <a href="https://<?= PG_HOST ?>">Volver a Principal
+                    <a href="https://<?= OMNI_HOST ?>">Volver a Principal
                    </a>
                 </li>
             </ul>

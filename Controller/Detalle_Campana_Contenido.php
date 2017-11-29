@@ -13,7 +13,7 @@ function mostrarEstadoAgentes($camp) {
     $jsonString .= '[';
     foreach($resul as $Obj) {
         $Qm = $Obj;
-        $pausa = $Controller_Agente->traerTipoPausa(trim($Qm->getExten()));
+        $pausa = $Controller_Agente->traerTipoPausa(trim(str_replace(')', '', $Qm->getExten())));
         $horaini = explode(' ', $pausa[3]);
         $tiempo = RestarHoras(date('H:i:s',$horaini[0]), date('H:i:s'));
         if($Qm->getName()) {
